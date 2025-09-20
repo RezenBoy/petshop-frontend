@@ -93,7 +93,8 @@ export default function RegisterPage() {
         }, 2000);
       } catch (error) {
         console.error("Registration failed:", error);
-        alert("Failed to register. Please try again.");
+        alert(error.response.data );
+        // alert("Failed to register. Please try again.");
       } finally {
         setIsSubmitting(false);
       }
