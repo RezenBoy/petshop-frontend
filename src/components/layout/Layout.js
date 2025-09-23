@@ -24,7 +24,7 @@ const Layout = () => {
   const currentTitle = routeTitles[location.pathname] || "Admin Panel";
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-gray-50 overflow-x-hidden">
       {/* Sidebar */}
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 

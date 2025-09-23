@@ -1,11 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-
 import {
   Heart,
   ShoppingCart,
-  Menu,
-  X,
   Facebook,
   Twitter,
   Instagram,
@@ -16,7 +11,7 @@ import {
 import Navbar from "./NavBar";
 
 const HomePage = () => {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  // const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const featuredProducts = [
     {
