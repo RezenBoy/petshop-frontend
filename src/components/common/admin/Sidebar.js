@@ -24,7 +24,7 @@ import {
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const location = useLocation();
-  const [openMenu, setOpenMenu] = useState(null);
+  const [openMenu, setOpenMenu] = useState(null); // only one menu open at a time
 
   const menuItems = [
     { icon: Home, label: "Dashboard", path: "/admin" },
@@ -37,11 +37,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
         { icon: Layers, label: "Categories", path: "/admin/config/categories" },
         { icon: Percent, label: "Tax", path: "/admin/config/tax" },
         { icon: BadgeCheck, label: "Brand", path: "/admin/config/brand" },
-        {
-          icon: TicketPercent,
-          label: "Discount",
-          path: "/admin/config/discount",
-        },
+        { icon: TicketPercent, label: "Discount", path: "/admin/config/discount" },
       ],
     },
 
@@ -49,16 +45,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       icon: ShoppingCart,
       label: "Purchase Management",
       children: [
-        {
-          icon: PlusSquare,
-          label: "Create Purchase",
-          path: "/admin/purchase/create",
-        },
-        {
-          icon: ListChecks,
-          label: "Manage Purchase",
-          path: "/admin/purchase/manage",
-        },
+        { icon: PlusSquare, label: "Create Purchase", path: "/admin/purchase/create" },
+        { icon: ListChecks, label: "Manage Purchase", path: "/admin/purchase/manage" },
       ],
     },
 
@@ -66,16 +54,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       icon: ClipboardList,
       label: "Product Management",
       children: [
-        {
-          icon: PlusCircle,
-          label: "Create Product",
-          path: "/admin/products/create",
-        },
-        {
-          icon: Boxes,
-          label: "Manage Product",
-          path: "/admin/products/manage",
-        },
+        { icon: PlusCircle, label: "Create Product", path: "/admin/products/create" },
+        { icon: Boxes, label: "Manage Product", path: "/admin/products/manage" },
       ],
     },
 
@@ -83,20 +63,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       icon: FileText,
       label: "Reports",
       children: [
-        {
-          icon: BarChart3,
-          label: "Sales Report",
-          path: "/admin/reports/sales",
-        },
-        {
-          icon: FileText,
-          label: "Purchase Report",
-          path: "/admin/reports/purchase",
-        },
+        { icon: BarChart3, label: "Sales Report", path: "/admin/reports/sales" },
+        { icon: FileText, label: "Purchase Report", path: "/admin/reports/purchase" },
       ],
     },
-    { icon: BarChart3, label: "Order Management", path: "/admin/orders" },
 
+    { icon: BarChart3, label: "Order Management", path: "/admin/orders" },
     { icon: Users, label: "User Management", path: "/admin/users" },
     { icon: LogOut, label: "Logout", path: "/logout" },
   ];
@@ -106,18 +78,21 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     const opened = menuItems.find((parent) =>
       parent.children?.some((c) => c.path === location.pathname)
     );
-    if (opened) setOpenMenu(opened.label);
-  }, [location.pathname, menuItems]);
+    if (opened) {
+      setOpenMenu(opened.label);
+    } else {
+      setOpenMenu(null);
+    }
+  }, [location.pathname]);
 
-  const toggleMenu = (label) => setOpenMenu(openMenu === label ? null : label);
+  // Toggle menu (accordion behavior)
+  const toggleMenu = (label) => {
+    setOpenMenu((prev) => (prev === label ? null : label));
+  };
 
   const isParentActive = (item) => {
     if (item.path && location.pathname === item.path) return true;
-    if (
-      item.children &&
-      item.children.some((c) => c.path === location.pathname)
-    )
-      return true;
+    if (item.children && item.children.some((c) => c.path === location.pathname)) return true;
     return false;
   };
 
@@ -132,13 +107,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     >
       {/* Header */}
       <div className="flex items-center justify-between h-16 px-4 bg-gray-800">
-        <span className="text-white text-lg font-semibold">
-          Bowlfull Buddies
-        </span>
-        <button
-          onClick={() => setSidebarOpen(false)}
-          className="lg:hidden text-white"
-        >
+        <span className="text-white text-lg font-semibold">Bowlfull Buddies</span>
+        <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-white">
           <X className="w-5 h-5" />
         </button>
       </div>

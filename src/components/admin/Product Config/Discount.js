@@ -14,31 +14,38 @@ const Discount = () => {
   const [formData, setFormData] = useState({
     discountName: "",
     discountPercent: "",
+    categoryId: "", // new
     subCategoryId: "",
   });
 
   // Fetch discounts + categories on load
-useEffect(() => {
-  fetchDiscounts();
-}, []);
+  useEffect(() => {
+    fetchDiscounts();
+    fetchCategories();
+  }, []);
 
-const fetchDiscounts = async () => {
-  try {
-    const res = await axios.get(API_BASE);
-    console.log("Fetched discounts:", res.data);  // 👈 debug line
-    setDiscounts(res.data);
-  } catch (err) {
-    console.error("Failed to fetch discounts", err.response?.data || err.message);
-  }
-};
-
+  const fetchDiscounts = async () => {
+    try {
+      const res = await axios.get(API_BASE);
+      console.log("Fetched discounts:", res.data); // 👈 debug line
+      setDiscounts(res.data);
+    } catch (err) {
+      console.error(
+        "Failed to fetch discounts",
+        err.response?.data || err.message
+      );
+    }
+  };
 
   const fetchCategories = async () => {
     try {
       const res = await axios.get(SUBCATEGORIES_API);
       setCategories(res.data);
     } catch (err) {
-      console.error("Failed to fetch categories", err.response?.data || err.message);
+      console.error(
+        "Failed to fetch categories",
+        err.response?.data || err.message
+      );
     }
   };
 
@@ -55,9 +62,10 @@ const fetchDiscounts = async () => {
         });
       } else {
         // Create
-        await axios.post(`${API_BASE}/subcategory/${formData.subCategoryId}`, {
+        await axios.post(API_BASE, {
           discountName: formData.discountName,
           discountPercent: formData.discountPercent,
+          subCategoryId: formData.subCategoryId,
         });
       }
       fetchDiscounts();
@@ -65,7 +73,10 @@ const fetchDiscounts = async () => {
       setShowModal(false);
       setEditDiscount(null);
     } catch (err) {
-      console.error("Failed to save discount", err.response?.data || err.message);
+      console.error(
+        "Failed to save discount",
+        err.response?.data || err.message
+      );
     }
   };
 
@@ -76,7 +87,10 @@ const fetchDiscounts = async () => {
       await axios.delete(`${API_BASE}/${id}`);
       fetchDiscounts();
     } catch (err) {
-      console.error("Failed to delete discount", err.response?.data || err.message);
+      console.error(
+        "Failed to delete discount",
+        err.response?.data || err.message
+      );
     }
   };
 
@@ -87,7 +101,11 @@ const fetchDiscounts = async () => {
         <h1 className="text-2xl font-semibold text-gray-900">Discounts</h1>
         <button
           onClick={() => {
-            setFormData({ discountName: "", discountPercent: "", subCategoryId: "" });
+            setFormData({
+              discountName: "",
+              discountPercent: "",
+              subCategoryId: "",
+            });
             setEditDiscount(null);
             setShowModal(true);
           }}
@@ -102,11 +120,21 @@ const fetchDiscounts = async () => {
         <table className="w-full">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-600">#</th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-600">Discount Name</th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-600">Value</th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-600">Subcategory</th>
-              <th className="px-6 py-3 text-right text-sm font-medium text-gray-600">Actions</th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-600">
+                #
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-600">
+                Discount Name
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-600">
+                Value
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-gray-600">
+                Subcategory
+              </th>
+              <th className="px-6 py-3 text-right text-sm font-medium text-gray-600">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -116,8 +144,11 @@ const fetchDiscounts = async () => {
                 <td className="px-6 py-4">{d.discountName}</td>
                 <td className="px-6 py-4">{d.discountPercent}%</td>
                 <td className="px-6 py-4">
-                  {d.productSubCategory?.subCategoryName || "—"}
+                  {d.categoryName && d.subCategoryName
+                    ? `${d.categoryName} → ${d.subCategoryName}`
+                    : "—"}
                 </td>
+
                 <td className="px-6 py-4 text-right space-x-3">
                   <button
                     onClick={() => {
@@ -160,7 +191,9 @@ const fetchDiscounts = async () => {
               type="text"
               placeholder="Discount Name"
               value={formData.discountName}
-              onChange={(e) => setFormData({ ...formData, discountName: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, discountName: e.target.value })
+              }
               className="w-full p-2 border rounded"
               required
             />
@@ -168,25 +201,61 @@ const fetchDiscounts = async () => {
               type="number"
               placeholder="Discount %"
               value={formData.discountPercent}
-              onChange={(e) => setFormData({ ...formData, discountPercent: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, discountPercent: e.target.value })
+              }
               className="w-full p-2 border rounded"
               required
             />
+
+            {/* Category Dropdown */}
             <select
-              value={formData.subCategoryId}
-              onChange={(e) => setFormData({ ...formData, subCategoryId: e.target.value })}
+              value={formData.categoryId}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  categoryId: e.target.value,
+                  subCategoryId: "",
+                })
+              }
               className="w-full p-2 border rounded"
               required
             >
-              <option value="">Select Subcategory</option>
-              {categories.flatMap((cat) =>
-                cat.subCategories?.map((sub) => (
-                  <option key={sub.id} value={sub.id}>
-                    {cat.categoryName} → {sub.subCategoryName}
-                  </option>
-                ))
-              )}
+              <option value="">Select Category</option>
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.id}>
+                  {cat.categoryName}
+                </option>
+              ))}
             </select>
+
+            {/* Subcategory Dropdown (depends on category) */}
+            <select
+              value={formData.subCategoryId}
+              onChange={(e) =>
+                setFormData({ ...formData, subCategoryId: e.target.value })
+              }
+              className="w-full p-2 border rounded"
+              required
+              disabled={!formData.categoryId}
+            >
+              <option value="">Select Subcategory</option>
+              {categories
+                .find((cat) => cat.id === parseInt(formData.categoryId))
+                ?.[
+                  "subCategories" in
+                  (categories.find(
+                    (cat) => cat.id === parseInt(formData.categoryId)
+                  ) || {})
+                    ? "subCategories"
+                    : "subcategories"
+                ]?.map((sub) => (
+                  <option key={sub.id} value={sub.id}>
+                    {sub.subCategoryName}
+                  </option>
+                ))}
+            </select>
+
             <button
               type="submit"
               className="w-full bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-600"
