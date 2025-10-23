@@ -34,7 +34,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       icon: Package,
       label: "Product Configuration",
       children: [
-        { icon: Layers, label: "Categories", path: "/admin/config/categories" },
         { icon: Percent, label: "Tax", path: "/admin/config/tax" },
         { icon: BadgeCheck, label: "Brand", path: "/admin/config/brand" },
         { icon: TicketPercent, label: "Discount", path: "/admin/config/discount" },
