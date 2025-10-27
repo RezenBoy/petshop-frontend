@@ -11,6 +11,8 @@ import Settings from "./components/admin/Settings";
 import MasterSetup from "./components/admin/MasterSetup";
 import ProductView from "./components/ProductView";
 import CartPage from "./pages/user/CartPage";
+import ContactPage from "./pages/user/ContactPage.js";
+import AboutPage from "./components/AboutPage.js";
 import OrdersPage from "./pages/user/OrdersPage.js";
 import ShopPage from "./pages/ShopPage.js";
 import ScrollToTop from "./components/common/ScrollToTop";
@@ -44,6 +46,8 @@ function App() {
           <Route path="cart" element={<CartPage />} />
           <Route path="user/orders" element={<OrdersPage />} />
           <Route path="shop" element={<ShopPage />} />
+          <Route path="contact" element={<ContactPage />} />
+          <Route path="about" element={<AboutPage />} />  
         </Route>
 
         {/*Admin Pages with Admin Layout */}

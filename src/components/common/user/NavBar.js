@@ -21,9 +21,7 @@ const Navbar = () => {
     { name: "Home", href: "/" },
     { name: "Shop", href: "/shop" },
     { name: "About", href: "/about" },
-    { name: "Contact", href: "/contact" },
-    { name: "Dogs", href: "/dogs" },
-    { name: "Cats", href: "/cats" },
+    { name: "Contact Us", href: "/contact" },
   ];
 
   useEffect(() => {

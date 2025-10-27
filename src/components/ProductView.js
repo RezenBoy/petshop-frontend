@@ -102,8 +102,8 @@ const ProductView = () => {
     };
 
     fetchProduct();
-    fetchReviews();
-  }, [id]);
+    // fetchReviews();
+  }, [id],);
 
   if (loading)
     return (
@@ -291,6 +291,24 @@ const ProductView = () => {
                   ))}
                 </div>
               )}
+                            {/* Features */}
+              <div className="bg-gradient-to-br from-pink-50 to-purple-50 rounded-xl p-5 border border-pink-100">
+                <h4 className="text-sm font-semibold text-gray-900 mb-4 uppercase tracking-wide">
+                  Why Choose Us
+                </h4>
+                <div className="space-y-3">
+                  {features.map((feature, idx) => (
+                    <div key={idx} className="flex items-center gap-3">
+                      <div className="flex-shrink-0 w-9 h-9 rounded-full bg-white shadow-sm flex items-center justify-center">
+                        <feature.icon className="h-4 w-4 text-pink-600" />
+                      </div>
+                      <span className="text-sm text-gray-700 font-medium">
+                        {feature.text}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
 
             {/* Right: Product Details */}
@@ -383,16 +401,44 @@ const ProductView = () => {
                 </div>
               </div>
 
-              {/* Description */}
-              <div className="mb-6">
-                <h3 className="text-sm font-semibold text-gray-900 mb-2 uppercase tracking-wide">
-                  About This Product
-                </h3>
-                <p className="text-gray-700 leading-relaxed text-sm">
-                  {product.description ||
-                    "This premium pet product is designed with your furry friend's comfort and happiness in mind. Made from high-quality materials, it ensures durability and safety. Perfect for daily use and guaranteed to bring joy to your beloved pet!"}
-                </p>
-              </div>
+              {/* Short Description Preview */}
+              {product.description && (
+                <div className="mt-2 mb-6">
+                  <h3 className="text-sm font-semibold text-gray-900 mb-1 uppercase tracking-wide">
+                    About This Product
+                  </h3>
+                  <p
+                    className="text-gray-700 text-sm leading-relaxed line-clamp-3"
+                    style={{
+                      display: "-webkit-box",
+                      WebkitLineClamp: 10,
+                      WebkitBoxOrient: "vertical",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "pre-line",
+                    }}
+                  >
+                    {product.description}
+                  </p>
+                  <button
+                    onClick={() => {
+                      const descriptionTab = document.getElementById(
+                        "product-description-tab"
+                      );
+                      if (descriptionTab) {
+                        descriptionTab.scrollIntoView({
+                          behavior: "smooth",
+                          block: "start",
+                        });
+                        setActiveTab("description");
+                      }
+                    }}
+                    className="mt-1 text-pink-600 hover:text-pink-700 text-sm font-medium"
+                  >
+                    View More ↓
+                  </button>
+                </div>
+              )}
 
               {/* Size and Color Selection */}
               {((product.sizes && product.sizes.length > 0) ||
@@ -484,49 +530,42 @@ const ProductView = () => {
 
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-3">
+                {/* Buy Now Button */}
                 <button
                   className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-4 rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all font-semibold text-base disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-                  onClick={() => alert(`Added ${quantity} item(s) to cart!`)}
+                  onClick={() =>
+                    alert(`Proceeding to buy ${quantity} item(s)!`)
+                  }
                   disabled={product.quantity <= 0}
                 >
-                  <ShoppingCart className="h-5 w-5" />
-                  {product.quantity <= 0 ? "Out of Stock" : "Add to Cart"}
+                  Buy Now
                 </button>
 
+                {/* Add to Cart Button */}
                 <button
-                  className={`px-6 py-4 rounded-xl border-2 shadow-md transition-all font-semibold ${
+                  className={`px-6 py-4 rounded-xl border-2 shadow-md transition-all font-semibold flex items-center justify-center gap-2 ${
                     wishlist
                       ? "bg-pink-50 text-pink-600 border-pink-400 shadow-pink-200"
                       : "border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
                   }`}
-                  onClick={() => setWishlist(!wishlist)}
+                  onClick={() => {
+                    setWishlist(!wishlist);
+                    alert(
+                      `${product.productName || product.name} added to cart!`
+                    );
+                  }}
+                  disabled={product.quantity <= 0}
                 >
-                  <Heart
+                  <ShoppingCart
                     className={`h-5 w-5 ${
-                      wishlist ? "fill-pink-500 text-pink-500" : ""
+                      wishlist ? "text-pink-500" : "text-gray-700"
                     }`}
                   />
+                  Add to Cart
                 </button>
               </div>
 
-              {/* Features */}
-              <div className="bg-gradient-to-br from-pink-50 to-purple-50 rounded-xl p-5 border border-pink-100">
-                <h4 className="text-sm font-semibold text-gray-900 mb-4 uppercase tracking-wide">
-                  Why Choose Us
-                </h4>
-                <div className="space-y-3">
-                  {features.map((feature, idx) => (
-                    <div key={idx} className="flex items-center gap-3">
-                      <div className="flex-shrink-0 w-9 h-9 rounded-full bg-white shadow-sm flex items-center justify-center">
-                        <feature.icon className="h-4 w-4 text-pink-600" />
-                      </div>
-                      <span className="text-sm text-gray-700 font-medium">
-                        {feature.text}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+
             </div>
           </div>
         </div>
@@ -572,11 +611,15 @@ const ProductView = () => {
           {/* Tab Content */}
           <div className="p-6 lg:p-8">
             {activeTab === "description" && (
-              <div className="prose max-w-none">
-                <p className="text-gray-700 leading-relaxed mb-4">
+              <div
+                id="product-description-tab"
+                className="prose max-w-none scroll-mt-24"
+              >
+                <div className="text-gray-700 leading-relaxed text-sm whitespace-pre-line">
                   {product.description ||
-                    "This premium pet product is designed with your furry friend's comfort and happiness in mind. Made from high-quality materials, it ensures durability and safety."}
-                </p>
+                    "This premium pet product is designed with your furry friend's comfort and happiness in mind. Made from high-quality materials, it ensures durability and safety. Perfect for daily use and guaranteed to bring joy to your beloved pet!"}
+                </div>
+
                 <h4 className="text-lg font-semibold text-gray-900 mt-6 mb-3">
                   Key Features:
                 </h4>
