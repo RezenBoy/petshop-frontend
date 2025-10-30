@@ -17,6 +17,8 @@ import OrdersPage from "./pages/user/OrdersPage.js";
 import ShopPage from "./pages/ShopPage.js";
 import ScrollToTop from "./components/common/ScrollToTop";
 
+import ProtectedRoute from "./components/common/ProductionRoute";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AddProduct from "./components/admin/Products Management/AddProduct";
 import ManageProducts from "./components/admin/Products Management/ManageProducts";
@@ -32,7 +34,7 @@ import UserLayout from "./components/layout/UserLayout";
 function App() {
   return (
     <Router>
-        <ScrollToTop/>
+      <ScrollToTop />
       <Routes>
         {/*Public Pages */}
         <Route path="/login" element={<LoginForm />} />
@@ -47,11 +49,18 @@ function App() {
           <Route path="user/orders" element={<OrdersPage />} />
           <Route path="shop" element={<ShopPage />} />
           <Route path="contact" element={<ContactPage />} />
-          <Route path="about" element={<AboutPage />} />  
+          <Route path="about" element={<AboutPage />} />
         </Route>
 
         {/*Admin Pages with Admin Layout */}
-        <Route path="/admin" element={<Layout />}>
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute requiredRole="ADMIN">
+              <Layout />
+            </ProtectedRoute>
+          }
+        >
           <Route index element={<Dashboard />} />
           <Route path="orders" element={<Orders />} />
           <Route path="products/create" element={<AddProduct />} />
