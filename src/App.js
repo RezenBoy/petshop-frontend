@@ -30,7 +30,17 @@ import ManagePurchase from "./components/admin/Purchase Management/ManagePurchas
 import SalesReport from "./components/admin/Report/SalesReport";
 import PurchaseReport from "./components/admin/Report/PurchaseReport";
 import UserLayout from "./components/layout/UserLayout";
+import axios from "axios";
 
+function setAuthHeaderFromStorage() {
+  const token = localStorage.getItem("token");
+  if (token) {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  } else {
+    delete axios.defaults.headers.common["Authorization"];
+  }
+}
+setAuthHeaderFromStorage();
 function App() {
   return (
     <Router>

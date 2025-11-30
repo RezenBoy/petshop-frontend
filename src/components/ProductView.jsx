@@ -9,7 +9,7 @@ import {
   Package,
 } from "lucide-react";
 import axios from "axios";
-import Footer from "../components/common/user/Footer";
+import Footer from "./common/user/Footer";
 
 const ProductView = () => {
   const { id } = useParams();
@@ -29,7 +29,7 @@ const ProductView = () => {
   const [submittingReview, setSubmittingReview] = useState(false);
 
   // API base URL for images
-  const API_BASE_URL = "http://localhost:8080";
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
 
   const features = [
     { icon: Truck, text: "Free delivery on orders above ₹999" },
@@ -40,7 +40,7 @@ const ProductView = () => {
   const handleHelpful = async (reviewId) => {
     try {
       await axios.post(
-        `http://localhost:8080/api/products/${id}/reviews/${reviewId}/helpful`
+        `${API_BASE_URL}/api/products/${id}/reviews/${reviewId}/helpful`
       );
       setReviews((prev) =>
         prev.map((r) =>
@@ -63,7 +63,7 @@ const ProductView = () => {
     setSubmittingReview(true);
     try {
       await axios.post(
-        `http://localhost:8080/api/products/${id}/reviews`,
+        `${API_BASE_URL}/api/products/${id}/reviews`,
         newReview
       );
 
@@ -82,7 +82,7 @@ const ProductView = () => {
   const fetchReviews = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:8080/api/products/${id}/reviews`
+        `${API_BASE_URL}/api/products/${id}/reviews`
       );
       setReviews(res.data);
     } catch (err) {
@@ -92,7 +92,7 @@ const ProductView = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/api/products/${id}`);
+        const res = await axios.get(`${API_BASE_URL}/api/products/${id}`);
         setProduct(res.data);
       } catch (err) {
         console.error("Error fetching product:", err);

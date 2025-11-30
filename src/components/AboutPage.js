@@ -1,6 +1,6 @@
 import React from "react";
 import { Heart, PawPrint, Shield, Truck, Smile } from "lucide-react";
-import Footer from "../components/common/user/Footer";
+import Footer from "./common/user/Footer";
 
 const AboutPage = () => {
   return (

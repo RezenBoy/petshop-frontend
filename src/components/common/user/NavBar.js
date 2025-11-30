@@ -36,20 +36,31 @@ const Navbar = () => {
     };
   }, []);
 
-  // Load user from memory state (replace localStorage with in-memory state)
+  // Load user from localStorage (JWT-based auth)
   useEffect(() => {
-    // For production, replace with your state management solution
-    const storedUser = sessionStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
+    const fullName = localStorage.getItem("fullName");
+
+    if (token && userId) {
+      setUser({
+        token,
+        userId,
+        fullName
+      });
     }
   }, []);
 
   const handleLogout = () => {
-    sessionStorage.removeItem("user");
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("fullName");
+
     setUser(null);
+
     window.location.href = "/login";
   };
+
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
@@ -211,17 +222,15 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 bg-black/50 z-40 lg:hidden transition-opacity duration-300 ${
-          isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed inset-0 bg-black/50 z-40 lg:hidden transition-opacity duration-300 ${isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
         onClick={() => setIsMenuOpen(false)}
       />
 
       {/* Mobile Menu Drawer */}
       <div
-        className={`fixed top-0 right-0 h-full w-64 sm:w-80 bg-white shadow-2xl z-50 lg:hidden transform transition-transform duration-300 ease-in-out ${
-          isMenuOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed top-0 right-0 h-full w-64 sm:w-80 bg-white shadow-2xl z-50 lg:hidden transform transition-transform duration-300 ease-in-out ${isMenuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
       >
         <div className="flex justify-between items-center p-4 border-b">
           <span className="font-semibold text-gray-800">Menu</span>

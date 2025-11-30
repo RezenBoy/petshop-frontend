@@ -53,7 +53,7 @@ export default function RegisterPage() {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
-
+const API = process.env.REACT_APP_API_URL;
   // Handle blur for validation
   const handleBlur = (e) => {
     const { name, value } = e.target;
@@ -100,7 +100,7 @@ export default function RegisterPage() {
           usersCategory: "CUSTOMER",
           addressEmbeddable: { email: formData.email },
         };
-        await axios.post("http://localhost:8080/api/users/register", payload);
+        await axios.post(`${API}/api/users/register`, payload);
         setIsRegistered(true);
 
         setTimeout(() => {

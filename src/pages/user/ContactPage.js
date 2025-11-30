@@ -16,14 +16,14 @@ const ContactPage = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
+const API = process.env.REACT_APP_API_URL;
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
       // send form data to backend
-      const res = await fetch("http://localhost:8080/api/contact", {
+      const res = await fetch(`${API}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

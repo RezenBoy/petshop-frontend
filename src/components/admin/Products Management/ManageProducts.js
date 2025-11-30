@@ -10,10 +10,10 @@ const ManageProduct = () => {
   useEffect(() => {
     fetchProducts();
   }, []);
-
+  const API = process.env.REACT_APP_API_URL;
   const fetchProducts = async () => {
     try {
-      const res = await fetch("http://localhost:8080/api/admin/products");
+      const res = await fetch(`${API}/api/admin/products`);
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }
@@ -23,12 +23,11 @@ const ManageProduct = () => {
       console.error("❌ Failed to fetch products:", error);
     }
   };
-
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this product?")) return;
 
     try {
-      const res = await fetch(`http://localhost:8080/api/admin/products/${id}`, {
+      const res = await fetch(`${API}/api/admin/products/${id}`, {
         method: "DELETE",
       });
 

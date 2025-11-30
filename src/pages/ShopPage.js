@@ -19,14 +19,13 @@ const ShopPage = () => {
     priceRange: "all",
     sortBy: "featured"
   });
-
-  const API_BASE_URL = "http://localhost:8080";
+const API = process.env.REACT_APP_API_URL;
 
   // Fetch products
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get(`${API_BASE_URL}/api/products`);
+        const res = await axios.get(`${API}/api/products`);
         setProducts(res.data);
         setFilteredProducts(res.data);
       } catch (err) {
@@ -111,7 +110,7 @@ const ShopPage = () => {
   const getImageUrl = (product) => {
     if (product.imageUrls && product.imageUrls.length > 0) {
       const url = product.imageUrls[0];
-      return url.startsWith('http') ? url : `${API_BASE_URL}${url}`;
+      return url.startsWith('http') ? url : `${API}${url}`;
     }
     return "https://via.placeholder.com/400x400?text=No+Image";
   };

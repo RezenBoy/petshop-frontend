@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Plus, X, Edit2, Trash2 } from "lucide-react";
 
-const API_BASE = "http://localhost:8080/api/admin/discounts";
-const SUBCATEGORIES_API = "http://localhost:8080/api/admin/categories"; // to fetch categories + subcategories
+const API = process.env.REACT_APP_API_URL;
+const API_BASE = `${API}/api/admin/discounts`;
+const SUBCATEGORIES_API = `${API}/api/admin/categories`; // to fetch categories + subcategories
 
 const Discount = () => {
   const [discounts, setDiscounts] = useState([]);

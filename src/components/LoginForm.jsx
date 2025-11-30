@@ -5,9 +5,10 @@ import axios from "axios";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
-    addressEmbeddable: { email: "" },
+    email: "",
     password: "",
   });
+
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -33,31 +34,28 @@ const LoginForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === "email") {
-      setFormData({
-        ...formData,
-        addressEmbeddable: { ...formData.addressEmbeddable, email: value },
-      });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
 
   const handleBlur = (e) => {
     const { name } = e.target;
     const value =
-      name === "email" ? formData.addressEmbeddable.email : formData[name];
+      name === "email" ? formData.email : formData[name];
     setTouched((prev) => ({ ...prev, [name]: true }));
     setErrors((prev) => ({ ...prev, [name]: validateField(name, value) }));
   };
 
   useEffect(() => {
     const hasErrors = Object.values(errors).some(Boolean);
-    const filled = formData.addressEmbeddable.email && formData.password;
+    const filled = formData.email && formData.password;
+
     setIsValid(!hasErrors && filled);
   }, [errors, formData]);
 
   // Submit
+  const API = process.env.REACT_APP_API_URL || "";
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isValid) return;
@@ -66,25 +64,29 @@ const LoginForm = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8080/api/users/login",
-        formData
+        `${API}/api/users/login`,
+        { email: formData.email, password: formData.password },
+        { headers: { "Content-Type": "application/json" } }
       );
 
       if (res.status === 200) {
-        sessionStorage.setItem("user", JSON.stringify(res.data));
+        // store token (so subsequent requests can use it)
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("userId", String(res.data.userId || ""));
+        localStorage.setItem("fullName", res.data.fullName || "");
+        // redirect to home or profile
         window.location.href = "/";
       }
     } catch (err) {
       setError(
-        err.response?.data?.message ||
-          (err.response?.status === 401
-            ? "Invalid email or password"
-            : "Something went wrong")
+        err.response?.data ||
+        (err.response?.status === 401 ? "Invalid email or password" : "Something went wrong")
       );
     } finally {
       setIsSubmitting(false);
     }
   };
+
 
   return (
     <div
@@ -106,7 +108,7 @@ const LoginForm = () => {
         <div className="hidden lg:flex lg:w-1/2 relative bg-gradient-to-br from-pink-500 via-purple-500 to-blue-500">
           {/* Subtle overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-          
+
           <div className="relative flex flex-col justify-between p-10 text-white z-10">
             <div>
               {/* Logo */}
@@ -181,17 +183,16 @@ const LoginForm = () => {
                   type="email"
                   name="email"
                   autoFocus
-                  value={formData.addressEmbeddable.email}
+                  value={formData.email}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   placeholder="you@example.com"
-                  className={`w-full px-4 py-2.5 text-sm rounded-xl border-2 transition-all focus:outline-none ${
-                    errors.email
-                      ? "border-red-300 bg-red-50 focus:border-red-500"
-                      : touched.email && !errors.email
+                  className={`w-full px-4 py-2.5 text-sm rounded-xl border-2 transition-all focus:outline-none ${errors.email
+                    ? "border-red-300 bg-red-50 focus:border-red-500"
+                    : touched.email && !errors.email
                       ? "border-green-300 bg-green-50 focus:border-green-500"
                       : "border-gray-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
-                  }`}
+                    }`}
                 />
                 {errors.email && (
                   <p className="text-xs text-red-600 mt-1">{errors.email}</p>
@@ -211,13 +212,12 @@ const LoginForm = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     placeholder="Enter your password"
-                    className={`w-full px-4 py-2.5 pr-12 text-sm rounded-xl border-2 transition-all focus:outline-none ${
-                      errors.password
-                        ? "border-red-300 bg-red-50 focus:border-red-500"
-                        : touched.password && !errors.password
+                    className={`w-full px-4 py-2.5 pr-12 text-sm rounded-xl border-2 transition-all focus:outline-none ${errors.password
+                      ? "border-red-300 bg-red-50 focus:border-red-500"
+                      : touched.password && !errors.password
                         ? "border-green-300 bg-green-50 focus:border-green-500"
                         : "border-gray-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
-                    }`}
+                      }`}
                   />
                   <button
                     type="button"
@@ -257,11 +257,10 @@ const LoginForm = () => {
               <button
                 type="submit"
                 disabled={!isValid || isSubmitting}
-                className={`w-full py-3 rounded-xl text-white font-semibold text-sm transition-all ${
-                  !isValid || isSubmitting
-                    ? "bg-gray-300 cursor-not-allowed"
-                    : "bg-gradient-to-r from-pink-500 to-blue-500 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]"
-                }`}
+                className={`w-full py-3 rounded-xl text-white font-semibold text-sm transition-all ${!isValid || isSubmitting
+                  ? "bg-gray-300 cursor-not-allowed"
+                  : "bg-gradient-to-r from-pink-500 to-blue-500 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]"
+                  }`}
               >
                 {isSubmitting ? (
                   <div className="flex justify-center items-center gap-2">

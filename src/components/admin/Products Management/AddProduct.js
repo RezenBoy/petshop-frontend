@@ -36,19 +36,18 @@ const AddProduct = () => {
     fetchTaxes();
     fetchCategories();
   }, []);
-
   const fetchBrands = async () => {
-    const res = await fetch("http://localhost:8080/api/admin/brands");
+    const res = await fetch(`${API}/api/admin/brands`);
     setBrands(await res.json());
   };
 
   const fetchTaxes = async () => {
-    const res = await fetch("http://localhost:8080/api/admin/tax");
+    const res = await fetch(`${API}/api/admin/tax`);
     setTaxes(await res.json());
   };
 
   const fetchCategories = async () => {
-    const res = await fetch("http://localhost:8080/api/admin/categories");
+    const res = await fetch(`${API}/api/admin/categories`);
     setCategories(await res.json());
   };
 
@@ -92,6 +91,8 @@ const AddProduct = () => {
     setImagePreviews(updatedPreviews);
   };
 
+  const API = process.env.REACT_APP_API_URL;
+
   // Submit Handler using FormData
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -127,8 +128,7 @@ const AddProduct = () => {
     images.forEach((file) => {
       formDataToSend.append("images", file);
     });
-
-    const res = await fetch("http://localhost:8080/api/admin/products", {
+    const res = await fetch(`${API}/api/admin/products`, {
       method: "POST",
       body: formDataToSend,
     });

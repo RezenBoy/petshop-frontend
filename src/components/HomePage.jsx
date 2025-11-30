@@ -1,38 +1,79 @@
 import { useEffect, useState } from "react";
 import Footer from "./common/user/Footer";
 import axios from "axios";
+import Navbar from "./common/user/NavBar";
+import { Link } from "react-router-dom";
+import api from "../libs/api";
 import {
   ShoppingCart,
 } from "lucide-react";
-import Navbar from "./common/user/NavBar";
-import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  // ✅ Fetch data from backend
+  const [loadError, setLoadError] = useState(null);
+  const API = process.env.REACT_APP_API_URL;
   useEffect(() => {
+    let mounted = true;
+
+    // fallback axios instance WITHOUT auth header (for public endpoints)
+    const unauthApi = axios.create({
+      baseURL: API + "/api",
+      headers: { "Content-Type": "application/json" },
+    });
+
     const fetchData = async () => {
+      setLoading(true);
+      setLoadError(null);
+
       try {
-        const [categoryRes, productRes] = await Promise.all([
-          axios.get("http://localhost:8080/api/categories"),
-          axios.get("http://localhost:8080/api/products"), // changed from /featured
+        // primary attempt: use api (adds Authorization header if token exists)
+        const [productRes, categoryRes] = await Promise.all([
+          api.get("/products"),
+          api.get("/categories"),
         ]);
 
-        setCategories(categoryRes.data || []);
+        if (!mounted) return;
+
         setProducts(productRes.data || []);
-      } catch (error) {
-        console.error("Error fetching data:", error);
+        setCategories(categoryRes.data || []);
+        // no return here — allow finally to run
+      } catch (err) {
+        // primary failed (maybe 401/403 or network). try unauthenticated fallback:
+        console.warn(
+          "Primary API fetch failed, attempting unauth fallback:",
+          err?.response?.status ?? err
+        );
+
+        try {
+          const [productRes2, categoryRes2] = await Promise.all([
+            unauthApi.get("/products"),
+            unauthApi.get("/categories"),
+          ]);
+
+          if (!mounted) return;
+
+          setProducts(productRes2.data || []);
+          setCategories(categoryRes2.data || []);
+        } catch (err2) {
+          console.error("Fallback unauthenticated fetch also failed:", err2);
+          if (!mounted) return;
+          setLoadError(err2);
+        }
       } finally {
-        setLoading(false);
+        // ALWAYS run this so the spinner stops
+        if (mounted) setLoading(false);
       }
     };
-    fetchData();
-  }, []);
 
-  if (loading) {
+    fetchData();
+    return () => {
+      mounted = false;
+    };
+  },[]);
+
+  if (loading) {    
     return (
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-pink-50 to-blue-50">
         <div className="text-lg font-medium text-gray-600 animate-pulse">
@@ -89,8 +130,8 @@ const HomePage = () => {
                     {cat.categoryName === "Dog"
                       ? "🐶"
                       : cat.categoryName === "Cat"
-                      ? "🐱"
-                      : "🎾"}
+                        ? "🐱"
+                        : "🎾"}
                   </div>
                   <h3 className="text-xl font-semibold text-gray-800 mb-1">
                     {cat.categoryName}

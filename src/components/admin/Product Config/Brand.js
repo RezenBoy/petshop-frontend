@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Plus, X, Edit2, Trash2 } from "lucide-react";
 
-const API_BASE = "http://localhost:8080/api/admin/brands";
+const API = process.env.REACT_APP_API_URL;
+
+const API_BASE = `${API}/api/admin/brands`;
 
 const Brand = () => {
   const [brands, setBrands] = useState([]);
