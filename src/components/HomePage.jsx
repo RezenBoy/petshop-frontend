@@ -1,93 +1,15 @@
-import { useEffect, useState } from "react";
 import Footer from "./common/user/Footer";
-import axios from "axios";
 import Navbar from "./common/user/NavBar";
 import { Link } from "react-router-dom";
-import api from "../libs/api";
-import {
-  ShoppingCart,
-} from "lucide-react";
+import CategorySection from "./home/CategorySection";
+import FeaturedProducts from "./home/FeaturedProducts";
 
 const HomePage = () => {
-  const [categories, setCategories] = useState([]);
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [loadError, setLoadError] = useState(null);
-  const API = process.env.REACT_APP_API_URL;
-  useEffect(() => {
-    let mounted = true;
-
-    // fallback axios instance WITHOUT auth header (for public endpoints)
-    const unauthApi = axios.create({
-      baseURL: API + "/api",
-      headers: { "Content-Type": "application/json" },
-    });
-
-    const fetchData = async () => {
-      setLoading(true);
-      setLoadError(null);
-
-      try {
-        // primary attempt: use api (adds Authorization header if token exists)
-        const [productRes, categoryRes] = await Promise.all([
-          api.get("/products"),
-          api.get("/categories"),
-        ]);
-
-        if (!mounted) return;
-
-        setProducts(productRes.data || []);
-        setCategories(categoryRes.data || []);
-        // no return here — allow finally to run
-      } catch (err) {
-        // primary failed (maybe 401/403 or network). try unauthenticated fallback:
-        console.warn(
-          "Primary API fetch failed, attempting unauth fallback:",
-          err?.response?.status ?? err
-        );
-
-        try {
-          const [productRes2, categoryRes2] = await Promise.all([
-            unauthApi.get("/products"),
-            unauthApi.get("/categories"),
-          ]);
-
-          if (!mounted) return;
-
-          setProducts(productRes2.data || []);
-          setCategories(categoryRes2.data || []);
-        } catch (err2) {
-          console.error("Fallback unauthenticated fetch also failed:", err2);
-          if (!mounted) return;
-          setLoadError(err2);
-        }
-      } finally {
-        // ALWAYS run this so the spinner stops
-        if (mounted) setLoading(false);
-      }
-    };
-
-    fetchData();
-    return () => {
-      mounted = false;
-    };
-  },[]);
-
-  if (loading) {    
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-pink-50 to-blue-50">
-        <div className="text-lg font-medium text-gray-600 animate-pulse">
-          Loading pet paradise...
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-blue-50">
       <Navbar />
 
-      {/* 🦴 Hero Section */}
+      {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-pink-100 via-blue-100 to-yellow-100 py-20">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <div className="mb-6">
@@ -110,106 +32,13 @@ const HomePage = () => {
         <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-white to-transparent"></div>
       </section>
 
-      {/* 🐶 Dynamic Categories */}
-      <section className="py-16 bg-white" id="categories">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">
-            Shop by Category
-          </h2>
+      {/* Shop by Category */}
+      <CategorySection />
 
-          {categories.length === 0 ? (
-            <p className="text-center text-gray-500">No categories found.</p>
-          ) : (
-            <div className="grid md:grid-cols-3 gap-8">
-              {categories.map((cat, idx) => (
-                <div
-                  key={cat.id || idx}
-                  className={`bg-gradient-to-br from-pink-100 to-blue-100 rounded-2xl p-8 text-center hover:shadow-lg transition-all cursor-pointer`}
-                >
-                  <div className="text-5xl mb-3">
-                    {cat.categoryName === "Dog"
-                      ? "🐶"
-                      : cat.categoryName === "Cat"
-                        ? "🐱"
-                        : "🎾"}
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-1">
-                    {cat.categoryName}
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    {cat.description || "Find great pet products!"}
-                  </p>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
+      {/* Featured Products */}
+      <FeaturedProducts />
 
-      {/* 🛍️ Dynamic Featured Products */}
-      <section className="py-16 bg-gray-50" id="featured">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">
-            Featured Products
-          </h2>
-
-          {products.length === 0 ? (
-            <p className="text-center text-gray-500">
-              No products available yet.
-            </p>
-          ) : (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {products.map((product) => (
-                <div
-                  key={product.id}
-                  className="bg-white rounded-2xl shadow-md hover:shadow-lg transition overflow-hidden group"
-                >
-                  {/* Wrap image area with Link */}
-                  <Link to={`/product/${product.id}`}>
-                    <div className="bg-gradient-to-br from-pink-50 to-blue-50 h-44 flex items-center justify-center text-5xl group-hover:scale-105 transition-transform">
-                      🐾
-                    </div>
-                  </Link>
-
-                  <div className="p-5">
-                    <div className="flex justify-between items-start mb-2">
-                      {/* Wrap product title with Link */}
-                      <Link
-                        to={`/product/${product.id}`}
-                        className="text-lg font-semibold text-gray-800 hover:text-pink-500 transition"
-                      >
-                        {product.productName}
-                      </Link>
-
-                      <span className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-medium">
-                        {product.productSubCategory?.subCategoryName ||
-                          "General"}
-                      </span>
-                    </div>
-
-                    <div className="flex justify-between items-center">
-                      <span className="text-xl font-bold text-pink-500">
-                        ₹{product.mrp}
-                      </span>
-
-                      {/* Add button can also navigate to ProductView */}
-                      <Link
-                        to={`/product/${product.id}`}
-                        className="bg-gradient-to-r from-pink-400 to-blue-400 text-white px-3 py-2 rounded-lg hover:opacity-90 transition-all flex items-center space-x-1 text-sm"
-                      >
-                        <ShoppingCart className="h-4 w-4" />
-                        <span>View</span>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* 🐾 About */}
+      {/* About */}
       <section id="about" className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-gray-800 mb-8">
