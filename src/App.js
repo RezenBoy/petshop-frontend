@@ -18,6 +18,7 @@ import ShopPage from "./pages/ShopPage.js";
 import ScrollToTop from "./components/common/ScrollToTop";
 
 import ProtectedRoute from "./components/common/ProductionRoute";
+import Logout from "./components/common/Logout";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AddProduct from "./components/admin/Products Management/AddProduct";
@@ -49,6 +50,7 @@ function App() {
         {/*Public Pages */}
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<RegisterForm />} />
+        <Route path="/logout" element={<Logout />} />
 
         {/*User Pages with fixed Navbar using UserLayout */}
         <Route path="/" element={<UserLayout />}>

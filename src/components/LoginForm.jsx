@@ -74,8 +74,14 @@ const LoginForm = () => {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("userId", String(res.data.userId || ""));
         localStorage.setItem("fullName", res.data.fullName || "");
-        // redirect to home or profile
-        window.location.href = "/";
+        localStorage.setItem("role", res.data.role || "");
+        
+        // redirect to appropriate dashboard based on role
+        if (res.data.role === "ADMIN") {
+          window.location.href = "/admin";
+        } else {
+          window.location.href = "/";
+        }
       }
     } catch (err) {
       setError(
