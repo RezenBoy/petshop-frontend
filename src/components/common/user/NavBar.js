@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import logo from "../../../assets/logo.jpg";
 import {
-  Heart,
   Menu,
   X,
   ShoppingCart,
@@ -81,9 +81,13 @@ const Navbar = () => {
           <div className="flex items-center justify-between h-16 gap-4">
             {/* LEFT: Logo */}
             <Link to="/" className="flex items-center gap-2 flex-shrink-0">
-              <span className="inline-flex p-2 rounded-full bg-gradient-to-r from-pink-500 to-blue-500 shadow-sm">
-                <Heart className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
-              </span>
+              <span className="inline-flex items-center justify-center">
+  <img
+    src={logo}
+    alt="Logo"
+    className="h-14 w-14 sm:h-16 sm:w-16 object-contain"
+  />
+</span>
               <span className="leading-tight">
                 <span className="block text-base sm:text-lg font-bold bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent">
                   Bowlfull Buddies
