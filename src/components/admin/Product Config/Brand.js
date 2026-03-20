@@ -202,7 +202,7 @@ const Brand = () => {
 
 // Reusable Modal
 const Modal = ({ children, onClose, title }) => (
-  <div className="fixed inset-0 bg-black bg-opacity-20 flex items-center justify-center z-50">
+  <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
     <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6 relative pointer-events-auto">
       <button
         onClick={onClose}

@@ -33,6 +33,8 @@ import PurchaseReport from "./components/admin/Report/PurchaseReport";
 import UserLayout from "./components/layout/UserLayout";
 import axios from "axios";
 
+import EditProduct from "./components/admin/Products Management/EditProduct";
+
 function setAuthHeaderFromStorage() {
   const token = localStorage.getItem("token");
   if (token) {
@@ -77,6 +79,7 @@ function App() {
           <Route path="orders" element={<Orders />} />
           <Route path="products/create" element={<AddProduct />} />
           <Route path="products/manage" element={<ManageProducts />} />
+          <Route path="products/edit/:id" element={<EditProduct />} />
           <Route path="config/discount" element={<Discount />} />
           <Route path="config/tax" element={<Tax />} />
           <Route path="config/brand" element={<Brand />} />

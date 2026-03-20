@@ -20,10 +20,10 @@ const UserProfile = () => {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
-  const [pets, setPets] = useState([
-    { id: 1, name: "Buddy", type: "Dog", breed: "Labrador", age: 2, color: "from-amber-400 to-orange-500" },
-    { id: 2, name: "Mittens", type: "Cat", breed: "Persian", age: 3, color: "from-gray-400 to-slate-500" },
-  ]);
+  const [pets, setPets] = useState([]);
+  const [showPetForm, setShowPetForm] = useState(false);
+  const [newPet, setNewPet] = useState({ name: "", type: "Dog", breed: "", age: "" });
+  const [savingPet, setSavingPet] = useState(false);
   const [wishlist, setWishlist] = useState([
     { id: 1, name: "Premium Dog Food", price: "₹1,999", image: "🦴" },
     { id: 2, name: "Cat Scratching Post", price: "₹3,299", image: "🐱" },
@@ -97,6 +97,19 @@ const UserProfile = () => {
     };
 
     loadAddresses();
+    loadAddresses();
+
+    const loadPets = async () => {
+      try {
+        const res = await fetch(`${API}/api/pets`, { headers: buildHeaders() });
+        if (res.ok) {
+          setPets(await res.json());
+        }
+      } catch (error) {
+         console.error("Failed to load pets", error);
+      }
+    };
+    loadPets();
   }, [user, API]);
 
   async function loadUser() {
@@ -345,26 +358,51 @@ const UserProfile = () => {
     // window.location.href = "/login";
   };
 
-  const handleAddPet = () => {
-    const colors = [
-      "from-pink-400 to-rose-500",
-      "from-blue-400 to-indigo-500",
-      "from-green-400 to-emerald-500",
-      "from-purple-400 to-violet-500",
-    ];
-    const newPet = {
-      id: Date.now(),
-      name: "New Pet",
-      type: "Dog",
-      breed: "Unknown",
-      age: 1,
-      color: colors[Math.floor(Math.random() * colors.length)],
-    };
-    setPets((p) => [...p, newPet]);
+  const handleAddPetClick = () => {
+    setShowPetForm(true);
   };
 
-  const handleRemovePet = (id) => {
-    setPets((p) => p.filter((x) => x.id !== id));
+  const submitPet = async (e) => {
+    e.preventDefault();
+    setSavingPet(true);
+    try {
+      const res = await fetch(`${API}/api/pets`, {
+        method: "POST",
+        headers: { ...buildHeaders(), "Content-Type": "application/json" },
+        body: JSON.stringify({
+           name: newPet.name,
+           type: newPet.type,
+           breed: newPet.breed,
+           age: Number(newPet.age) || 1
+        })
+      });
+      if (res.ok) {
+         const saved = await res.json();
+         setPets([...pets, saved]);
+         setShowPetForm(false);
+         setNewPet({ name: "", type: "Dog", breed: "", age: "" });
+      } else {
+         alert("Failed to save pet");
+      }
+    } catch(err) {
+      console.error(err);
+    } finally {
+      setSavingPet(false);
+    }
+  };
+
+  const handleRemovePet = async (id) => {
+    if(!window.confirm("Remove this pet?")) return;
+    try {
+      const res = await fetch(`${API}/api/pets/${id}`, { method: "DELETE", headers: buildHeaders() });
+      if(res.ok) {
+         setPets((p) => p.filter((x) => x.id !== id));
+      } else {
+         alert("Failed to delete pet");
+      }
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const handleRemoveFromWishlist = (id) => {
@@ -652,12 +690,39 @@ const UserProfile = () => {
                       <p className="text-xs sm:text-sm text-gray-500 mt-1">Manage your beloved companions</p>
                     </div>
                     <button
-                      onClick={handleAddPet}
+                      onClick={handleAddPetClick}
                       className="w-full sm:w-auto px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-gradient-to-r from-pink-500 to-blue-500 text-white hover:opacity-90 transition-all shadow-sm"
                     >
                       ➕ Add Pet
                     </button>
                   </div>
+
+                  {showPetForm && (
+                     <form onSubmit={submitPet} className="bg-pink-50 p-4 rounded-xl border border-pink-100 mb-6 space-y-4">
+                        <h3 className="font-semibold text-gray-900">Register a New Pet</h3>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                           <input type="text" placeholder="Pet Name" value={newPet.name} required
+                              onChange={(e) => setNewPet({...newPet, name: e.target.value})}
+                              className="px-3 py-2 rounded-lg border border-gray-200 outline-none text-sm w-full" />
+                           <select value={newPet.type} onChange={(e) => setNewPet({...newPet, type: e.target.value})} className="px-3 py-2 rounded-lg border border-gray-200 outline-none text-sm w-full">
+                              <option value="Dog">Dog</option>
+                              <option value="Cat">Cat</option>
+                              <option value="Bird">Bird</option>
+                              <option value="Other">Other</option>
+                           </select>
+                           <input type="text" placeholder="Breed" value={newPet.breed} required
+                              onChange={(e) => setNewPet({...newPet, breed: e.target.value})}
+                              className="px-3 py-2 rounded-lg border border-gray-200 outline-none text-sm w-full" />
+                           <input type="number" placeholder="Age (Years)" value={newPet.age} required min="0" max="50"
+                              onChange={(e) => setNewPet({...newPet, age: e.target.value})}
+                              className="px-3 py-2 rounded-lg border border-gray-200 outline-none text-sm w-full" />
+                        </div>
+                        <div className="flex gap-2 justify-end">
+                           <button type="button" onClick={() => setShowPetForm(false)} className="px-4 py-2 text-sm text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-lg">Cancel</button>
+                           <button type="submit" disabled={savingPet} className="px-4 py-2 text-sm text-white bg-pink-500 hover:bg-pink-600 rounded-lg">{savingPet ? "Saving..." : "Save Pet"}</button>
+                        </div>
+                     </form>
+                  )}
 
                   {pets.length === 0 ? (
                     <div className="text-center py-12 sm:py-16">

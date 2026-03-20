@@ -1,6 +1,7 @@
-// src/components/admin/AddProduct.js
+// src/components/admin/EditProduct.js
 import React, { useState, useEffect } from "react";
 import api from "../../../libs/api";
+import { useParams, useNavigate } from "react-router-dom";
 
 const initialFormData = {
   productname: "",
@@ -22,7 +23,7 @@ const initialFormData = {
   colors: [{ name: "", code: "" }],
 };
 
-const AddProduct = () => {
+const EditProduct = () => {
   const [brands, setBrands] = useState([]);
   const [taxes, setTaxes] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -32,11 +33,54 @@ const AddProduct = () => {
   const [images, setImages] = useState([]);
   const [imagePreviews, setImagePreviews] = useState([]);
 
+  const { id } = useParams();
+  const navigate = useNavigate();
+
   useEffect(() => {
     fetchBrands();
     fetchTaxes();
     fetchCategories();
-  }, []);
+    if (id) {
+       fetchProductDetails();
+    }
+  }, [id]);
+
+  const fetchProductDetails = async () => {
+    try {
+      const res = await api.get(`/admin/products/${id}`);
+      const p = res.data;
+      
+      const catId = p.productSubCategory?.productCategory?.id || "";
+      
+      setFormData({
+        productname: p.productName || "",
+        hsnCode: p.hsnCode || "",
+        barCode: p.barCode || "",
+        modelNo: p.modelNo || "",
+        serialNo: p.serialNo || "",
+        description: p.description || "",
+        quantity: p.quantity || "",
+        minimumStock: p.minimumStock || "",
+        costPrice: p.costPrice || "",
+        mrp: p.mrp || "",
+        brandId: p.brand?.id || "",
+        taxId: p.tax?.id || "",
+        categoryId: catId,
+        productSubCategoryId: p.productSubCategory?.id || "",
+        sizes: p.sizes && p.sizes.length ? p.sizes : [""],
+        measurementUnit: p.measurementUnit || "cm",
+        colors: p.colors && p.colors.length ? p.colors : [{ name: "", code: "" }],
+      });
+
+      const catRes = await api.get(`/admin/categories`);
+      const cats = catRes.data;
+      setCategories(cats);
+      const selectedCat = cats.find(c => c.id === catId);
+      setSubCategories(selectedCat?.subCategories || []);
+    } catch (error) {
+      console.error("Failed to fetch product", error);
+    }
+  };
   const fetchBrands = async () => {
     try {
       const res = await api.get(`/admin/brands`);
@@ -142,18 +186,16 @@ const AddProduct = () => {
       formDataToSend.append("images", file);
     });
     try {
-      const res = await api.post(`/admin/products`, formDataToSend, {
+      const res = await api.put(`/admin/products/${id}`, formDataToSend, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
       if (res.status === 200 || res.status === 201) {
-        alert("Product saved successfully!");
-        setFormData(initialFormData);
-        setImages([]);
-        setImagePreviews([]);
+        alert("Product updated successfully!");
+        navigate("/admin/products/manage");
       }
     } catch (error) {
-      alert("Failed to save product");
+      alert("Failed to update product");
       console.error(error);
     }
   };
@@ -567,7 +609,7 @@ const AddProduct = () => {
             type="submit"
             className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition"
           >
-            Save Product
+            Update Product
           </button>
         </div>
       </form>
@@ -575,4 +617,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default EditProduct;

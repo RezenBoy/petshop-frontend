@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import api from "../../../libs/api";
 import { Eye, Edit, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -10,15 +11,10 @@ const ManageProduct = () => {
   useEffect(() => {
     fetchProducts();
   }, []);
-  const API = process.env.REACT_APP_API_URL;
   const fetchProducts = async () => {
     try {
-      const res = await fetch(`${API}/api/admin/products`);
-      if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}`);
-      }
-      const data = await res.json();
-      setProducts(data);
+      const res = await api.get(`/admin/products`);
+      setProducts(Array.isArray(res.data) ? res.data : []);
     } catch (error) {
       console.error("❌ Failed to fetch products:", error);
     }
@@ -27,11 +23,8 @@ const ManageProduct = () => {
     if (!window.confirm("Are you sure you want to delete this product?")) return;
 
     try {
-      const res = await fetch(`${API}/api/admin/products/${id}`, {
-        method: "DELETE",
-      });
-
-      if (res.ok) {
+      const res = await api.delete(`/admin/products/${id}`);
+      if (res.status === 200 || res.status === 204) {
         setProducts((prev) => prev.filter((p) => p.id !== id));
         alert("✅ Product deleted");
       } else {
@@ -116,7 +109,7 @@ const ManageProduct = () => {
 
       {/* ✅ View Modal */}
       {selectedProduct && (
-        <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg relative">
             <button
               onClick={() => setSelectedProduct(null)}
