@@ -550,10 +550,26 @@ const ProductView = () => {
                       : "border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
                   }`}
                   onClick={() => {
-                    setWishlist(!wishlist);
-                    alert(
-                      `${product.productName || product.name} added to cart!`
-                    );
+                    const cartStr = localStorage.getItem("cartItems");
+                    let cart = cartStr ? JSON.parse(cartStr) : [];
+                    const existingItem = cart.find(item => item.productId === product.id);
+                    
+                    if (existingItem) {
+                      existingItem.quantity += quantity;
+                    } else {
+                      cart.push({
+                        id: Date.now(),
+                        productId: product.id,
+                        name: product.productName || product.name,
+                        price: product.price || product.mrp,
+                        image: productImages.length > 0 ? productImages[0] : "",
+                        quantity: quantity
+                      });
+                    }
+                    
+                    localStorage.setItem("cartItems", JSON.stringify(cart));
+                    window.dispatchEvent(new Event("cartUpdated"));
+                    alert(`${product.productName || product.name} added to cart!`);
                   }}
                   disabled={product.quantity <= 0}
                 >

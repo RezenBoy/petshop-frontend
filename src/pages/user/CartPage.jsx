@@ -1,13 +1,45 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Trash2, Plus, Minus, ShoppingBag, ArrowRight, Tag, Heart } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Trash2, Plus, Minus, ShoppingBag, ArrowRight, Tag, Heart, X } from "lucide-react";
 import Footer from "../../components/common/user/Footer";
+import axios from "axios";
+
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
 const CartPage = () => {
+  const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [couponCode, setCouponCode] = useState("");
   const [appliedCoupon, setAppliedCoupon] = useState(null);
+  const [showCheckoutModal, setShowCheckoutModal] = useState(false);
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [shippingAddress, setShippingAddress] = useState({
+    email: "", mobileNo: "", city: "", landMark: "", pincode: ""
+  });
+
+  // ✅ Fetch user profile to prefill address
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      axios.get(`${API_URL}/api/users/me`, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(res => {
+        if (res.data && res.data.address) {
+          const ad = res.data.address;
+          setShippingAddress({
+            email: ad.email || res.data.email || "",
+            mobileNo: ad.mobileNo || res.data.mobileNo || "",
+            city: ad.city || "",
+            landMark: ad.landMark || "",
+            pincode: ad.pincode || ""
+          });
+        }
+      })
+      .catch(err => console.error("Could not fetch user profile details", err));
+    }
+  }, []);
 
   // ✅ Load cart from localStorage (or API later)
   useEffect(() => {
@@ -16,43 +48,10 @@ const CartPage = () => {
       setCartItems(JSON.parse(savedCart));
       setLoading(false);
     } else {
-      // Temporary mocked cart (replace with API call later)
-      setTimeout(() => {
-        const mockData = [
-          {
-            id: 1,
-            productId: 3,
-            name: "Premium Dog Toy",
-            image: "https://via.placeholder.com/150x150?text=Dog+Toy",
-            price: 99,
-            mrp: 120,
-            quantity: 2,
-            size: "M",
-            color: "Red",
-            inStock: true,
-            maxStock: 10,
-          },
-          {
-            id: 2,
-            productId: 5,
-            name: "Cat Food Bowl",
-            image: "https://via.placeholder.com/150x150?text=Cat+Bowl",
-            price: 299,
-            mrp: 399,
-            quantity: 1,
-            size: "L",
-            color: "Blue",
-            inStock: true,
-            maxStock: 5,
-          },
-        ];
-        setCartItems(mockData);
-        localStorage.setItem("cartItems", JSON.stringify(mockData));
-        setLoading(false);
-      }, 400);
+      setCartItems([]);
+      setLoading(false);
     }
   }, []);
-
   // ✅ Persist cart in localStorage whenever it changes
   useEffect(() => {
     if (!loading) {
@@ -107,6 +106,37 @@ const CartPage = () => {
   const removeCoupon = () => {
     setAppliedCoupon(null);
     setCouponCode("");
+  };
+
+  // ✅ Submit Checkout
+  const handleCheckout = async (e) => {
+    e.preventDefault();
+    setCheckoutLoading(true);
+    try {
+      const payload = {
+        shippingAddress,
+        paymentMode: "CASH",
+        cartItems: cartItems.map(item => ({
+          productId: item.productId,
+          quantity: item.quantity
+        }))
+      };
+
+      const token = localStorage.getItem("token");
+      const config = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
+
+      await axios.post(`${API_URL}/api/user/orders/checkout`, payload, config);
+      alert("Order placed successfully!");
+      localStorage.removeItem("cartItems");
+      setCartItems([]);
+      setShowCheckoutModal(false);
+      navigate("/user/orders");
+    } catch (err) {
+      console.error(err);
+      alert(err.response?.data || "Failed to place order.");
+    } finally {
+      setCheckoutLoading(false);
+    }
   };
 
   // ✅ Loading spinner
@@ -340,7 +370,10 @@ const CartPage = () => {
               )}
 
               {/* Checkout Button */}
-              <button className="w-full py-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-xl font-bold text-base shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
+              <button 
+                onClick={() => setShowCheckoutModal(true)}
+                className="w-full py-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-xl font-bold text-base shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all flex items-center justify-center gap-2"
+              >
                 Proceed to Checkout
                 <ArrowRight className="h-5 w-5" />
               </button>
@@ -357,6 +390,70 @@ const CartPage = () => {
         </div>
       </div>
       <Footer />
+
+      {/* Checkout Modal */}
+      {showCheckoutModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg p-6 relative">
+            <button
+              onClick={() => setShowCheckoutModal(false)}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Delivery Details</h2>
+            <form onSubmit={handleCheckout} className="space-y-4">
+              <input
+                required
+                type="email"
+                placeholder="Email Address"
+                value={shippingAddress.email}
+                onChange={(e) => setShippingAddress({ ...shippingAddress, email: e.target.value })}
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-400 focus:outline-none"
+              />
+              <input
+                required
+                type="tel"
+                placeholder="Mobile Number"
+                value={shippingAddress.mobileNo}
+                onChange={(e) => setShippingAddress({ ...shippingAddress, mobileNo: e.target.value })}
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-400 focus:outline-none"
+              />
+              <input
+                required
+                type="text"
+                placeholder="City"
+                value={shippingAddress.city}
+                onChange={(e) => setShippingAddress({ ...shippingAddress, city: e.target.value })}
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-400 focus:outline-none"
+              />
+              <input
+                required
+                type="text"
+                placeholder="Landmark / Street Address"
+                value={shippingAddress.landMark}
+                onChange={(e) => setShippingAddress({ ...shippingAddress, landMark: e.target.value })}
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-400 focus:outline-none"
+              />
+              <input
+                required
+                type="text"
+                placeholder="Pincode"
+                value={shippingAddress.pincode}
+                onChange={(e) => setShippingAddress({ ...shippingAddress, pincode: e.target.value })}
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-400 focus:outline-none"
+              />
+              <button
+                type="submit"
+                disabled={checkoutLoading}
+                className="w-full mt-6 py-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-xl font-bold text-lg hover:opacity-90 transition disabled:opacity-50"
+              >
+                {checkoutLoading ? "Processing..." : "Place Order (Cash on Delivery)"}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

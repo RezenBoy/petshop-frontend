@@ -1,75 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
 const OrdersPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
   const [selectedOrder, setSelectedOrder] = useState(null);
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const orders = [
-    {
-      id: "ORD123456",
-      date: "2025-10-18",
-      status: "Delivered",
-      total: "₹4,999",
-      items: [
-        { name: "Premium Dog Food - 5kg", quantity: 2, price: "₹1,999", image: "🦴" },
-        { name: "Pet Shampoo", quantity: 1, price: "₹599", image: "🧴" },
-        { name: "Chew Toys Set", quantity: 1, price: "₹899", image: "🎾" },
-      ],
-      shippingAddress: "123 Pet Street, Animal City, Punjab 147001",
-      deliveryDate: "2025-10-20",
-      trackingNumber: "TRK987654321",
-    },
-    {
-      id: "ORD123457",
-      date: "2025-10-16",
-      status: "Shipped",
-      total: "₹3,499",
-      items: [
-        { name: "Cat Scratching Post", quantity: 1, price: "₹2,999", image: "🐱" },
-        { name: "Cat Treats", quantity: 1, price: "₹499", image: "🍖" },
-      ],
-      shippingAddress: "123 Pet Street, Animal City, Punjab 147001",
-      estimatedDelivery: "2025-10-22",
-      trackingNumber: "TRK987654322",
-    },
-    {
-      id: "ORD123458",
-      date: "2025-10-15",
-      status: "Processing",
-      total: "₹2,799",
-      items: [
-        { name: "Pet Carrier Bag", quantity: 1, price: "₹2,499", image: "👜" },
-        { name: "Travel Water Bowl", quantity: 1, price: "₹299", image: "🥣" },
-      ],
-      shippingAddress: "123 Pet Street, Animal City, Punjab 147001",
-      estimatedDelivery: "2025-10-24",
-    },
-    {
-      id: "ORD123459",
-      date: "2025-10-12",
-      status: "Cancelled",
-      total: "₹1,999",
-      items: [
-        { name: "Pet Bed - Large", quantity: 1, price: "₹1,999", image: "🛏️" },
-      ],
-      shippingAddress: "123 Pet Street, Animal City, Punjab 147001",
-      cancelReason: "Requested by customer",
-    },
-    {
-      id: "ORD123460",
-      date: "2025-10-10",
-      status: "Delivered",
-      total: "₹5,499",
-      items: [
-        { name: "Automatic Pet Feeder", quantity: 1, price: "₹3,999", image: "🍽️" },
-        { name: "Pet Food Storage", quantity: 1, price: "₹1,499", image: "📦" },
-      ],
-      shippingAddress: "123 Pet Street, Animal City, Punjab 147001",
-      deliveryDate: "2025-10-14",
-      trackingNumber: "TRK987654323",
-    },
-  ];
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
+  const fetchOrders = async () => {
+    try {
+      const res = await axios.get(`${API_URL}/api/user/orders`);
+      
+      // Map backend UserOrderResponseDTO to frontend format
+      const formattedOrders = res.data.map(o => ({
+        id: o.id.toString(),
+        date: new Date(o.orderDateTime).toLocaleDateString(),
+        status: o.orderStatus ? o.orderStatus.charAt(0).toUpperCase() + o.orderStatus.slice(1).toLowerCase() : "Pending",
+        total: `₹${o.totalPrice}`,
+        items: o.items ? o.items.map(i => ({
+          name: i.productName,
+          quantity: i.quantity,
+          price: `₹${i.price}`,
+          image: "📦"
+        })) : [],
+        shippingAddress: o.shippingAddress,
+      }));
+      setOrders(formattedOrders);
+    } catch (err) {
+      console.error("Failed to fetch orders", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const getStatusConfig = (status) => {
     const configs = {
@@ -155,7 +124,12 @@ const OrdersPage = () => {
 
         {/* Orders List */}
         <div className="space-y-3 sm:space-y-4">
-          {filteredOrders.length === 0 ? (
+          {loading ? (
+            <div className="bg-white rounded-2xl border border-gray-100 p-8 sm:p-16 text-center shadow-sm">
+              <div className="animate-spin h-10 w-10 border-4 border-pink-400 border-t-transparent rounded-full mx-auto"></div>
+              <p className="mt-4 text-gray-500">Loading your orders...</p>
+            </div>
+          ) : filteredOrders.length === 0 ? (
             <div className="bg-white rounded-2xl border border-gray-100 p-8 sm:p-16 text-center shadow-sm">
               <div className="text-5xl mb-4">📦</div>
               <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">No orders found</h3>

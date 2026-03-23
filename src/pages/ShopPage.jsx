@@ -359,7 +359,27 @@ const ShopPage = () => {
 
                   {/* Add to Cart Button */}
                   <button
-                    onClick={() => alert(`Added ${product.productName} to cart!`)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const cartStr = localStorage.getItem("cartItems");
+                      let cart = cartStr ? JSON.parse(cartStr) : [];
+                      const existingItem = cart.find(item => item.productId === product.id);
+                      if (existingItem) {
+                        existingItem.quantity += 1;
+                      } else {
+                        cart.push({
+                          id: Date.now(),
+                          productId: product.id,
+                          name: product.productName,
+                          price: product.price || product.mrp,
+                          image: getImageUrl(product),
+                          quantity: 1
+                        });
+                      }
+                      localStorage.setItem("cartItems", JSON.stringify(cart));
+                      window.dispatchEvent(new Event("cartUpdated"));
+                      alert(`Added ${product.productName} to cart!`);
+                    }}
                     disabled={product.quantity <= 0}
                     className={`w-full py-2.5 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2 ${
                       product.quantity <= 0

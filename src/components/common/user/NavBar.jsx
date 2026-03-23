@@ -16,6 +16,32 @@ const Navbar = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const [cartCount, setCartCount] = useState(0);
+
+  const updateCartCount = () => {
+    const savedCart = localStorage.getItem("cartItems");
+    if (savedCart) {
+      try {
+        const items = JSON.parse(savedCart);
+        const count = items.reduce((sum, item) => sum + (item.quantity || 1), 0);
+        setCartCount(count);
+      } catch (e) {
+        setCartCount(0);
+      }
+    } else {
+      setCartCount(0);
+    }
+  };
+
+  useEffect(() => {
+    updateCartCount();
+    window.addEventListener("cartUpdated", updateCartCount);
+    window.addEventListener("storage", updateCartCount);
+    return () => {
+      window.removeEventListener("cartUpdated", updateCartCount);
+      window.removeEventListener("storage", updateCartCount);
+    };
+  }, []);
 
   const navItems = [
     { name: "Home", href: "/" },
@@ -138,7 +164,7 @@ const Navbar = () => {
               >
                 <ShoppingCart className="h-5 w-5" />
                 <span className="absolute top-0 right-0 h-5 w-5 text-[11px] rounded-full text-white bg-pink-500 flex items-center justify-center shadow-sm">
-                  3
+                  {cartCount}
                 </span>
               </Link>
 
