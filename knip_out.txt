@@ -1,0 +1,18 @@
+﻿[93m[4mUnused files[24m[39m (5)
+postcss.config.js                   
+tailwind.config.js                  
+src/App.test.js                     
+src/setupTests.js                   
+src/components/auth/authProvider.jsx
+[93m[4mUnused dependencies[24m[39m (8)
+@headlessui/react            package.json:6:6 
+@heroicons/react             package.json:7:6 
+@testing-library/dom         package.json:8:6 
+@testing-library/jest-dom    package.json:9:6 
+@testing-library/react       package.json:10:6
+@testing-library/user-event  package.json:11:6
+jwt-decode                   package.json:13:6
+recharts                     package.json:19:6
+[93m[4mUnused exports[24m[39m (2)
+useAuth             src/context/AuthContext.jsx:41:14
+getToken  function  src/components/auth/auth.jsx:1:17

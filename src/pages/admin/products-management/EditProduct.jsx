@@ -43,6 +43,7 @@ const EditProduct = () => {
     if (id) {
        fetchProductDetails();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const fetchProductDetails = async () => {
@@ -147,8 +148,6 @@ const EditProduct = () => {
     setImages(updatedImages);
     setImagePreviews(updatedPreviews);
   };
-
-  const API = process.env.REACT_APP_API_URL;
 
   // Submit Handler using FormData
   const handleSubmit = async (e) => {

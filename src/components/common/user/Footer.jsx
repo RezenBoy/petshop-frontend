@@ -77,7 +77,9 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
             <div className="flex space-x-6">
               <a
-                href="#"
+                href="https://facebook.com"
+                target="_blank"
+                rel="noreferrer"
                 aria-label="Facebook"
                 className="text-gray-400 hover:text-pink-400 transition-all duration-200 transform hover:scale-110"
               >
@@ -86,7 +88,9 @@ const Footer = () => {
                 </svg>
               </a>
               <a
-                href="#"
+                href="https://twitter.com"
+                target="_blank"
+                rel="noreferrer"
                 aria-label="Twitter"
                 className="text-gray-400 hover:text-pink-400 transition-all duration-200 transform hover:scale-110"
               >
@@ -95,7 +99,9 @@ const Footer = () => {
                 </svg>
               </a>
               <a
-                href="#"
+                href="https://instagram.com"
+                target="_blank"
+                rel="noreferrer"
                 aria-label="Instagram"
                 className="text-gray-400 hover:text-pink-400 transition-all duration-200 transform hover:scale-110"
               >

@@ -9,7 +9,9 @@ import {
   Package,
 } from "lucide-react";
 import axios from "axios";
-import Footer from "./common/user/Footer";
+import Footer from "../components/common/user/Footer";
+
+const API_BASE_URL = process.env.REACT_APP_API_URL;
 
 const ProductView = () => {
   const { id } = useParams();
@@ -29,7 +31,6 @@ const ProductView = () => {
   const [submittingReview, setSubmittingReview] = useState(false);
 
   // API base URL for images
-  const API_BASE_URL = process.env.REACT_APP_API_URL;
 
   const features = [
     { icon: Truck, text: "Free delivery on orders above ₹999" },
@@ -265,7 +266,7 @@ const ProductView = () => {
 
               {/* Thumbnail Images */}
               {productImages.length > 1 && (
-                <div className="flex gap-3">
+                <div className="flex flex-wrap gap-3">
                   {productImages.slice(0, 4).map((img, idx) => (
                     <button
                       key={idx}

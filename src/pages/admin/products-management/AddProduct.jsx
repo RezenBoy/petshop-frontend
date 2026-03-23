@@ -104,8 +104,6 @@ const AddProduct = () => {
     setImagePreviews(updatedPreviews);
   };
 
-  const API = process.env.REACT_APP_API_URL;
-
   // Submit Handler using FormData
   const handleSubmit = async (e) => {
     e.preventDefault();

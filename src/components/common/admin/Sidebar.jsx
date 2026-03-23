@@ -6,7 +6,6 @@ import {
   Settings,
   Package,
   Percent,
-  Layers,
   ShoppingCart,
   ClipboardList,
   FileText,
@@ -22,55 +21,55 @@ import {
   Boxes,
 } from "lucide-react";
 
+const menuItems = [
+  { icon: Home, label: "Dashboard", path: "/admin" },
+  { icon: Settings, label: "Master Setup", path: "/admin/master" },
+
+  {
+    icon: Package,
+    label: "Product Configuration",
+    children: [
+      { icon: Percent, label: "Tax", path: "/admin/config/tax" },
+      { icon: BadgeCheck, label: "Brand", path: "/admin/config/brand" },
+      { icon: TicketPercent, label: "Discount", path: "/admin/config/discount" },
+    ],
+  },
+
+  {
+    icon: ShoppingCart,
+    label: "Purchase Management",
+    children: [
+      { icon: PlusSquare, label: "Create Purchase", path: "/admin/purchase/create" },
+      { icon: ListChecks, label: "Manage Purchase", path: "/admin/purchase/manage" },
+    ],
+  },
+
+  {
+    icon: ClipboardList,
+    label: "Product Management",
+    children: [
+      { icon: PlusCircle, label: "Create Product", path: "/admin/products/create" },
+      { icon: Boxes, label: "Manage Product", path: "/admin/products/manage" },
+    ],
+  },
+
+  {
+    icon: FileText,
+    label: "Reports",
+    children: [
+      { icon: BarChart3, label: "Sales Report", path: "/admin/reports/sales" },
+      { icon: FileText, label: "Purchase Report", path: "/admin/reports/purchase" },
+    ],
+  },
+
+  { icon: BarChart3, label: "Order Management", path: "/admin/orders" },
+  { icon: Users, label: "User Management", path: "/admin/users" },
+  { icon: LogOut, label: "Logout", path: "/logout" },
+];
+
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const location = useLocation();
   const [openMenu, setOpenMenu] = useState(null); // only one menu open at a time
-
-  const menuItems = [
-    { icon: Home, label: "Dashboard", path: "/admin" },
-    { icon: Settings, label: "Master Setup", path: "/admin/master" },
-
-    {
-      icon: Package,
-      label: "Product Configuration",
-      children: [
-        { icon: Percent, label: "Tax", path: "/admin/config/tax" },
-        { icon: BadgeCheck, label: "Brand", path: "/admin/config/brand" },
-        { icon: TicketPercent, label: "Discount", path: "/admin/config/discount" },
-      ],
-    },
-
-    {
-      icon: ShoppingCart,
-      label: "Purchase Management",
-      children: [
-        { icon: PlusSquare, label: "Create Purchase", path: "/admin/purchase/create" },
-        { icon: ListChecks, label: "Manage Purchase", path: "/admin/purchase/manage" },
-      ],
-    },
-
-    {
-      icon: ClipboardList,
-      label: "Product Management",
-      children: [
-        { icon: PlusCircle, label: "Create Product", path: "/admin/products/create" },
-        { icon: Boxes, label: "Manage Product", path: "/admin/products/manage" },
-      ],
-    },
-
-    {
-      icon: FileText,
-      label: "Reports",
-      children: [
-        { icon: BarChart3, label: "Sales Report", path: "/admin/reports/sales" },
-        { icon: FileText, label: "Purchase Report", path: "/admin/reports/purchase" },
-      ],
-    },
-
-    { icon: BarChart3, label: "Order Management", path: "/admin/orders" },
-    { icon: Users, label: "User Management", path: "/admin/users" },
-    { icon: LogOut, label: "Logout", path: "/logout" },
-  ];
 
   // Auto-open parent if child is active
   useEffect(() => {

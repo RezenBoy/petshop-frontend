@@ -1,39 +1,39 @@
 import "./App.css";
-import RegisterForm from "./components/RegisterForm";
-import LoginForm from "./components/LoginForm";
-import Dashboard from "./components/admin/Dashboard";
-import HomePage from "./components/HomePage";
+import RegisterForm from "./pages/auth/RegisterForm";
+import LoginForm from "./pages/auth/LoginForm";
+import Dashboard from "./pages/admin/Dashboard";
+import HomePage from "./pages/HomePage";
 import Layout from "./components/layout/Layout";
 import UserProfile from "./pages/user/userProfile";
-import Orders from "./components/admin/Orders";
-import Customers from "./components/admin/Users";
-import Settings from "./components/admin/Settings";
-import MasterSetup from "./components/admin/MasterSetup";
-import ProductView from "./components/ProductView";
+import Orders from "./pages/admin/Orders";
+import Customers from "./pages/admin/Users";
+import Settings from "./pages/admin/Settings";
+import MasterSetup from "./pages/admin/MasterSetup";
+import ProductView from "./pages/ProductView";
 import CartPage from "./pages/user/CartPage";
-import ContactPage from "./pages/user/ContactPage.js";
-import AboutPage from "./components/AboutPage.js";
-import OrdersPage from "./pages/user/OrdersPage.js";
-import ShopPage from "./pages/ShopPage.js";
+import ContactPage from "./pages/ContactPage";
+import AboutPage from "./pages/AboutPage";
+import OrdersPage from "./pages/user/OrdersPage";
+import ShopPage from "./pages/ShopPage";
 import ScrollToTop from "./components/common/ScrollToTop";
 
 import ProtectedRoute from "./components/common/ProductionRoute";
 import Logout from "./components/common/Logout";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import AddProduct from "./components/admin/Products Management/AddProduct";
-import ManageProducts from "./components/admin/Products Management/ManageProducts";
-import Discount from "./components/admin/Product Config/Discount";
-import Tax from "./components/admin/Product Config/Tax";
-import Brand from "./components/admin/Product Config/Brand";
-import CreatePurchase from "./components/admin/Purchase Management/CreatePurchase";
-import ManagePurchase from "./components/admin/Purchase Management/ManagePurchase";
-import SalesReport from "./components/admin/Report/SalesReport";
-import PurchaseReport from "./components/admin/Report/PurchaseReport";
+import AddProduct from "./pages/admin/products-management/AddProduct";
+import ManageProducts from "./pages/admin/products-management/ManageProducts";
+import Discount from "./pages/admin/product-config/Discount";
+import Tax from "./pages/admin/product-config/Tax";
+import Brand from "./pages/admin/product-config/Brand";
+import CreatePurchase from "./pages/admin/purchase-management/CreatePurchase";
+import ManagePurchase from "./pages/admin/purchase-management/ManagePurchase";
+import SalesReport from "./pages/admin/report/SalesReport";
+import PurchaseReport from "./pages/admin/report/PurchaseReport";
 import UserLayout from "./components/layout/UserLayout";
 import axios from "axios";
 
-import EditProduct from "./components/admin/Products Management/EditProduct";
+import EditProduct from "./pages/admin/products-management/EditProduct";
 
 function setAuthHeaderFromStorage() {
   const token = localStorage.getItem("token");

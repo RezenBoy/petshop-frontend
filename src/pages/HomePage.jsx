@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
-import Footer from "./common/user/Footer";
+import Footer from "../components/common/user/Footer";
 import axios from "axios";
-import Navbar from "./common/user/NavBar";
+import Navbar from "../components/common/user/NavBar";
 import { Link } from "react-router-dom";
 import api from "../libs/api";
 import {
   ShoppingCart,
 } from "lucide-react";
 
+const API = process.env.REACT_APP_API_URL;
+
 const HomePage = () => {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [loadError, setLoadError] = useState(null);
-  const API = process.env.REACT_APP_API_URL;
   useEffect(() => {
     let mounted = true;
 
@@ -25,7 +25,6 @@ const HomePage = () => {
 
     const fetchData = async () => {
       setLoading(true);
-      setLoadError(null);
 
       try {
         // primary attempt: use api (adds Authorization header if token exists)
@@ -59,7 +58,6 @@ const HomePage = () => {
         } catch (err2) {
           console.error("Fallback unauthenticated fetch also failed:", err2);
           if (!mounted) return;
-          setLoadError(err2);
         }
       } finally {
         // ALWAYS run this so the spinner stops
@@ -92,7 +90,7 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-4 text-center">
           <div className="mb-6">
             <div className="text-5xl md:text-6xl mb-3">🐾</div>
-            <h1 className="text-4xl md:text-6xl font-extrabold text-gray-800 mb-4">
+            <h1 className="text-4xl md:text-6xl font-extrabold text-gray-800 mb-4 break-words">
               Happy Pets, Happy You
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
@@ -133,7 +131,7 @@ const HomePage = () => {
                         ? "🐱"
                         : "🎾"}
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-1">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-1 break-words">
                     {cat.categoryName}
                   </h3>
                   <p className="text-gray-600 text-sm">

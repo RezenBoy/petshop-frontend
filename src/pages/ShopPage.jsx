@@ -4,6 +4,8 @@ import { Heart, ShoppingCart, Star, Filter, X, ChevronDown, Search } from "lucid
 import axios from "axios";
 import Footer from "../components/common/user/Footer";
 
+const API = process.env.REACT_APP_API_URL;
+
 const ShopPage = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -19,7 +21,7 @@ const ShopPage = () => {
     priceRange: "all",
     sortBy: "featured"
   });
-const API = process.env.REACT_APP_API_URL;
+
 
   // Fetch products
   useEffect(() => {

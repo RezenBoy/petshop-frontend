@@ -10,6 +10,8 @@ import {
   LogOut,
 } from "lucide-react";
 
+const API = process.env.REACT_APP_API_URL;
+
 const UserProfile = () => {
   // ---------- existing component-level state ----------
   const [activeTab, setActiveTab] = useState("profile");
@@ -56,8 +58,6 @@ const UserProfile = () => {
     isDefault: false,
   });
 
-  const API = process.env.REACT_APP_API_URL;
-
   const tabs = [
     { id: "profile", label: "Profile", icon: <User size={20} /> },
     { id: "pets", label: "My Pets", icon: <PawPrint size={20} /> },
@@ -70,6 +70,7 @@ const UserProfile = () => {
   // Load user on mount
   useEffect(() => {
     loadUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Load addresses when user is available
@@ -97,7 +98,6 @@ const UserProfile = () => {
     };
 
     loadAddresses();
-    loadAddresses();
 
     const loadPets = async () => {
       try {
@@ -110,7 +110,7 @@ const UserProfile = () => {
       }
     };
     loadPets();
-  }, [user, API]);
+  }, [user]);
 
   async function loadUser() {
     setLoading(true);
@@ -464,12 +464,23 @@ const UserProfile = () => {
           </div>
 
           {/* Sidebar */}
-          <aside
-            className={`lg:col-span-3 ${sidebarOpen ? "block" : "hidden"} lg:block fixed lg:static inset-0 lg:inset-auto z-40 lg:z-0`}
-          >
-            <div className="lg:hidden fixed inset-0 bg-black/20 z-30" onClick={() => setSidebarOpen(false)}></div>
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden sticky top-24 relative z-40">
-              <div className="bg-gradient-to-br from-pink-500 to-blue-500 p-4 sm:p-6 text-white">
+          <aside className="lg:col-span-3">
+            {/* Mobile Overlay */}
+            {sidebarOpen && (
+              <div 
+                className="lg:hidden fixed inset-0 bg-black/50 z-40 transition-opacity" 
+                onClick={() => setSidebarOpen(false)}
+              ></div>
+            )}
+            
+            {/* Sidebar Content */}
+            <div 
+              className={`fixed inset-y-0 left-0 z-50 w-64 h-full bg-white shadow-2xl transform transition-transform duration-300 ease-in-out lg:static lg:w-auto lg:h-auto lg:bg-transparent lg:shadow-none lg:translate-x-0 ${
+                sidebarOpen ? "translate-x-0" : "-translate-x-full"
+              }`}
+            >
+              <div className="bg-white lg:rounded-2xl lg:shadow-sm lg:border border-gray-100 overflow-y-auto h-full lg:h-auto lg:overflow-hidden lg:sticky lg:top-24 flex flex-col">
+                <div className="bg-gradient-to-br from-pink-500 to-blue-500 p-4 sm:p-6 text-white flex-shrink-0">
                 <div className="flex flex-col items-center text-center">
                   <div className="relative">
                     <div className="h-16 sm:h-20 w-16 sm:w-20 rounded-full bg-white/20 backdrop-blur-sm border-4 border-white/30 flex items-center justify-center text-2xl sm:text-3xl font-bold">
@@ -516,6 +527,7 @@ const UserProfile = () => {
                 </button>
               </div>
             </div>
+          </div>
           </aside>
 
           {/* Main Content */}

@@ -69,6 +69,7 @@ const API = process.env.REACT_APP_API_URL;
         confirmPassword: validateField("confirmPassword", formData.confirmPassword),
       }));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData.password]);
 
   // Submit
