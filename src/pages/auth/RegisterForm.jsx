@@ -23,6 +23,7 @@ export default function RegisterPage() {
       case "fullName":
         if (!value.trim()) return "Full name is required";
         if (value.trim().length < 2) return "Name must be at least 2 characters";
+        if (value.trim().length > 20) return "Name is way to long(max limit 20 characters)";
         return "";
       case "email":
         if (!value) return "Email is required";

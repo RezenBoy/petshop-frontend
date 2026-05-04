@@ -4,7 +4,9 @@ import axios from "axios";
 import Navbar from "../components/common/user/NavBar";
 import { Link } from "react-router-dom";
 import api from "../libs/api";
-import { ShoppingCart, ArrowRight, Star, Package } from "lucide-react";
+import bg from "../assets/images/backgroundImage.png";
+// import bg from "../assets/images/background.png";
+import { ShoppingCart, ArrowRight, Package, Award, PawPrint, HeadphonesIcon } from "lucide-react";
 import { ReactComponent as DeliveryIcon } from "../assets/svg/fast-delivery-svgrepo-com.svg";
 import { ReactComponent as QualityIcon } from "../assets/svg/quality-supervision-svgrepo-com.svg";
 import { ReactComponent as BestPriceIcon } from "../assets/svg/best-price-guarantee-warranty-svgrepo-com.svg";
@@ -97,66 +99,68 @@ const HomePage = () => {
       {/* <div className="h-0" /> */}
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-pink-100 via-blue-50 to-yellow-50">
-        {/* Background blobs */}
+      <section
+        className="relative overflow-hidden"
+        style={{
+          backgroundImage: `url(${bg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-white/10 via-white/10 to-transparent" />
         <div className="absolute top-0 left-0 w-64 h-64 sm:w-96 sm:h-96 bg-pink-200/40 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-        <div className="absolute bottom-0 right-0 w-64 h-64 sm:w-96 sm:h-96 bg-blue-200/40 rounded-full blur-3xl translate-x-1/2 translate-y-1/2 pointer-events-none" />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32 text-center">
-          <div
-            className="inline-flex items-center gap-2 bg-white/70 backdrop-blur-sm border border-pink-200/50 px-3 py-1.5 rounded-full text-xs sm:text-sm text-pink-600 font-medium mb-6"
-          >
-            <span className="text-base leading-none">🐾</span>
-            Your trusted pet store
-          </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-14 sm:pt-14 sm:pb-20 lg:pt-20 lg:pb-28">
+          {/* Two column layout */}
+          <div className="flex flex-col lg:flex-row items-center lg:items-end gap-8 lg:gap-12">
 
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-gray-800 mb-4 sm:mb-6 leading-tight tracking-tight">
-            Happy Pets,{" "}
-            <span className="bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent">
-              Happy You
-            </span>
-          </h1>
-
-          <p className="text-base sm:text-lg lg:text-xl text-gray-500 mb-8 sm:mb-10 max-w-xl mx-auto leading-relaxed px-2">
-            Everything your furry friends need — nutritious food, cozy accessories, and playful toys, all in one place.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center px-4">
-            <Link
-              to="/shop"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-blue-500 text-white px-7 py-3 sm:py-3.5 rounded-full text-sm sm:text-base font-semibold hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-pink-200"
-            >
-              Shop Now
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <a
-              href="#categories"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/80 text-gray-700 border border-gray-200 px-7 py-3 sm:py-3.5 rounded-full text-sm sm:text-base font-medium hover:bg-white hover:border-pink-200 active:scale-95 transition-all"
-            >
-              Browse Categories
-            </a>
-          </div>
-
-          {/* Stats row */}
-          <div className="flex flex-wrap justify-center gap-6 sm:gap-10 mt-10 sm:mt-14 text-center">
-            {[
-              { value: "500+", label: "Products" },
-              { value: "50+", label: "Brands" },
-              { value: "10k+", label: "Happy Pets" },
-            ].map(({ value, label }) => (
-              <div key={label} className="flex flex-col">
-                <span className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent">
-                  {value}
-                </span>
-                <span className="text-xs sm:text-sm text-gray-400 font-medium mt-0.5">{label}</span>
+            {/* LEFT — Text content */}
+            <div className="flex-1 text-left max-w-xl">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 bg-white/70 backdrop-blur-sm border border-pink-200/50 px-3 py-1.5 rounded-full text-xs sm:text-sm text-pink-600 font-medium mb-5">
+                <span className="text-base leading-none">🐾</span>
+                Your trusted pet store
               </div>
-            ))}
+
+              {/* Heading */}
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-800 mb-5 leading-tight tracking-tight">
+                Happy Pets,{" "}
+                <span className="bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent">
+                  Happy You
+                </span>
+              </h1>
+
+              {/* Description */}
+              <p className="text-base sm:text-lg text-gray-700 mb-8 leading-relaxed max-w-md">
+                Everything your furry friends need — nutritious food, cozy accessories, and playful toys, all in one place.
+              </p>
+
+              {/* Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link
+                  to="/shop"
+                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-blue-500 text-white px-7 py-3 sm:py-3.5 rounded-full text-sm sm:text-base font-semibold hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-pink-200"
+                >
+                  Shop Now
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <a
+                  href="#categories"
+                  className="inline-flex items-center justify-center gap-2 bg-white/80 text-gray-700 border border-gray-200 px-7 py-3 sm:py-3.5 rounded-full text-sm sm:text-base font-medium hover:bg-white hover:border-pink-200 active:scale-95 transition-all"
+                >
+                  Browse Categories
+                </a>
+              </div>
+            </div>
+
+            {/* RIGHT — spacer so the background image pet shows on the right */}
+            <div className="hidden lg:block flex-1" />
           </div>
         </div>
 
         <div className="absolute bottom-0 left-0 right-0 h-8 sm:h-12 bg-gradient-to-t from-white to-transparent" />
       </section>
-
       {/* ── Categories ── */}
       <section className="py-12 sm:py-16 lg:py-20 bg-white" id="categories">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -233,9 +237,9 @@ const HomePage = () => {
                   {/* Image */}
                   <Link to={`/product/${product.id}`} className="block flex-shrink-0">
                     <div className="relative bg-gradient-to-br from-pink-50 to-blue-50 h-40 sm:h-44 lg:h-48 flex items-center justify-center overflow-hidden">
-                      {product.imageUrl ? (
+                      {product.imageUrls?.length > 0 ? (
                         <img
-                          src={product.imageUrl}
+                          src={API + product.imageUrls[0]}
                           alt={product.productName}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                           loading="lazy"
@@ -260,7 +264,7 @@ const HomePage = () => {
                     </Link>
 
                     {product.description && (
-                      <p className="text-xs text-gray-400 line-clamp-2 leading-relaxed hidden sm:block">
+                      <p className="text-xs text-gray-400 line-clamp-2 leading-relaxed ">
                         {product.description}
                       </p>
                     )}
@@ -307,12 +311,12 @@ const HomePage = () => {
               { Icon: BestPriceIcon, title: "Best Prices", desc: "Competitive pricing with regular deals and discounts.", color: "bg-amber-50" },
               { Icon: SupportIcon, title: "Pet Expert Support", desc: "Our team of pet lovers is always ready to help.", color: "bg-green-50" },
             ].map(({ Icon, title, desc, color }) => (
-              <div key={title} className="flex flex-col items-center text-center p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-pink-50/50 to-blue-50/50 border border-gray-100 hover:border-pink-200/60 hover:shadow-sm transition-all">
-                <div className={`h-12 w-12 rounded-xl flex items-center justify-center mb-3 sm:mb-4 ${color}`}>
-                  <Icon className="h-12 w-12" />
+              <div key={title} className="flex flex-col items-center text-center p-4 rounded-2xl bg-gradient-to-br from-pink-50/50 to-blue-50/50 border border-gray-100 hover:border-pink-200/60 hover:shadow-sm transition-all">
+                <div className={`h-10 w-10 rounded-xl flex items-center justify-center mb-2.5 ${color}`}>
+                  <Icon className="h-5 w-5" />
                 </div>
-                <h3 className="font-semibold text-gray-800 text-sm sm:text-base mb-1.5">{title}</h3>
-                <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">{desc}</p>
+                <h3 className="font-semibold text-gray-800 text-sm mb-1">{title}</h3>
+                <p className="text-gray-500 text-xs leading-relaxed">{desc}</p>
               </div>
             ))}
           </div>
@@ -320,45 +324,86 @@ const HomePage = () => {
       </section>
 
       {/* ── About ── */}
-      <section id="about" className="py-12 sm:py-16 lg:py-20 bg-gray-50/80">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">
-            About Bowlfull Buddies
-          </h2>
-          <p className="text-gray-400 text-sm sm:text-base mb-8 sm:mb-10">
-            Founded by passionate pet lovers, for pet lovers
-          </p>
-          <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 shadow-sm border border-gray-100">
-            <div className="text-4xl sm:text-5xl mb-5 sm:mb-6">🐾</div>
-            <p className="text-gray-600 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
-              At Bowlfull Buddies, we believe every pet deserves the very best. Founded by passionate pet lovers,
-              we're dedicated to providing high-quality products that keep your furry friends healthy, happy, and loved.
-              From premium nutrition to engaging toys and essential accessories, our mission is simple: to strengthen
-              the bond between you and your beloved pets.
-            </p>
-            <Link
-              to="/about"
-              className="inline-flex items-center gap-2 mt-6 text-sm font-semibold text-pink-500 hover:text-pink-600 transition-colors"
-            >
-              Learn more about us
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+      <section id="about" className="py-16 sm:py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+
+            {/* Left */}
+            <div className="flex-1 text-left">
+              <span className="text-xs font-semibold tracking-widest text-pink-500 uppercase">
+                Who We Are
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-2 mb-5 leading-tight">
+                Built for pets,<br /> by pet lovers.
+              </h2>
+              <div className="w-10 h-1 bg-gradient-to-r from-pink-500 to-blue-500 rounded-full mb-5" />
+              <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-3">
+                At Bowlfull Buddies, we believe every pet deserves the very best. We're dedicated to providing
+                high-quality products that keep your furry friends healthy, happy, and loved.
+              </p>
+              <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-8">
+                From premium nutrition to engaging toys and essential accessories — our mission is to strengthen
+                the bond between you and your beloved pets.
+              </p>
+              <Link
+                to="/about"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-white bg-gradient-to-r from-pink-500 to-blue-500 px-6 py-2.5 rounded-full hover:opacity-90 active:scale-95 transition-all shadow-sm"
+              >
+                Our Story
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+
+            {/* Right — Stats */}
+            <div className="flex-1 w-full grid grid-cols-2 gap-3 sm:gap-4">
+              {[
+                { value: "500+", label: "Products available", icon: Package, color: "text-pink-500 bg-pink-50" },
+                { value: "50+", label: "Trusted brands", icon: Award, color: "text-blue-500 bg-blue-50" },
+                { value: "10k+", label: "Happy pet parents", icon: PawPrint, color: "text-purple-500 bg-purple-50" },
+                { value: "24/7", label: "Customer support", icon: HeadphonesIcon, color: "text-green-500 bg-green-50" },
+              ].map(({ value, label, icon: Icon, color }) => (
+                <div
+                  key={label}
+                  className="border border-gray-100 hover:border-pink-200 rounded-2xl p-5 sm:p-6 flex flex-col gap-1 transition-all hover:shadow-sm bg-white"
+                >
+                  <div className={`h-9 w-9 rounded-xl flex items-center justify-center mb-1 ${color}`}>
+                    <Icon className="h-4 w-4" />
+                  </div>
+                  <span className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent">
+                    {value}
+                  </span>
+                  <span className="text-xs sm:text-sm text-gray-400 leading-snug">{label}</span>
+                </div>
+              ))}
+            </div>
+
           </div>
         </div>
       </section>
 
+
       {/* ── CTA Banner ── */}
-      <section className="py-10 sm:py-14 bg-gradient-to-r from-pink-500 to-blue-500">
+      <section className="relative py-12 sm:py-16 bg-white">
+
+        {/* Top Fade */}
+        {/* <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-white to-transparent pointer-events-none" /> */}
+
+        {/* Bottom Fade */}
+        {/* <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none" /> */}
+
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-          <h2 className="text-xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">
+
+          <h2 className="text-xl sm:text-3xl font-bold text-gray-800 mb-3 sm:mb-4">
             Ready to spoil your pet?
           </h2>
-          <p className="text-pink-100 text-sm sm:text-base mb-6 sm:mb-8">
+
+          <p className="text-gray-600 text-sm sm:text-base mb-6 sm:mb-8">
             Browse hundreds of products curated just for your furry, feathered, or scaly friends.
           </p>
+
           <Link
             to="/shop"
-            className="inline-flex items-center gap-2 bg-white text-pink-600 font-semibold px-7 py-3 rounded-full hover:bg-pink-50 active:scale-95 transition-all shadow-md text-sm sm:text-base"
+            className="inline-flex items-center gap-2 bg-gradient-to-br from-pink-50/50 to-blue-50/50 border border-gray-100 hover:border-pink-200/60 hover:shadow-sm transition-all text-pink-600 font-semibold px-7 py-3 rounded-full hover:bg-pink-50 active:scale-95 transition-all shadow-md text-sm sm:text-base"
           >
             Shop All Products
             <ArrowRight className="h-4 w-4" />
