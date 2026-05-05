@@ -4,14 +4,12 @@ import axios from "axios";
 import Navbar from "../components/common/user/NavBar";
 import { Link } from "react-router-dom";
 import api from "../libs/api";
-import bg from "../assets/images/backgroundImage.png";
-// import bg from "../assets/images/background.png";
+import bg from "../assets/images/heroImage.png";
 import { ShoppingCart, ArrowRight, Package, Award, PawPrint, HeadphonesIcon } from "lucide-react";
 import { ReactComponent as DeliveryIcon } from "../assets/svg/fast-delivery-svgrepo-com.svg";
 import { ReactComponent as QualityIcon } from "../assets/svg/quality-supervision-svgrepo-com.svg";
 import { ReactComponent as BestPriceIcon } from "../assets/svg/best-price-guarantee-warranty-svgrepo-com.svg";
 import { ReactComponent as SupportIcon } from "../assets/svg/pet-svgrepo-com.svg";
-
 
 const API = process.env.REACT_APP_API_URL;
 
@@ -95,9 +93,6 @@ const HomePage = () => {
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-blue-50">
       <Navbar />
 
-      {/* Spacer for fixed navbar */}
-      {/* <div className="h-0" /> */}
-
       {/* ── Hero ── */}
       <section
         className="relative overflow-hidden"
@@ -106,61 +101,57 @@ const HomePage = () => {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
+          minHeight: "420px",
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-white/10 via-white/10 to-transparent" />
         <div className="absolute top-0 left-0 w-64 h-64 sm:w-96 sm:h-96 bg-pink-200/40 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-14 sm:pt-14 sm:pb-20 lg:pt-20 lg:pb-28">
-          {/* Two column layout */}
-          <div className="flex flex-col lg:flex-row items-center lg:items-end gap-8 lg:gap-12">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16 sm:pt-14 sm:pb-24 lg:pt-20 lg:pb-32">
+          <div className="flex flex-col lg:flex-row items-start lg:items-end gap-8 lg:gap-12">
 
-            {/* LEFT — Text content */}
-            <div className="flex-1 text-left max-w-xl">
-              {/* Badge */}
+            {/* LEFT — Text */}
+            <div className="flex-1 text-left w-full max-w-lg">
               <div className="inline-flex items-center gap-2 bg-white/70 backdrop-blur-sm border border-pink-200/50 px-3 py-1.5 rounded-full text-xs sm:text-sm text-pink-600 font-medium mb-5">
                 <span className="text-base leading-none">🐾</span>
                 Your trusted pet store
               </div>
 
-              {/* Heading */}
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-800 mb-5 leading-tight tracking-tight">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-gray-800 mb-4 sm:mb-5 leading-tight tracking-tight">
                 Happy Pets,{" "}
                 <span className="bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent">
                   Happy You
                 </span>
               </h1>
 
-              {/* Description */}
-              <p className="text-base sm:text-lg text-gray-700 mb-8 leading-relaxed max-w-md">
+              <p className="text-sm sm:text-base lg:text-lg text-gray-700 mb-7 sm:mb-8 leading-relaxed max-w-md">
                 Everything your furry friends need — nutritious food, cozy accessories, and playful toys, all in one place.
               </p>
 
-              {/* Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                 <Link
                   to="/shop"
-                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-blue-500 text-white px-7 py-3 sm:py-3.5 rounded-full text-sm sm:text-base font-semibold hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-pink-200"
+                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-blue-500 text-white px-6 sm:px-7 py-3 sm:py-3.5 rounded-full text-sm sm:text-base font-semibold hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-pink-200 w-full sm:w-auto"
                 >
                   Shop Now
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <a
                   href="#categories"
-                  className="inline-flex items-center justify-center gap-2 bg-white/80 text-gray-700 border border-gray-200 px-7 py-3 sm:py-3.5 rounded-full text-sm sm:text-base font-medium hover:bg-white hover:border-pink-200 active:scale-95 transition-all"
+                  className="inline-flex items-center justify-center gap-2 bg-white/80 text-gray-700 border border-gray-200 px-6 sm:px-7 py-3 sm:py-3.5 rounded-full text-sm sm:text-base font-medium hover:bg-white hover:border-pink-200 active:scale-95 transition-all w-full sm:w-auto"
                 >
                   Browse Categories
                 </a>
               </div>
             </div>
 
-            {/* RIGHT — spacer so the background image pet shows on the right */}
             <div className="hidden lg:block flex-1" />
           </div>
         </div>
 
         <div className="absolute bottom-0 left-0 right-0 h-8 sm:h-12 bg-gradient-to-t from-white to-transparent" />
       </section>
+
       {/* ── Categories ── */}
       <section className="py-12 sm:py-16 lg:py-20 bg-white" id="categories">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -179,12 +170,12 @@ const HomePage = () => {
               <p>No categories found.</p>
             </div>
           ) : (
-            <div className="flex flex-wrap justify-center gap-5 sm:gap-6 lg:gap-8">
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-5 lg:gap-8">
               {categories.map((cat, idx) => (
                 <Link
                   key={cat.id || idx}
                   to={`/shop?category=${cat.id}`}
-                  className={`group bg-gradient-to-br ${getCategoryGradient(idx)} rounded-2xl p-4 sm:p-6 text-center hover:shadow-md active:scale-95 transition-all cursor-pointer border border-white/60 w-[calc(50%-10px)] sm:w-[calc(33.33%-16px)] lg:w-[calc(25%-18px)] xl:w-[calc(20%-20px)]`}
+                  className={`group bg-gradient-to-br ${getCategoryGradient(idx)} rounded-2xl p-4 sm:p-6 text-center hover:shadow-md active:scale-95 transition-all cursor-pointer border border-white/60 w-[calc(50%-8px)] sm:w-[calc(33.33%-14px)] lg:w-[calc(25%-18px)] xl:w-[calc(20%-20px)]`}
                 >
                   <div className="text-3xl sm:text-4xl mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-200">
                     {getCategoryIcon(cat.categoryName)}
@@ -205,7 +196,7 @@ const HomePage = () => {
       {/* ── Featured Products ── */}
       <section className="py-12 sm:py-16 lg:py-20 bg-gray-50/80" id="featured">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-12">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 mb-8 sm:mb-12">
             <div>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-1 sm:mb-2">
                 Featured Products
@@ -214,7 +205,7 @@ const HomePage = () => {
             </div>
             <Link
               to="/shop"
-              className="flex items-center gap-1.5 text-sm font-medium text-pink-500 hover:text-pink-600 transition-colors self-start sm:self-auto whitespace-nowrap"
+              className="flex items-center gap-1.5 text-sm font-medium text-pink-500 hover:text-pink-600 transition-colors self-start sm:self-auto whitespace-nowrap flex-shrink-0"
             >
               View all
               <ArrowRight className="h-4 w-4" />
@@ -228,7 +219,7 @@ const HomePage = () => {
               <p className="text-sm">Check back soon for exciting new arrivals!</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-5 lg:gap-6">
               {products.map((product) => (
                 <div
                   key={product.id}
@@ -236,7 +227,7 @@ const HomePage = () => {
                 >
                   {/* Image */}
                   <Link to={`/product/${product.id}`} className="block flex-shrink-0">
-                    <div className="relative bg-gradient-to-br from-pink-50 to-blue-50 h-40 sm:h-44 lg:h-48 flex items-center justify-center overflow-hidden">
+                    <div className="relative bg-gradient-to-br from-pink-50 to-blue-50 h-36 sm:h-44 lg:h-48 flex items-center justify-center overflow-hidden">
                       {product.imageUrls?.length > 0 ? (
                         <img
                           src={API + product.imageUrls[0]}
@@ -245,33 +236,39 @@ const HomePage = () => {
                           loading="lazy"
                         />
                       ) : (
-                        <span className="text-5xl group-hover:scale-110 transition-transform duration-200">🐾</span>
+                        <span className="text-4xl sm:text-5xl group-hover:scale-110 transition-transform duration-200">🐾</span>
                       )}
-                      {/* Badge */}
-                      <span className="absolute top-2.5 left-2.5 bg-yellow-100 text-yellow-700 text-[10px] font-semibold px-2 py-0.5 rounded-full">
+                      <span className="absolute top-2 left-2 bg-yellow-100 text-yellow-700 text-[10px] font-semibold px-2 py-0.5 rounded-full">
                         {product.productSubCategory?.subCategoryName || "General"}
                       </span>
                     </div>
                   </Link>
 
                   {/* Content */}
-                  <div className="p-3.5 sm:p-4 flex flex-col flex-1 gap-2">
+                  <div className="p-3 sm:p-4 flex flex-col flex-1 gap-1.5 sm:gap-2">
                     <Link
                       to={`/product/${product.id}`}
-                      className="text-sm sm:text-base font-semibold text-gray-800 hover:text-pink-500 transition-colors line-clamp-2 leading-snug"
+                      className="text-xs sm:text-sm lg:text-base font-semibold text-gray-800 hover:text-pink-500 transition-colors line-clamp-2 leading-snug"
                     >
                       {product.productName}
                     </Link>
 
                     {product.description && (
-                      <p className="text-xs text-gray-400 line-clamp-2 leading-relaxed ">
+                      <p className="text-xs text-gray-400 leading-relaxed overflow-hidden"
+                        style={{
+                          display: "-webkit-box",
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: "vertical",
+                          overflow: "hidden",
+                        }}
+                      >
                         {product.description}
                       </p>
                     )}
 
                     <div className="flex items-center justify-between mt-auto pt-1">
                       <div className="flex flex-col">
-                        <span className="text-lg sm:text-xl font-bold text-pink-500">
+                        <span className="text-base sm:text-lg lg:text-xl font-bold text-pink-500">
                           ₹{product.mrp}
                         </span>
                         {product.originalPrice && product.originalPrice > product.mrp && (
@@ -283,11 +280,11 @@ const HomePage = () => {
 
                       <Link
                         to={`/product/${product.id}`}
-                        className="flex items-center gap-1.5 bg-gradient-to-r from-pink-500 to-blue-500 text-white px-3 py-2 rounded-xl text-xs sm:text-sm font-medium hover:opacity-90 active:scale-95 transition-all shadow-sm shadow-pink-100"
+                        className="flex items-center gap-1 sm:gap-1.5 bg-gradient-to-r from-pink-500 to-blue-500 text-white px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-medium hover:opacity-90 active:scale-95 transition-all shadow-sm shadow-pink-100"
                         aria-label={`View ${product.productName}`}
                       >
-                        <ShoppingCart className="h-3.5 w-3.5 flex-shrink-0" />
-                        <span className="hidden xs:inline">View</span>
+                        <ShoppingCart className="h-3 w-3 sm:h-3.5 sm:w-3.5 flex-shrink-0" />
+                        <span className="hidden sm:inline">View</span>
                       </Link>
                     </div>
                   </div>
@@ -301,22 +298,22 @@ const HomePage = () => {
       {/* ── Why Choose Us ── */}
       <section className="py-12 sm:py-16 lg:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-10 sm:mb-14">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-8 sm:mb-12">
             Why Pet Parents Love Us
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 sm:gap-6">
             {[
               { Icon: DeliveryIcon, title: "Fast Delivery", desc: "Get orders delivered to your doorstep quickly and reliably.", color: "bg-pink-50" },
               { Icon: QualityIcon, title: "Quality Assured", desc: "Every product is vet-reviewed and safe for your pets.", color: "bg-blue-50" },
               { Icon: BestPriceIcon, title: "Best Prices", desc: "Competitive pricing with regular deals and discounts.", color: "bg-amber-50" },
               { Icon: SupportIcon, title: "Pet Expert Support", desc: "Our team of pet lovers is always ready to help.", color: "bg-green-50" },
             ].map(({ Icon, title, desc, color }) => (
-              <div key={title} className="flex flex-col items-center text-center p-4 rounded-2xl bg-gradient-to-br from-pink-50/50 to-blue-50/50 border border-gray-100 hover:border-pink-200/60 hover:shadow-sm transition-all">
-                <div className={`h-10 w-10 rounded-xl flex items-center justify-center mb-2.5 ${color}`}>
-                  <Icon className="h-5 w-5" />
+              <div key={title} className="flex flex-col items-center text-center p-3.5 sm:p-4 rounded-2xl bg-gradient-to-br from-pink-50/50 to-blue-50/50 border border-gray-100 hover:border-pink-200/60 hover:shadow-sm transition-all">
+                <div className={`h-9 w-9 sm:h-10 sm:w-10 rounded-xl flex items-center justify-center mb-2 sm:mb-2.5 ${color}`}>
+                  <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
                 </div>
-                <h3 className="font-semibold text-gray-800 text-sm mb-1">{title}</h3>
-                <p className="text-gray-500 text-xs leading-relaxed">{desc}</p>
+                <h3 className="font-semibold text-gray-800 text-xs sm:text-sm mb-1">{title}</h3>
+                <p className="text-gray-500 text-xs leading-relaxed hidden sm:block">{desc}</p>
               </div>
             ))}
           </div>
@@ -326,22 +323,22 @@ const HomePage = () => {
       {/* ── About ── */}
       <section id="about" className="py-16 sm:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+          <div className="flex flex-col lg:flex-row items-center gap-10 sm:gap-12 lg:gap-20">
 
             {/* Left */}
-            <div className="flex-1 text-left">
+            <div className="flex-1 text-left w-full">
               <span className="text-xs font-semibold tracking-widest text-pink-500 uppercase">
                 Who We Are
               </span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-2 mb-5 leading-tight">
+              <h2 className="text-2xl sm:text-3xl sm:text-4xl font-bold text-gray-900 mt-2 mb-4 sm:mb-5 leading-tight">
                 Built for pets,<br /> by pet lovers.
               </h2>
-              <div className="w-10 h-1 bg-gradient-to-r from-pink-500 to-blue-500 rounded-full mb-5" />
+              <div className="w-10 h-1 bg-gradient-to-r from-pink-500 to-blue-500 rounded-full mb-4 sm:mb-5" />
               <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-3">
                 At Bowlfull Buddies, we believe every pet deserves the very best. We're dedicated to providing
                 high-quality products that keep your furry friends healthy, happy, and loved.
               </p>
-              <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-8">
+              <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8">
                 From premium nutrition to engaging toys and essential accessories — our mission is to strengthen
                 the bond between you and your beloved pets.
               </p>
@@ -364,12 +361,12 @@ const HomePage = () => {
               ].map(({ value, label, icon: Icon, color }) => (
                 <div
                   key={label}
-                  className="border border-gray-100 hover:border-pink-200 rounded-2xl p-5 sm:p-6 flex flex-col gap-1 transition-all hover:shadow-sm bg-white"
+                  className="border border-gray-100 hover:border-pink-200 rounded-2xl p-4 sm:p-5 lg:p-6 flex flex-col gap-1 transition-all hover:shadow-sm bg-white"
                 >
-                  <div className={`h-9 w-9 rounded-xl flex items-center justify-center mb-1 ${color}`}>
-                    <Icon className="h-4 w-4" />
+                  <div className={`h-8 w-8 sm:h-9 sm:w-9 rounded-xl flex items-center justify-center mb-1 ${color}`}>
+                    <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   </div>
-                  <span className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent">
+                  <span className="text-xl sm:text-2xl lg:text-3xl font-extrabold bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent">
                     {value}
                   </span>
                   <span className="text-xs sm:text-sm text-gray-400 leading-snug">{label}</span>
@@ -381,29 +378,18 @@ const HomePage = () => {
         </div>
       </section>
 
-
       {/* ── CTA Banner ── */}
       <section className="relative py-12 sm:py-16 bg-white">
-
-        {/* Top Fade */}
-        {/* <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-white to-transparent pointer-events-none" /> */}
-
-        {/* Bottom Fade */}
-        {/* <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none" /> */}
-
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-
           <h2 className="text-xl sm:text-3xl font-bold text-gray-800 mb-3 sm:mb-4">
             Ready to spoil your pet?
           </h2>
-
           <p className="text-gray-600 text-sm sm:text-base mb-6 sm:mb-8">
             Browse hundreds of products curated just for your furry, feathered, or scaly friends.
           </p>
-
           <Link
             to="/shop"
-            className="inline-flex items-center gap-2 bg-gradient-to-br from-pink-50/50 to-blue-50/50 border border-gray-100 hover:border-pink-200/60 hover:shadow-sm transition-all text-pink-600 font-semibold px-7 py-3 rounded-full hover:bg-pink-50 active:scale-95 transition-all shadow-md text-sm sm:text-base"
+            className="inline-flex items-center gap-2 bg-gradient-to-br from-pink-50/50 to-blue-50/50 border border-gray-100 hover:border-pink-200/60 hover:shadow-sm transition-all text-pink-600 font-semibold px-6 sm:px-7 py-3 rounded-full hover:bg-pink-50 active:scale-95 shadow-md text-sm sm:text-base"
           >
             Shop All Products
             <ArrowRight className="h-4 w-4" />
