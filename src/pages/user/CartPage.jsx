@@ -4,7 +4,7 @@ import { Trash2, Plus, Minus, ShoppingBag, ArrowRight, Tag, Heart, X } from "luc
 import Footer from "../../components/common/user/Footer";
 import axios from "axios";
 
-const API_URL = process.env.REACT_APP_API_URL || "https://petshop-backend-44re.onrender.com";
+const API_URL = process.env.REACT_APP_API_URL;
 
 const CartPage = () => {
   const navigate = useNavigate();
