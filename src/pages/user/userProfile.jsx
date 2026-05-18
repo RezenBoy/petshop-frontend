@@ -202,78 +202,85 @@ const UserProfile = () => {
   const [loadingAddresses, setLoadingAddresses] = useState(false);
 
   // ─── Data Loading ──────────────────────────────────────
+  // Load user on mount
   useEffect(() => {
+    const loadUser = async () => {
+      setLoading(true);
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) throw new Error("Please login first");
+
+        const res = await fetch(`${API}/api/users/me`, {
+          headers: buildHeaders(),
+        });
+
+        if (!res.ok) throw new Error(`Failed to load user (${res.status})`);
+
+        const data = await res.json();
+        const mapped = {
+          id: data.id,
+          fullName: data.fullName || "",
+          email: data.address?.email || "",
+          phone: data.address?.mobileNo || "",
+          addressObj: {
+            landMark: data.address?.landMark || "",
+            city: data.address?.city || "",
+            pincode: data.address?.pincode || "",
+            districtId: data.address?.districtId ?? null,
+            country: data.address?.country || "",
+          },
+          joinedDate: data.joinedDate || "Member",
+          raw: data,
+        };
+
+        setUser(mapped);
+        setTempUser(JSON.parse(JSON.stringify(mapped)));
+      } catch (err) {
+        console.error("[loadUser] error:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     loadUser();
   }, []);
 
+  // Load addresses and pets when user is available
   useEffect(() => {
     if (!user) return;
+
+    const loadAddresses = async () => {
+      setLoadingAddresses(true);
+      try {
+        const res = await fetch(`${API}/api/addresses`, { headers: buildHeaders() });
+        if (!res.ok) throw new Error(`Failed (${res.status})`);
+        const data = await res.json();
+        const list = Array.isArray(data) ? data : data?.items ?? [];
+        setAddresses(list);
+        if (list.length > 0) {
+          setSelectedAddressId(list[0].id);
+          setSelectedAddress(list[0]);
+          setTempAddress({ ...list[0] });
+        }
+      } catch (e) {
+        console.error("Failed to load addresses", e);
+      } finally {
+        setLoadingAddresses(false);
+      }
+    };
+
+    const loadPets = async () => {
+      try {
+        const res = await fetch(`${API}/api/pets`, { headers: buildHeaders() });
+        if (res.ok) setPets(await res.json());
+      } catch (error) {
+        console.error("Failed to load pets", error);
+      }
+    };
+
     loadAddresses();
     loadPets();
   }, [user]);
-
-  const loadUser = async () => {
-    setLoading(true);
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) throw new Error("Please login first");
-
-      const res = await fetch(`${API}/api/users/me`, {
-        headers: buildHeaders(),
-      });
-
-      if (!res.ok) throw new Error(`Failed to load user (${res.status})`);
-
-      const data = await res.json();
-      const mapped = {
-        id: data.id,
-        fullName: data.fullName || "",
-        email: data.address?.email || "",
-        phone: data.address?.mobileNo || "",
-        addressObj: {
-          landMark: data.address?.landMark || "",
-          city: data.address?.city || "",
-          pincode: data.address?.pincode || "",
-          districtId: data.address?.districtId ?? null,
-          country: data.address?.country || "",
-        },
-        joinedDate: data.joinedDate || "Member",
-        raw: data,
-      };
-
-      setUser(mapped);
-      setTempUser(JSON.parse(JSON.stringify(mapped)));
-    } catch (err) {
-      console.error("[loadUser] error:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const loadAddresses = async () => {
-    setLoadingAddresses(true);
-    try {
-      const res = await fetch(`${API}/api/addresses`, { headers: buildHeaders() });
-      if (!res.ok) throw new Error(`Failed (${res.status})`);
-      const data = await res.json();
-      const list = Array.isArray(data) ? data : data?.items ?? [];
-      setAddresses(list);
-      if (list.length > 0) selectAddress(list[0].id);
-    } catch (e) {
-      console.error("Failed to load addresses", e);
-    } finally {
-      setLoadingAddresses(false);
-    }
-  };
-
-  const loadPets = async () => {
-    try {
-      const res = await fetch(`${API}/api/pets`, { headers: buildHeaders() });
-      if (res.ok) setPets(await res.json());
-    } catch (error) {
-      console.error("Failed to load pets", error);
-    }
-  };
 
   // ─── Profile Handlers ──────────────────────────────────
   const handleEditToggle = useCallback(() => {
@@ -389,14 +396,6 @@ const UserProfile = () => {
   };
 
   // ─── Address Handlers ────────────────────────────────────
-  const selectAddress = useCallback((id) => {
-    setSelectedAddressId(id);
-    const a = addresses.find((x) => x.id === id) || null;
-    setSelectedAddress(a);
-    setTempAddress(a ? { ...a } : { ...INITIAL_ADDRESS });
-    setAddressEditMode(false);
-    setAddressError("");
-  }, [addresses]);
 
   const openAddAddress = useCallback(() => {
     setSelectedAddressId(null);
@@ -551,8 +550,8 @@ const UserProfile = () => {
                     setSidebarOpen(false);
                   }}
                   className={`w-full flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-medium transition-all mb-2 ${isActive
-                      ? "bg-gradient-to-r from-pink-500 to-blue-500 text-white shadow-md"
-                      : "text-gray-600 hover:bg-gray-50"
+                    ? "bg-gradient-to-r from-pink-500 to-blue-500 text-white shadow-md"
+                    : "text-gray-600 hover:bg-gray-50"
                     }`}
                 >
                   <div className="flex items-center gap-2 sm:gap-3">
@@ -829,10 +828,16 @@ const UserProfile = () => {
             addresses.map((a) => (
               <button
                 key={a.id}
-                onClick={() => selectAddress(a.id)}
+                onClick={() => {
+                  setSelectedAddressId(a.id);
+                  setSelectedAddress(a);
+                  setTempAddress({ ...a });
+                  setAddressEditMode(false);
+                  setAddressError("");
+                }}
                 className={`w-full text-left p-3 rounded-xl border transition-all ${selectedAddressId === a.id
-                    ? "border-pink-300 bg-pink-50"
-                    : "border-gray-100 bg-white hover:border-gray-200"
+                  ? "border-pink-300 bg-pink-50"
+                  : "border-gray-100 bg-white hover:border-gray-200"
                   }`}
               >
                 <div className="flex items-center justify-between">
