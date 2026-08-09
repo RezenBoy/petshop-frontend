@@ -1,6 +1,8 @@
 // src/components/admin/Customers.js
 import React from "react";
-import { PlusCircle, Edit, Trash2, Eye } from "lucide-react";
+import { 
+  // PlusCircle,
+   Edit, Trash2, Eye } from "lucide-react";
 
 const Customers = () => {
   // Dummy customer data
