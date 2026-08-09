@@ -269,12 +269,12 @@ const Navbar = () => {
             <Link to="/" className="flex items-center gap-2 flex-shrink-0 min-w-0">
               <img
                 src={logo}
-                alt="Bowlfull Buddies"
+                alt="Pashora"
                 className="h-10 w-10 sm:h-12 sm:w-12 object-contain rounded-full flex-shrink-0"
               />
               <div className="leading-tight min-w-0">
                 <span className="block text-sm sm:text-base font-bold bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent whitespace-nowrap">
-                  Bowlfull Buddies
+                  Pashora
                 </span>
                 <span className="hidden sm:block text-[10px] text-gray-400 tracking-wide">
                   Pet Paradise

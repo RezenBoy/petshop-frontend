@@ -1,9 +1,13 @@
 import { useEffect, useState, useCallback, useMemo, Suspense } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { 
-  ShoppingCart, ArrowRight, Package, Award, PawPrint, 
-  HeadphonesIcon, Loader2, AlertCircle, RefreshCw 
+import {
+  ShoppingCart,
+  ArrowRight, 
+  Package, Award, PawPrint,
+  HeadphonesIcon, Loader2,
+  // AlertCircle, 
+  // RefreshCw 
 } from "lucide-react";
 
 import Footer from "../components/common/user/Footer";
@@ -28,29 +32,29 @@ const CATEGORY_GRADIENTS = [
 ];
 
 const FEATURES = [
-  { 
-    Icon: DeliveryIcon, 
-    title: "Fast Delivery", 
-    desc: "Get orders delivered to your doorstep quickly and reliably.", 
-    color: "bg-pink-50" 
+  {
+    Icon: DeliveryIcon,
+    title: "Fast Delivery",
+    desc: "Get orders delivered to your doorstep quickly and reliably.",
+    color: "bg-pink-50"
   },
-  { 
-    Icon: QualityIcon, 
-    title: "Quality Assured", 
-    desc: "Every product is vet-reviewed and safe for your pets.", 
-    color: "bg-blue-50" 
+  {
+    Icon: QualityIcon,
+    title: "Quality Assured",
+    desc: "Every product is vet-reviewed and safe for your pets.",
+    color: "bg-blue-50"
   },
-  { 
-    Icon: BestPriceIcon, 
-    title: "Best Prices", 
-    desc: "Competitive pricing with regular deals and discounts.", 
-    color: "bg-amber-50" 
+  {
+    Icon: BestPriceIcon,
+    title: "Best Prices",
+    desc: "Competitive pricing with regular deals and discounts.",
+    color: "bg-amber-50"
   },
-  { 
-    Icon: SupportIcon, 
-    title: "Pet Expert Support", 
-    desc: "Our team of pet lovers is always ready to help.", 
-    color: "bg-green-50" 
+  {
+    Icon: SupportIcon,
+    title: "Pet Expert Support",
+    desc: "Our team of pet lovers is always ready to help.",
+    color: "bg-green-50"
   },
 ];
 
@@ -72,7 +76,7 @@ const getCategoryIcon = (name = "") => {
   return "🐾";
 };
 
-const getCategoryGradient = (index) => 
+const getCategoryGradient = (index) =>
   CATEGORY_GRADIENTS[index % CATEGORY_GRADIENTS.length];
 
 const buildImageUrl = (imagePath) => {
@@ -87,13 +91,13 @@ const useHomeData = () => {
   const [state, setState] = useState({
     categories: [],
     products: [],
-    loading: true,
-    error: null,
+    // loading: true,
+    // error: null,
   });
 
   const fetchData = useCallback(async () => {
     setState(prev => ({ ...prev, loading: true, error: null }));
-    
+
     const controller = new AbortController();
     const unauthApi = axios.create({
       baseURL: `${API}/api`,
@@ -106,7 +110,7 @@ const useHomeData = () => {
         api.get("/products", { signal: controller.signal }),
         api.get("/categories", { signal: controller.signal }),
       ]);
-      
+
       setState({
         categories: categoryRes.data || [],
         products: productRes.data || [],
@@ -115,18 +119,18 @@ const useHomeData = () => {
       });
     } catch (err) {
       if (axios.isCancel(err)) return;
-      
+
       // Fallback to unauth
       try {
         const [productRes2, categoryRes2] = await Promise.all([
           unauthApi.get("/products"),
           unauthApi.get("/categories"),
         ]);
-        
+
         setState({
           categories: categoryRes2.data || [],
           products: productRes2.data || [],
-          loading: false,
+          // loading: false,
           error: null,
         });
       } catch (err2) {
@@ -155,31 +159,31 @@ const useHomeData = () => {
 
 // ─── Sub-Components ──────────────────────────────────────
 
-const ErrorState = ({ message, onRetry }) => (
-  <div className="flex flex-col items-center justify-center min-h-[60vh] bg-gradient-to-br from-pink-50 to-blue-50 gap-4 px-4">
-    <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center">
-      <AlertCircle className="h-8 w-8 text-red-400" />
-    </div>
-    <p className="text-base font-medium text-gray-700 text-center max-w-sm">{message}</p>
-    <button
-      onClick={onRetry}
-      className="inline-flex items-center gap-2 px-5 py-2.5 bg-white border-2 border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:border-pink-400 hover:text-pink-600 transition-all"
-    >
-      <RefreshCw className="h-4 w-4" />
-      Try Again
-    </button>
-  </div>
-);
+// const ErrorState = ({ message, onRetry }) => (
+//   <div className="flex flex-col items-center justify-center min-h-[60vh] bg-gradient-to-br from-pink-50 to-blue-50 gap-4 px-4">
+//     <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center">
+//       <AlertCircle className="h-8 w-8 text-red-400" />
+//     </div>
+//     <p className="text-base font-medium text-gray-700 text-center max-w-sm">{message}</p>
+//     <button
+//       onClick={onRetry}
+//       className="inline-flex items-center gap-2 px-5 py-2.5 bg-white border-2 border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:border-pink-400 hover:text-pink-600 transition-all"
+//     >
+//       <RefreshCw className="h-4 w-4" />
+//       Try Again
+//     </button>
+//   </div>
+// );
 
-const LoadingState = () => (
-  <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-pink-50 to-blue-50 gap-4">
-    <div className="relative">
-      <Loader2 className="h-10 w-10 text-pink-400 animate-spin" />
-      <span className="absolute inset-0 flex items-center justify-center text-lg">🐾</span>
-    </div>
-    <p className="text-base font-medium text-gray-500 animate-pulse">Loading pet paradise...</p>
-  </div>
-);
+// const LoadingState = () => (
+//   <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-pink-50 to-blue-50 gap-4">
+//     <div className="relative">
+//       <Loader2 className="h-10 w-10 text-pink-400 animate-spin" />
+//       <span className="absolute inset-0 flex items-center justify-center text-lg">🐾</span>
+//     </div>
+//     <p className="text-base font-medium text-gray-500 animate-pulse">Loading pet paradise...</p>
+//   </div>
+// );
 
 const HeroSection = () => (
   <section
@@ -273,8 +277,8 @@ const ProductCard = ({ product }) => {
 
   return (
     <article className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-gray-100 transition-all group flex flex-col">
-      <Link 
-        to={`/product/${product.id}`} 
+      <Link
+        to={`/product/${product.id}`}
         className="block flex-shrink-0"
         aria-label={`View ${product.productName}`}
       >
@@ -284,7 +288,7 @@ const ProductCard = ({ product }) => {
               <Loader2 className="h-6 w-6 text-gray-300 animate-spin" />
             </div>
           )}
-          
+
           {imageUrl ? (
             <img
               src={imageUrl}
@@ -299,7 +303,7 @@ const ProductCard = ({ product }) => {
               🐾
             </span>
           )}
-          
+
           <span className="absolute top-2 left-2 bg-yellow-100 text-yellow-700 text-[10px] font-semibold px-2 py-0.5 rounded-full">
             {subcategory}
           </span>
@@ -372,10 +376,12 @@ const StatCard = ({ value, label, icon: Icon, color }) => (
 
 // ─── Main Component ──────────────────────────────────────
 const HomePage = () => {
-  const { categories, products, loading, error, refetch } = useHomeData();
+  const { categories, products,
+    //  loading, error,refetch
+  } = useHomeData();
 
-  if (loading) return <LoadingState />;
-  if (error) return <ErrorState message={error} onRetry={refetch} />;
+  // if (loading) return <LoadingState />;
+  // if (error) return <ErrorState message={error} onRetry={refetch} />;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-blue-50">
@@ -474,7 +480,7 @@ const HomePage = () => {
               </h2>
               <div className="w-10 h-1 bg-gradient-to-r from-pink-500 to-blue-500 rounded-full mb-4 sm:mb-5" />
               <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-3">
-                At Bowlfull Buddies, we believe every pet deserves the very best. We're dedicated to providing
+                At Pashora, we believe every pet deserves the very best. We're dedicated to providing
                 high-quality products that keep your furry friends healthy, happy, and loved.
               </p>
               <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8">

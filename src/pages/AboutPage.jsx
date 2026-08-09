@@ -19,7 +19,7 @@ const AboutPage = () => {
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
             About{" "}
             <span className="bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent">
-              Bowlfull Buddies
+              Pashora
             </span>
           </h1>
           <p className="text-gray-500 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
@@ -51,7 +51,7 @@ const AboutPage = () => {
               </h2>
               <div className="w-10 h-1 bg-gradient-to-r from-pink-500 to-blue-500 rounded-full mb-5" />
               <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-3">
-                Founded by passionate pet lovers, Bowlfull Buddies began with one mission — to provide
+                Founded by passionate pet lovers, Pashora began with one mission — to provide
                 high-quality, safe, and heart-warming products for our furry friends. From nutritious meals
                 to comfy accessories, we've grown into a trusted pet-care brand loved by pet parents across India.
               </p>
@@ -95,7 +95,7 @@ const AboutPage = () => {
               {
                 icon: Heart,
                 title: "Our Vision",
-                desc: "To build a global community where pets live happier, healthier lives — supported by products, education, and love from Bowlfull Buddies.",
+                desc: "To build a global community where pets live happier, healthier lives — supported by products, education, and love from Pashora.",
                 color: "text-blue-500 bg-blue-50",
               },
               {
@@ -128,7 +128,7 @@ const AboutPage = () => {
               Why Us
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mt-2">
-              Why Choose Bowlfull Buddies?
+              Why Choose Pashora?
             </h2>
           </div>
 

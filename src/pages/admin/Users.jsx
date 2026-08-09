@@ -13,12 +13,12 @@ const Customers = () => {
   return (
     <div className="p-6">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      {/* <div className="flex items-center justify-between mb-6">
         <button className="flex items-center bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
           <PlusCircle className="w-5 h-5 mr-2" />
           Add Customer
         </button>
-      </div>
+      </div> */}
 
       {/* Customers Table */}
       <div className="overflow-x-auto bg-white rounded-lg shadow-md">

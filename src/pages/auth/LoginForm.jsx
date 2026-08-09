@@ -123,7 +123,7 @@ const LoginForm = () => {
                   <Heart className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-lg font-bold">Bowlfull Buddies</h1>
+                  <h1 className="text-lg font-bold">Pashora</h1>
                   <p className="text-xs text-white/80">Pet Paradise</p>
                 </div>
               </Link>
@@ -139,7 +139,7 @@ const LoginForm = () => {
 
             {/* Footer */}
             <p className="text-xs text-white/60 mt-6">
-              © 2025 Bowlfull Buddies. All rights reserved.
+              © 2025 Pashora. All rights reserved.
             </p>
           </div>
         </div>
@@ -153,7 +153,7 @@ const LoginForm = () => {
                 <Heart className="h-5 w-5 text-white" />
               </div>
               <span className="text-xl font-bold bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent">
-                Bowlfull Buddies
+                Pashora
               </span>
             </Link>
 

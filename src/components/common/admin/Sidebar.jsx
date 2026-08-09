@@ -23,7 +23,7 @@ import {
 
 const menuItems = [
   { icon: Home, label: "Dashboard", path: "/admin" },
-  { icon: Settings, label: "Master Setup", path: "/admin/master" },
+  // { icon: Settings, label: "Master Setup", path: "/admin/master" },
 
   {
     icon: Package,
@@ -60,7 +60,7 @@ const menuItems = [
       { icon: BarChart3, label: "Sales Report", path: "/admin/reports/sales" },
       { icon: FileText, label: "Purchase Report", path: "/admin/reports/purchase" },
     ],
-  },
+  },  
 
   { icon: BarChart3, label: "Order Management", path: "/admin/orders" },
   { icon: Users, label: "User Management", path: "/admin/users" },
@@ -99,13 +99,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
   return (
     <div
-      className={`fixed inset-y-0 left-0 z-50 w-64 flex-shrink-0 box-border bg-gray-900 transform ${
-        sidebarOpen ? "translate-x-0" : "-translate-x-full"
-      } transition-transform duration-200 lg:translate-x-0 lg:static lg:inset-0`}
+      className={`fixed inset-y-0 left-0 z-50 w-64 flex-shrink-0 box-border bg-gray-900 transform ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } transition-transform duration-200 lg:translate-x-0 lg:static lg:inset-0`}
     >
       {/* Header */}
       <div className="flex items-center justify-between h-16 px-4 bg-gray-800">
-        <span className="text-white text-lg font-semibold">Bowlfull Buddies</span>
+        <span className="text-white text-lg font-semibold">Pashora</span>
         <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-white">
           <X className="w-5 h-5" />
         </button>
@@ -122,11 +121,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 {item.children ? (
                   <button
                     onClick={() => toggleMenu(item.label)}
-                    className={`${linkBaseClass} justify-between px-4 py-2 ${
-                      parentActive
+                    className={`${linkBaseClass} justify-between px-4 py-2 ${parentActive
                         ? "bg-gray-800 text-white"
                         : "text-gray-300 hover:bg-gray-800 hover:text-white"
-                    }`}
+                      }`}
                   >
                     <div className="flex items-center truncate">
                       <item.icon className="w-5 h-5 mr-3" />
@@ -139,11 +137,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 ) : (
                   <Link
                     to={item.path}
-                    className={`${linkBaseClass} px-4 py-2 ${
-                      parentActive
+                    className={`${linkBaseClass} px-4 py-2 ${parentActive
                         ? "bg-gray-800 text-white"
                         : "text-gray-300 hover:bg-gray-800 hover:text-white"
-                    }`}
+                      }`}
                   >
                     <item.icon className="w-5 h-5 mr-3" />
                     <span>{item.label}</span>
@@ -159,11 +156,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                         <Link
                           key={sidx}
                           to={sub.path}
-                          className={`flex items-center px-4 py-2 text-sm font-medium truncate ${
-                            childActive
+                          className={`flex items-center px-4 py-2 text-sm font-medium truncate ${childActive
                               ? "bg-gray-700 text-white rounded-r-md"
                               : "text-gray-300 hover:bg-gray-800 hover:text-white"
-                          }`}
+                            }`}
                         >
                           <sub.icon className="w-4 h-4 mr-2" />
                           {sub.label}

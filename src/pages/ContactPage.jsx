@@ -92,7 +92,7 @@ const ContactPage = () => {
         <h1 className="text-4xl font-bold text-center text-gray-900 mb-10">
           Contact{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600">
-            Bowlfull Buddies
+            Pashora
           </span>
         </h1>
 
@@ -107,7 +107,7 @@ const ContactPage = () => {
               </p>
               <div className="space-y-4">
                 {[
-                  { icon: Mail, text: "help@bowlfullbuddies.com" },
+                  { icon: Mail, text: "help@pashora.com" },
                   { icon: Phone, text: "+91 98765 43210" },
                   { icon: MapPin, text: "123 Pet Street, Animal City, India" },
                 ].map(({ icon: Icon, text }) => (

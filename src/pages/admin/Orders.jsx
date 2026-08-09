@@ -13,12 +13,12 @@ const Orders = () => {
   return (
     <div className="p-6">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      {/* <div className="flex items-center justify-between mb-6">
         <button className="flex items-center bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-600 transition">
           <PlusCircle className="w-5 h-5 mr-2" />
           Add Order
         </button>
-      </div>
+      </div> */}  
 
       {/* Orders Table */}
       <div className="overflow-x-auto bg-white rounded-lg shadow-md">
