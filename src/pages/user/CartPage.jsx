@@ -136,7 +136,7 @@ const QuantityControl = ({ quantity, maxStock, onIncrease, onDecrease, disabled 
     <button
       onClick={onDecrease}
       disabled={disabled || quantity <= 1}
-      className="w-8 h-8 rounded-lg border-2 border-gray-300 hover:border-pink-500 hover:bg-pink-50 transition disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center"
+      className="w-8 h-8 rounded-lg border-2 border-gray-300 hover:border-primary-light hover:bg-secondary-light transition disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center"
       aria-label="Decrease quantity"
     >
       <Minus className="h-4 w-4" />
@@ -147,7 +147,7 @@ const QuantityControl = ({ quantity, maxStock, onIncrease, onDecrease, disabled 
     <button
       onClick={onIncrease}
       disabled={disabled || quantity >= (maxStock || 99)}
-      className="w-8 h-8 rounded-lg border-2 border-gray-300 hover:border-pink-500 hover:bg-pink-50 transition disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center"
+      className="w-8 h-8 rounded-lg border-2 border-gray-300 hover:border-primary-light hover:bg-secondary-light transition disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center"
       aria-label="Increase quantity"
     >
       <Plus className="h-4 w-4" />
@@ -186,7 +186,7 @@ const FormInput = ({
         <Icon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
       )}
       <input
-        className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-pink-400 focus:outline-none transition ${
+        className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-primary focus:outline-none transition ${
           error 
             ? "border-red-300 bg-red-50 focus:ring-red-400" 
             : "border-gray-300 bg-white"
@@ -367,9 +367,9 @@ const CartPage = () => {
   // ─── Loading State ───────────────────────────────────────
   if (!loaded) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-secondary-light via-primary to-secondary-soft">
         <div className="flex flex-col items-center gap-3">
-          <Loader2 className="h-8 w-8 text-pink-500 animate-spin" />
+          <Loader2 className="h-8 w-8 text-primary animate-spin" />
           <p className="text-sm text-gray-500">Loading your cart...</p>
         </div>
       </div>
@@ -379,11 +379,11 @@ const CartPage = () => {
   // ─── Empty Cart ──────────────────────────────────────────
   if (cartItems.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+      <div className="min-h-screen bg-gradient-to-br from-secondary-light via-primary to-secondary-soft">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="bg-white rounded-2xl shadow-xl p-12 text-center max-w-lg mx-auto">
-            <div className="w-24 h-24 bg-pink-50 rounded-full flex items-center justify-center mx-auto mb-6">
-              <ShoppingBag className="h-12 w-12 text-pink-300" />
+            <div className="w-24 h-24 bg-secondary-light rounded-full flex items-center justify-center mx-auto mb-6">
+              <ShoppingBag className="h-12 w-12 text-primary" />
             </div>
             <h2 className="text-2xl font-bold text-gray-900 mb-3">Your Cart is Empty</h2>
             <p className="text-gray-500 mb-8">
@@ -391,7 +391,7 @@ const CartPage = () => {
             </p>
             <Link
               to="/shop"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-primary to-primary-light text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all"
             >
               Start Shopping
               <ArrowRight className="h-5 w-5" />
@@ -405,7 +405,7 @@ const CartPage = () => {
 
   // ─── Main UI ─────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-secondary-light via-primary to-secondary-soft">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Shopping Cart</h1>
@@ -447,7 +447,7 @@ const CartPage = () => {
                         <div>
                           <Link
                             to={`/product/${item.productId}`}
-                            className="text-base font-semibold text-gray-900 hover:text-pink-600 transition-colors line-clamp-2"
+                            className="text-base font-semibold text-gray-900 hover:text-primary transition-colors line-clamp-2"
                           >
                             {item.name}
                           </Link>
@@ -498,10 +498,10 @@ const CartPage = () => {
             })}
 
             {/* Wishlist CTA */}
-            <div className="bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl p-6 border border-pink-100">
+            <div className="bg-gradient-to-r from-secondary-light to-primary-light rounded-xl p-6 border border-primary-light">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-white rounded-lg shadow-sm">
-                  <Heart className="h-5 w-5 text-pink-500" />
+                  <Heart className="h-5 w-5 text-primary" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900">Save for later?</h3>
@@ -511,7 +511,7 @@ const CartPage = () => {
                 </div>
                 <Link
                   to="/wishlist"
-                  className="ml-auto text-sm font-medium text-pink-600 hover:text-pink-700 whitespace-nowrap"
+                  className="ml-auto text-sm font-medium text-primary hover:text-primary whitespace-nowrap"
                 >
                   View Wishlist →
                 </Link>
@@ -541,7 +541,7 @@ const CartPage = () => {
                       }}
                       placeholder="SAVE10"
                       disabled={appliedCoupon}
-                      className="w-full pl-10 pr-3 py-2.5 border-2 border-gray-200 rounded-lg focus:border-pink-400 focus:outline-none text-sm disabled:bg-gray-100 uppercase"
+                      className="w-full pl-10 pr-3 py-2.5 border-2 border-gray-200 rounded-lg focus:border-primary-light focus:outline-none text-sm disabled:bg-gray-100 uppercase"
                     />
                   </div>
                   {appliedCoupon ? (
@@ -555,7 +555,7 @@ const CartPage = () => {
                     <button
                       onClick={validateCoupon}
                       disabled={!couponCode.trim()}
-                      className="px-4 py-2.5 bg-pink-500 text-white rounded-lg font-medium hover:bg-pink-600 transition disabled:bg-gray-300 text-sm whitespace-nowrap"
+                      className="px-4 py-2.5 bg-primary text-white rounded-lg font-medium hover:bg-primary-dark transition disabled:bg-gray-300 text-sm whitespace-nowrap"
                     >
                       Apply
                     </button>
@@ -628,10 +628,10 @@ const CartPage = () => {
               </div>
 
               {/* Total */}
-              <div className="flex justify-between items-center mb-6 py-4 bg-gradient-to-r from-pink-50 to-purple-50 rounded-lg px-4">
+              <div className="flex justify-between items-center mb-6 py-4 bg-gradient-to-r from-secondary-light to-primary-light rounded-lg px-4">
                 <span className="text-lg font-bold text-gray-900">Total</span>
                 <div className="text-right">
-                  <span className="text-2xl font-bold text-pink-600">₹{totals.total.toFixed(2)}</span>
+                  <span className="text-2xl font-bold text-primary">₹{totals.total.toFixed(2)}</span>
                   {totals.totalSavings > 0 && (
                     <p className="text-xs text-green-600 font-medium">
                       You save ₹{totals.totalSavings.toFixed(2)}
@@ -645,7 +645,7 @@ const CartPage = () => {
               {/* Checkout */}
               <button
                 onClick={() => setShowCheckout(true)}
-                className="w-full py-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-xl font-bold text-base shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+                className="w-full py-4 bg-gradient-to-r from-primary to-primary-light text-white rounded-xl font-bold text-base shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
               >
                 Proceed to Checkout
                 <ArrowRight className="h-5 w-5" />
@@ -683,7 +683,7 @@ const CartPage = () => {
             >
               <div className="sticky top-0 bg-white px-6 py-4 border-b border-gray-100 flex items-center justify-between z-10">
                 <h2 id="checkout-title" className="text-xl font-bold text-gray-900 flex items-center gap-2">
-                  <MapPin className="h-5 w-5 text-pink-500" />
+                  <MapPin className="h-5 w-5 text-primary" />
                   Delivery Details
                 </h2>
                 <button
@@ -773,7 +773,7 @@ const CartPage = () => {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Total</span>
-                    <span className="font-bold text-pink-600">₹{totals.total.toFixed(2)}</span>
+                    <span className="font-bold text-primary">₹{totals.total.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Payment</span>
@@ -784,7 +784,7 @@ const CartPage = () => {
                 <button
                   type="submit"
                   disabled={checkoutLoading}
-                  className="w-full py-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-xl font-bold text-lg hover:opacity-90 transition disabled:opacity-60 flex items-center justify-center gap-2"
+                  className="w-full py-4 bg-gradient-to-r from-primary to-primary-light text-white rounded-xl font-bold text-lg hover:opacity-90 transition disabled:opacity-60 flex items-center justify-center gap-2"
                 >
                   {checkoutLoading ? (
                     <>
@@ -808,3 +808,7 @@ const CartPage = () => {
 };
 
 export default CartPage;
+
+
+
+

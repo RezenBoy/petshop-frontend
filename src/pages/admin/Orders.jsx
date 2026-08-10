@@ -16,7 +16,7 @@ const Orders = () => {
     <div className="p-6">
       {/* Header */}
       {/* <div className="flex items-center justify-between mb-6">
-        <button className="flex items-center bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-600 transition">
+        <button className="flex items-center bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition">
           <PlusCircle className="w-5 h-5 mr-2" />
           Add Order
         </button>
@@ -65,7 +65,7 @@ const Orders = () => {
                   <button className="text-red-500 hover:text-red-700" title="Delete">
                     <Trash2 className="w-5 h-5" />
                   </button>
-                  <button className="text-purple-500 hover:text-purple-700" title="Track Order">
+                  <button className="text-primary hover:text-primary-dark" title="Track Order">
                     <Truck className="w-5 h-5" />
                   </button>
                   <button className="text-gray-600 hover:text-gray-800" title="Return/Refund">
@@ -82,3 +82,8 @@ const Orders = () => {
 };
 
 export default Orders;
+
+
+
+
+

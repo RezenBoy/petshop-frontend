@@ -82,7 +82,7 @@ const Brand = () => {
         <h1 className="text-2xl font-semibold text-gray-900">Brands</h1>
         <button
           onClick={() => setShowBrandModal(true)}
-          className="flex items-center bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition"
+          className="flex items-center bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition"
         >
           <Plus className="w-4 h-4 mr-2" /> Add Brand
         </button>
@@ -155,7 +155,7 @@ const Brand = () => {
             </label>
             <button
               type="submit"
-              className="w-full bg-purple-500 text-white px-4 py-2 rounded-lg"
+              className="w-full bg-primary text-white px-4 py-2 rounded-lg"
             >
               Save
             </button>
@@ -189,7 +189,7 @@ const Brand = () => {
             </label>
             <button
               type="submit"
-              className="w-full bg-purple-500 text-white px-4 py-2 rounded-lg"
+              className="w-full bg-primary text-white px-4 py-2 rounded-lg"
             >
               Update
             </button>
@@ -217,3 +217,8 @@ const Modal = ({ children, onClose, title }) => (
 );
 
 export default Brand;
+
+
+
+
+

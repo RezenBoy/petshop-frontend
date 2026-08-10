@@ -108,11 +108,11 @@ const ProductView = () => {
 
   if (loading)
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-secondary-light via-primary to-secondary-soft">
         <div className="relative">
-          <div className="animate-spin h-12 w-12 border-4 border-pink-400 border-t-transparent rounded-full"></div>
+          <div className="animate-spin h-12 w-12 border-4 border-primary-light border-t-transparent rounded-full"></div>
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <Heart className="h-5 w-5 text-pink-400 animate-pulse" />
+            <Heart className="h-5 w-5 text-primary animate-pulse" />
           </div>
         </div>
       </div>
@@ -120,12 +120,12 @@ const ProductView = () => {
 
   if (!product)
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center text-gray-700 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+      <div className="min-h-screen flex flex-col items-center justify-center text-gray-700 bg-gradient-to-br from-secondary-light via-primary to-secondary-soft">
         <div className="text-6xl mb-4">🐾</div>
         <p className="text-xl font-semibold">Product not found</p>
         <Link
           to="/shop"
-          className="mt-4 text-pink-600 hover:text-pink-700 font-medium"
+          className="mt-4 text-primary hover:text-primary font-medium"
         >
           Back to Shop
         </Link>
@@ -213,7 +213,7 @@ const ProductView = () => {
   console.log("Final productImages array:", productImages);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-secondary-light via-primary to-secondary-soft">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
         {/* Product Section */}
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden mb-8">
@@ -273,7 +273,7 @@ const ProductView = () => {
                       onClick={() => setSelectedImage(idx)}
                       className={`flex-1 aspect-square rounded-lg overflow-hidden border-2 transition-all ${
                         selectedImage === idx
-                          ? "border-pink-500 shadow-md scale-105"
+                          ? "border-primary shadow-md scale-105"
                           : "border-gray-200 hover:border-gray-300"
                       }`}
                     >
@@ -293,7 +293,7 @@ const ProductView = () => {
                 </div>
               )}
                             {/* Features */}
-              <div className="bg-gradient-to-br from-pink-50 to-purple-50 rounded-xl p-5 border border-pink-100">
+              <div className="bg-gradient-to-br from-secondary-light to-primary-light rounded-xl p-5 border border-primary-light">
                 <h4 className="text-sm font-semibold text-gray-900 mb-4 uppercase tracking-wide">
                   Why Choose Us
                 </h4>
@@ -301,7 +301,7 @@ const ProductView = () => {
                   {features.map((feature, idx) => (
                     <div key={idx} className="flex items-center gap-3">
                       <div className="flex-shrink-0 w-9 h-9 rounded-full bg-white shadow-sm flex items-center justify-center">
-                        <feature.icon className="h-4 w-4 text-pink-600" />
+                        <feature.icon className="h-4 w-4 text-primary" />
                       </div>
                       <span className="text-sm text-gray-700 font-medium">
                         {feature.text}
@@ -316,14 +316,14 @@ const ProductView = () => {
             <div className="flex flex-col space-y-5">
               {/* Category Badge */}
               <div className="flex items-center gap-2">
-                <span className="inline-block px-3 py-1 text-xs font-semibold text-pink-600 bg-pink-100 rounded-full">
+                <span className="inline-block px-3 py-1 text-xs font-semibold text-primary bg-secondary-light rounded-full">
                   {product.category || "Pet Accessories"}
                 </span>
                 {product.subCategory && (
                   <span className="text-gray-400">›</span>
                 )}
                 {product.subCategory && (
-                  <span className="inline-block px-3 py-1 text-xs font-semibold text-purple-600 bg-purple-100 rounded-full">
+                  <span className="inline-block px-3 py-1 text-xs font-semibold text-primary bg-secondary-light rounded-full">
                     {product.subCategory}
                   </span>
                 )}
@@ -434,7 +434,7 @@ const ProductView = () => {
                         setActiveTab("description");
                       }
                     }}
-                    className="mt-1 text-pink-600 hover:text-pink-700 text-sm font-medium"
+                    className="mt-1 text-primary hover:text-primary text-sm font-medium"
                   >
                     View More ↓
                   </button>
@@ -455,7 +455,7 @@ const ProductView = () => {
                         {product.sizes.map((size, idx) => (
                           <button
                             key={idx}
-                            className="px-4 py-2 border-2 border-pink-500 text-pink-600 bg-pink-50 rounded-lg text-sm font-semibold hover:bg-pink-100 transition-colors"
+                            className="px-4 py-2 border-2 border-primary text-primary bg-secondary-light rounded-lg text-sm font-semibold hover:bg-secondary-light transition-colors"
                           >
                             {size.toUpperCase()}
                           </button>
@@ -483,7 +483,7 @@ const ProductView = () => {
                               title={colorName}
                             >
                               <div
-                                className="w-10 h-10 rounded-full border-2 border-pink-500 shadow-md hover:scale-110 transition-transform"
+                                className="w-10 h-10 rounded-full border-2 border-primary shadow-md hover:scale-110 transition-transform"
                                 style={{ backgroundColor: hexColor }}
                               ></div>
                               <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
@@ -506,7 +506,7 @@ const ProductView = () => {
                 <div className="flex items-center gap-3">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-pink-500 hover:bg-pink-50 transition-colors font-semibold disabled:opacity-50"
+                    className="w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-primary-light hover:bg-secondary-light transition-colors font-semibold disabled:opacity-50"
                     disabled={quantity <= 1}
                   >
                     -
@@ -518,7 +518,7 @@ const ProductView = () => {
                     onClick={() =>
                       setQuantity(Math.min(product.quantity, quantity + 1))
                     }
-                    className="w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-pink-500 hover:bg-pink-50 transition-colors font-semibold disabled:opacity-50"
+                    className="w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-primary-light hover:bg-secondary-light transition-colors font-semibold disabled:opacity-50"
                     disabled={quantity >= product.quantity}
                   >
                     +
@@ -533,7 +533,7 @@ const ProductView = () => {
               <div className="flex flex-col sm:flex-row gap-3">
                 {/* Buy Now Button */}
                 <button
-                  className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-4 rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all font-semibold text-base disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                  className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-primary-light text-white px-6 py-4 rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all font-semibold text-base disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                   onClick={() =>
                     alert(`Proceeding to buy ${quantity} item(s)!`)
                   }
@@ -546,7 +546,7 @@ const ProductView = () => {
                 <button
                   className={`px-6 py-4 rounded-xl border-2 shadow-md transition-all font-semibold flex items-center justify-center gap-2 ${
                     wishlist
-                      ? "bg-pink-50 text-pink-600 border-pink-400 shadow-pink-200"
+                      ? "bg-secondary-light text-primary border-primary-light "
                       : "border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400"
                   }`}
                   onClick={() => {
@@ -575,7 +575,7 @@ const ProductView = () => {
                 >
                   <ShoppingCart
                     className={`h-5 w-5 ${
-                      wishlist ? "text-pink-500" : "text-gray-700"
+                      wishlist ? "text-primary" : "text-gray-700"
                     }`}
                   />
                   Add to Cart
@@ -596,7 +596,7 @@ const ProductView = () => {
                 onClick={() => setActiveTab("description")}
                 className={`flex-1 px-6 py-4 text-sm font-semibold transition-colors ${
                   activeTab === "description"
-                    ? "text-pink-600 border-b-2 border-pink-600"
+                    ? "text-primary border-b-2 border-primary"
                     : "text-gray-600 hover:text-gray-900"
                 }`}
               >
@@ -606,7 +606,7 @@ const ProductView = () => {
                 onClick={() => setActiveTab("details")}
                 className={`flex-1 px-6 py-4 text-sm font-semibold transition-colors ${
                   activeTab === "details"
-                    ? "text-pink-600 border-b-2 border-pink-600"
+                    ? "text-primary border-b-2 border-primary"
                     : "text-gray-600 hover:text-gray-900"
                 }`}
               >
@@ -616,7 +616,7 @@ const ProductView = () => {
                 onClick={() => setActiveTab("reviews")}
                 className={`flex-1 px-6 py-4 text-sm font-semibold transition-colors ${
                   activeTab === "reviews"
-                    ? "text-pink-600 border-b-2 border-pink-600"
+                    ? "text-primary border-b-2 border-primary"
                     : "text-gray-600 hover:text-gray-900"
                 }`}
               >
@@ -707,7 +707,7 @@ const ProductView = () => {
                   </h4>
                   <div className="space-y-3 text-sm text-gray-700">
                     <div className="flex items-start gap-2">
-                      <Truck className="h-5 w-5 text-pink-600 flex-shrink-0 mt-0.5" />
+                      <Truck className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
                       <div>
                         <p className="font-medium text-gray-900">
                           Free Shipping
@@ -718,7 +718,7 @@ const ProductView = () => {
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
-                      <Package className="h-5 w-5 text-pink-600 flex-shrink-0 mt-0.5" />
+                      <Package className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
                       <div>
                         <p className="font-medium text-gray-900">
                           Easy Returns
@@ -729,7 +729,7 @@ const ProductView = () => {
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
-                      <Shield className="h-5 w-5 text-pink-600 flex-shrink-0 mt-0.5" />
+                      <Shield className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
                       <div>
                         <p className="font-medium text-gray-900">
                           Authentic Products
@@ -819,7 +819,7 @@ const ProductView = () => {
                       >
                         <div className="flex items-start justify-between mb-3">
                           <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center text-white font-semibold">
+                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary-light flex items-center justify-center text-white font-semibold">
                               {review.reviewerName.charAt(0).toUpperCase()}
                             </div>
                             <div>
@@ -854,7 +854,7 @@ const ProductView = () => {
                         </p>
                         <button
                           onClick={() => handleHelpful(review.id)}
-                          className="text-sm text-gray-500 hover:text-pink-600 transition-colors"
+                          className="text-sm text-gray-500 hover:text-primary transition-colors"
                         >
                           Helpful ({review.helpfulCount})
                         </button>
@@ -873,13 +873,13 @@ const ProductView = () => {
                     <div className="text-center">
                       <button
                         onClick={() => setShowReviewForm(true)}
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all"
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-primary-light text-white rounded-xl font-semibold hover:shadow-lg transition-all"
                       >
                         Write a Review
                       </button>
                     </div>
                   ) : (
-                    <div className="bg-gradient-to-br from-pink-50 to-purple-50 rounded-xl p-6 border border-pink-100">
+                    <div className="bg-gradient-to-br from-secondary-light to-primary-light rounded-xl p-6 border border-primary-light">
                       <h3 className="text-lg font-semibold text-gray-900 mb-4">
                         Write Your Review
                       </h3>
@@ -898,7 +898,7 @@ const ProductView = () => {
                                 reviewerName: e.target.value,
                               })
                             }
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                             placeholder="Enter your name"
                             required
                           />
@@ -951,7 +951,7 @@ const ProductView = () => {
                               })
                             }
                             rows="4"
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent resize-none"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
                             placeholder="Share your experience with this product..."
                             required
                           ></textarea>
@@ -962,7 +962,7 @@ const ProductView = () => {
                           <button
                             type="submit"
                             disabled={submittingReview}
-                            className="flex-1 px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="flex-1 px-6 py-3 bg-gradient-to-r from-primary to-primary-light text-white rounded-xl font-semibold hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                           >
                             {submittingReview
                               ? "Submitting..."
@@ -1000,3 +1000,8 @@ const ProductView = () => {
 };
 
 export default ProductView;
+
+
+
+
+

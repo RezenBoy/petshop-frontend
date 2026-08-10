@@ -110,7 +110,7 @@ const Discount = () => {
             setEditDiscount(null);
             setShowModal(true);
           }}
-          className="flex items-center bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-600 transition"
+          className="flex items-center bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition"
         >
           <Plus className="w-4 h-4 mr-2" /> Add Discount
         </button>
@@ -259,7 +259,7 @@ const Discount = () => {
 
             <button
               type="submit"
-              className="w-full bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-600"
+              className="w-full bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark"
             >
               {editDiscount ? "Update" : "Save"}
             </button>
@@ -286,3 +286,8 @@ const Modal = ({ children, onClose, title }) => (
 );
 
 export default Discount;
+
+
+
+
+

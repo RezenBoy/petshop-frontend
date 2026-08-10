@@ -56,7 +56,7 @@ const FILTER_OPTIONS = [
 const LoadingState = () => (
   <div className="bg-white rounded-2xl border border-gray-100 p-8 sm:p-16 text-center shadow-sm">
     <div className="flex flex-col items-center gap-3">
-      <Loader2 className="h-10 w-10 text-pink-400 animate-spin" />
+      <Loader2 className="h-10 w-10 text-primary animate-spin" />
       <p className="text-gray-500">Loading your orders...</p>
     </div>
   </div>
@@ -91,8 +91,8 @@ const StatusBadge = ({ status }) => {
 
 const OrderItemPreview = ({ item }) => (
   <div className="flex items-center gap-2 bg-gray-50 rounded-lg px-2.5 sm:px-3 py-2 flex-shrink-0 text-xs sm:text-sm">
-    <div className="h-8 w-8 rounded-md bg-gradient-to-br from-pink-100 to-blue-100 flex items-center justify-center flex-shrink-0">
-      <Box className="h-4 w-4 text-pink-400" />
+    <div className="h-8 w-8 rounded-md bg-gradient-to-br from-secondary-light to-primary-light flex items-center justify-center flex-shrink-0">
+      <Box className="h-4 w-4 text-primary" />
     </div>
     <div className="hidden sm:block min-w-0">
       <p className="font-medium text-gray-900 line-clamp-1">{item.name}</p>
@@ -104,8 +104,8 @@ const OrderItemPreview = ({ item }) => (
 const OrderItemDetail = ({ item }) => (
   <div className="flex items-center justify-between p-2.5 sm:p-3 bg-white rounded-xl border border-gray-100 gap-2">
     <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-      <div className="h-10 sm:h-12 w-10 sm:w-12 rounded-lg bg-gradient-to-br from-pink-100 to-blue-100 flex items-center justify-center flex-shrink-0">
-        <Box className="h-5 w-5 text-pink-400" />
+      <div className="h-10 sm:h-12 w-10 sm:w-12 rounded-lg bg-gradient-to-br from-secondary-light to-primary-light flex items-center justify-center flex-shrink-0">
+        <Box className="h-5 w-5 text-primary" />
       </div>
       <div className="min-w-0">
         <p className="font-medium text-gray-900 text-xs sm:text-sm line-clamp-2">
@@ -220,7 +220,7 @@ const OrdersPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-secondary-light via-white to-secondary-soft">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         {/* Header */}
         <div className="mb-6 sm:mb-8">
@@ -242,7 +242,7 @@ const OrdersPage = () => {
                 placeholder="Search by order ID or product..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-pink-400 focus:border-transparent outline-none transition-all text-sm sm:text-base"
+                className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all text-sm sm:text-base"
               />
             </div>
             <div className="relative min-w-[140px] sm:min-w-[180px]">
@@ -250,7 +250,7 @@ const OrdersPage = () => {
               <select
                 value={filterStatus}
                 onChange={(e) => setFilterStatus(e.target.value)}
-                className="w-full pl-10 sm:pl-12 pr-8 sm:pr-10 py-2.5 sm:py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-pink-400 focus:border-transparent outline-none transition-all appearance-none bg-white cursor-pointer text-sm sm:text-base"
+                className="w-full pl-10 sm:pl-12 pr-8 sm:pr-10 py-2.5 sm:py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all appearance-none bg-white cursor-pointer text-sm sm:text-base"
               >
                 {FILTER_OPTIONS.map((opt) => (
                   <option key={opt.value} value={opt.value}>
@@ -282,7 +282,7 @@ const OrdersPage = () => {
                   <div className="p-4 sm:p-6">
                     <div className="flex flex-col gap-4 mb-4">
                       <div className="flex items-start gap-3 sm:gap-4">
-                        <div className="h-12 sm:h-14 w-12 sm:w-14 rounded-xl bg-gradient-to-br from-pink-500 to-blue-500 flex items-center justify-center text-white flex-shrink-0">
+                        <div className="h-12 sm:h-14 w-12 sm:w-14 rounded-xl bg-gradient-to-br from-primary to-primary-light flex items-center justify-center text-white flex-shrink-0">
                           <Package className="h-6 w-6 sm:h-7 sm:w-7" />
                         </div>
                         <div className="min-w-0 flex-1">
@@ -321,7 +321,7 @@ const OrdersPage = () => {
                     <div className="flex flex-wrap gap-2">
                       <button
                         onClick={() => toggleOrderDetails(order.id)}
-                        className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-gradient-to-r from-pink-500 to-blue-500 text-white hover:opacity-90 transition-all shadow-sm flex-1 sm:flex-none"
+                        className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-gradient-to-r from-primary to-primary-light text-white hover:opacity-90 transition-all shadow-sm flex-1 sm:flex-none"
                       >
                         {isExpanded ? (
                           <>
@@ -364,7 +364,7 @@ const OrdersPage = () => {
                         {/* Order Items Details */}
                         <div>
                           <h4 className="font-semibold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2 text-sm sm:text-base">
-                            <Package className="h-4 w-4 text-pink-500" />
+                            <Package className="h-4 w-4 text-primary" />
                             Order Items
                           </h4>
                           <div className="space-y-2 sm:space-y-3">
@@ -377,7 +377,7 @@ const OrdersPage = () => {
                         {/* Delivery Information */}
                         <div>
                           <h4 className="font-semibold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2 text-sm sm:text-base">
-                            <MapPin className="h-4 w-4 text-pink-500" />
+                            <MapPin className="h-4 w-4 text-primary" />
                             Delivery Information
                           </h4>
                           <div className="space-y-2 sm:space-y-4">
@@ -433,7 +433,7 @@ const OrdersPage = () => {
         </div>
 
         {/* Help Section */}
-        <div className="mt-8 bg-gradient-to-br from-pink-500 to-blue-500 rounded-2xl p-6 sm:p-8 text-white text-center">
+        <div className="mt-8 bg-gradient-to-br from-primary to-primary-light rounded-2xl p-6 sm:p-8 text-white text-center">
           <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
             <Headphones className="h-6 w-6 text-white" />
           </div>
@@ -443,7 +443,7 @@ const OrdersPage = () => {
           <p className="text-sm sm:text-base text-white/90 mb-4 sm:mb-6">
             Our customer support team is here to assist you
           </p>
-          <button className="px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-medium bg-white text-pink-600 hover:bg-gray-50 transition-all shadow-sm inline-flex items-center gap-2">
+          <button className="px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-medium bg-white text-primary hover:bg-gray-50 transition-all shadow-sm inline-flex items-center gap-2">
             Contact Support
             <ArrowRight className="h-4 w-4" />
           </button>
@@ -454,3 +454,7 @@ const OrdersPage = () => {
 };
 
 export default OrdersPage;
+
+
+
+

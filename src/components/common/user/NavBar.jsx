@@ -150,14 +150,14 @@ const UserAvatar = ({ name, size = "sm" }) => {
     : "h-9 w-9 text-sm";
   
   return (
-    <div className={`${sizeClasses} rounded-full bg-gradient-to-br from-pink-400 to-blue-400 flex items-center justify-center text-white font-semibold flex-shrink-0`}>
+    <div className={`${sizeClasses} rounded-full bg-gradient-to-br from-primary to-primary-light flex items-center justify-center text-white font-semibold flex-shrink-0`}>
       {initial}
     </div>
   );
 };
 
 const CartBadge = ({ count }) => (
-  <span className="absolute -top-0.5 -right-0.5 h-4 w-4 text-[10px] rounded-full text-white bg-pink-500 flex items-center justify-center font-medium shadow-sm">
+  <span className="absolute -top-0.5 -right-0.5 h-4 w-4 text-[10px] rounded-full text-white bg-accent-orange flex items-center justify-center font-medium shadow-sm">
     {count > 9 ? "9+" : count}
   </span>
 );
@@ -168,8 +168,8 @@ const NavLink = ({ item, isActive, onClick }) => (
     onClick={onClick}
     className={`relative px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
       isActive
-        ? "text-pink-500 bg-pink-50"
-        : "text-gray-600 hover:text-pink-500 hover:bg-pink-50/50"
+        ? "text-primary bg-secondary-soft"
+        : "text-gray-600 hover:text-primary hover:bg-secondary-soft/60"
     }`}
     aria-current={isActive ? "page" : undefined}
   >
@@ -180,7 +180,7 @@ const NavLink = ({ item, isActive, onClick }) => (
 const IconButton = ({ onClick, label, children, className = "" }) => (
   <button
     onClick={onClick}
-    className={`p-2 text-gray-600 hover:text-pink-500 hover:bg-pink-50 rounded-lg transition-colors ${className}`}
+    className={`p-2 text-gray-600 hover:text-primary hover:bg-secondary-soft rounded-lg transition-colors ${className}`}
     aria-label={label}
   >
     {children}
@@ -273,7 +273,7 @@ const Navbar = () => {
                 className="h-10 w-10 sm:h-12 sm:w-12 object-contain rounded-full flex-shrink-0"
               />
               <div className="leading-tight min-w-0">
-                <span className="block text-sm sm:text-base font-bold bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent whitespace-nowrap">
+                <span className="block text-sm sm:text-base font-bold bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent whitespace-nowrap">
                   Pashora
                 </span>
                 <span className="hidden sm:block text-[10px] text-gray-400 tracking-wide">
@@ -305,7 +305,7 @@ const Navbar = () => {
                   <button
                     type="button"
                     onClick={() => setSearchOpen(!searchOpen)}
-                    className="absolute left-2 z-10 text-gray-400 hover:text-pink-500 transition-colors"
+                    className="absolute left-2 z-10 text-gray-400 hover:text-primary transition-colors"
                     aria-label={searchOpen ? "Close search" : "Open search"}
                   >
                     <Search className="h-4 w-4" />
@@ -316,7 +316,7 @@ const Navbar = () => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search products..."
-                    className={`pl-8 pr-3 py-1.5 text-sm border border-gray-200 rounded-full focus:ring-2 focus:ring-pink-300 focus:border-pink-400 focus:outline-none transition-all duration-300 bg-gray-50 focus:bg-white ${
+                    className={`pl-8 pr-3 py-1.5 text-sm border border-gray-200 rounded-full focus:ring-2 focus:ring-primary focus:border-primary-light focus:outline-none transition-all duration-300 bg-gray-50 focus:bg-white ${
                       searchOpen ? "opacity-100 w-full" : "opacity-0 w-0 pointer-events-none"
                     }`}
                     aria-label="Search products"
@@ -346,7 +346,7 @@ const Navbar = () => {
               {/* Cart */}
               <Link
                 to="/cart"
-                className="relative p-2 text-gray-600 hover:text-pink-500 hover:bg-pink-50 rounded-lg transition-colors"
+                className="relative p-2 text-gray-600 hover:text-primary hover:bg-secondary-light rounded-lg transition-colors"
                 aria-label={`Cart with ${cartCount} items`}
               >
                 <ShoppingCart className="h-5 w-5" aria-hidden="true" />
@@ -358,7 +358,7 @@ const Navbar = () => {
                 <div className="relative hidden lg:block" ref={dropdownRef}>
                   <button
                     onClick={() => setDropdownOpen(prev => !prev)}
-                    className="flex items-center gap-1.5 px-2 py-1.5 text-sm text-gray-700 hover:bg-pink-50 rounded-lg transition-colors"
+                    className="flex items-center gap-1.5 px-2 py-1.5 text-sm text-gray-700 hover:bg-secondary-light rounded-lg transition-colors"
                     aria-expanded={dropdownOpen}
                     aria-haspopup="true"
                   >
@@ -383,7 +383,7 @@ const Navbar = () => {
                       </div>
                       <Link 
                         to="/user/profile" 
-                        className="block px-4 py-2.5 text-sm text-gray-600 hover:bg-pink-50 hover:text-pink-500 transition-colors"
+                        className="block px-4 py-2.5 text-sm text-gray-600 hover:bg-secondary-light hover:text-primary transition-colors"
                         onClick={() => setDropdownOpen(false)}
                         role="menuitem"
                       >
@@ -391,7 +391,7 @@ const Navbar = () => {
                       </Link>
                       <Link 
                         to="/user/orders" 
-                        className="block px-4 py-2.5 text-sm text-gray-600 hover:bg-pink-50 hover:text-pink-500 transition-colors"
+                        className="block px-4 py-2.5 text-sm text-gray-600 hover:bg-secondary-light hover:text-primary transition-colors"
                         onClick={() => setDropdownOpen(false)}
                         role="menuitem"
                       >
@@ -414,14 +414,14 @@ const Navbar = () => {
                 <div className="hidden lg:flex items-center gap-2">
                   <Link
                     to="/login"
-                    className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-600 hover:text-pink-500 hover:bg-pink-50 rounded-lg transition-colors"
+                    className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-600 hover:text-primary hover:bg-secondary-light rounded-lg transition-colors"
                   >
                     <User className="h-4 w-4" aria-hidden="true" />
                     <span className="hidden xl:inline">Login</span>
                   </Link>
                   <Link
                     to="/register"
-                    className="px-4 py-1.5 text-sm text-white rounded-full bg-gradient-to-r from-pink-500 to-blue-500 hover:opacity-90 transition-opacity shadow-sm font-medium whitespace-nowrap"
+                    className="px-4 py-1.5 text-sm text-white rounded-full bg-gradient-to-r from-primary to-primary-light hover:opacity-90 transition-opacity shadow-sm font-medium whitespace-nowrap"
                   >
                     Sign Up
                   </Link>
@@ -485,7 +485,7 @@ const Navbar = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search products..."
-              className="w-full pl-9 pr-4 py-2.5 text-sm border border-gray-200 rounded-full bg-gray-50 focus:bg-white focus:ring-2 focus:ring-pink-300 focus:border-pink-400 focus:outline-none transition-all"
+              className="w-full pl-9 pr-4 py-2.5 text-sm border border-gray-200 rounded-full bg-gray-50 focus:bg-white focus:ring-2 focus:ring-primary focus:border-primary-light focus:outline-none transition-all"
               aria-label="Search products"
             />
           </form>
@@ -498,8 +498,8 @@ const Navbar = () => {
                 to={item.href}
                 className={`flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-colors ${
                   item.active
-                    ? "text-pink-500 bg-pink-50"
-                    : "text-gray-600 hover:text-pink-500 hover:bg-pink-50/60"
+                    ? "text-primary bg-secondary-light"
+                    : "text-gray-600 hover:text-primary hover:bg-secondary-light/60"
                 }`}
                 onClick={() => setIsMenuOpen(false)}
                 aria-current={item.active ? "page" : undefined}
@@ -515,7 +515,7 @@ const Navbar = () => {
           {/* Auth */}
           {user ? (
             <div className="space-y-1">
-              <div className="flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-pink-50 to-blue-50 rounded-xl">
+              <div className="flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-secondary-light to-secondary-soft rounded-xl">
                 <UserAvatar name={user.fullName} size="md" />
                 <div className="min-w-0">
                   <p className="text-sm font-semibold text-gray-800 truncate">{user.fullName}</p>
@@ -524,14 +524,14 @@ const Navbar = () => {
               </div>
               <Link
                 to="/user/profile"
-                className="flex items-center px-4 py-2.5 text-sm text-gray-600 hover:text-pink-500 hover:bg-pink-50 rounded-xl transition-colors"
+                className="flex items-center px-4 py-2.5 text-sm text-gray-600 hover:text-primary hover:bg-secondary-light rounded-xl transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 My Profile
               </Link>
               <Link
                 to="/user/orders"
-                className="flex items-center px-4 py-2.5 text-sm text-gray-600 hover:text-pink-500 hover:bg-pink-50 rounded-xl transition-colors"
+                className="flex items-center px-4 py-2.5 text-sm text-gray-600 hover:text-primary hover:bg-secondary-light rounded-xl transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 My Orders
@@ -548,7 +548,7 @@ const Navbar = () => {
             <div className="space-y-2.5">
               <Link
                 to="/login"
-                className="flex items-center justify-center gap-2 w-full py-2.5 text-sm font-medium text-gray-700 border border-gray-200 hover:border-pink-400 hover:text-pink-500 rounded-full transition-colors"
+                className="flex items-center justify-center gap-2 w-full py-2.5 text-sm font-medium text-gray-700 border border-gray-200 hover:border-primary-light hover:text-primary rounded-full transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 <User className="h-4 w-4" aria-hidden="true" />
@@ -556,7 +556,7 @@ const Navbar = () => {
               </Link>
               <Link
                 to="/register"
-                className="flex items-center justify-center w-full py-2.5 text-sm font-medium text-white rounded-full bg-gradient-to-r from-pink-500 to-blue-500 hover:opacity-90 transition-opacity shadow-sm"
+                className="flex items-center justify-center w-full py-2.5 text-sm font-medium text-white rounded-full bg-gradient-to-r from-primary to-primary-light hover:opacity-90 transition-opacity shadow-sm"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Create Account
@@ -570,3 +570,7 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+
+

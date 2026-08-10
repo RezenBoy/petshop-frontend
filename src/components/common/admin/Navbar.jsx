@@ -24,7 +24,7 @@ const Navbar = ({ setSidebarOpen, title }) => {
             <Bell className="w-5 h-5" />
           </button>
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center">
+            <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
               <User className="w-4 h-4 text-white" />
             </div>
             <span className="text-sm font-medium text-gray-700">Admin</span>
@@ -36,3 +36,8 @@ const Navbar = ({ setSidebarOpen, title }) => {
 };
 
 export default Navbar;
+
+
+
+
+

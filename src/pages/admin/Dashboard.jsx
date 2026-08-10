@@ -36,7 +36,7 @@ const Dashboard = () => {
       change: "-2.1%",
       trend: "down",
       icon: Package,
-      color: "bg-purple-500",
+      color: "bg-primary",
     },
     {
       title: "Active Customers",
@@ -75,7 +75,7 @@ const Dashboard = () => {
         <select
           value={selectedPeriod}
           onChange={(e) => setSelectedPeriod(e.target.value)}
-          className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+          className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
         >
           <option>This Week</option>
           <option>This Month</option>
@@ -195,9 +195,9 @@ const Dashboard = () => {
           <h3 className="text-lg font-semibold text-gray-900">Sales Overview</h3>
         </div>
         <div className="p-6">
-          <div className="h-64 bg-gradient-to-r from-pink-100 to-purple-100 rounded-lg flex items-center justify-center">
+          <div className="h-64 bg-gradient-to-r from-secondary-light to-primary-light rounded-lg flex items-center justify-center">
             <div className="text-center">
-              <BarChart3 className="w-16 h-16 text-pink-500 mx-auto mb-4" />
+              <BarChart3 className="w-16 h-16 text-primary mx-auto mb-4" />
               <p className="text-gray-600">Sales chart would be rendered here</p>
               <p className="text-sm text-gray-500">Integration with chart library like Recharts recommended</p>
             </div>
@@ -209,3 +209,8 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+
+
+
+

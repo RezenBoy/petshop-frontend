@@ -145,7 +145,7 @@ const FilterSelect = ({ label, value, onChange, options }) => (
     <select
       value={value}
       onChange={onChange}
-      className="px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-pink-400 focus:outline-none bg-white text-sm"
+      className="px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-primary-light focus:outline-none bg-white text-sm"
     >
       {options.map(opt => (
         <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -298,11 +298,11 @@ const ShopPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-secondary-light via-primary to-secondary-soft">
         <div className="relative">
-          <div className="animate-spin h-12 w-12 border-4 border-pink-400 border-t-transparent rounded-full" />
+          <div className="animate-spin h-12 w-12 border-4 border-primary-light border-t-transparent rounded-full" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <Heart className="h-5 w-5 text-pink-400 animate-pulse" />
+            <Heart className="h-5 w-5 text-primary animate-pulse" />
           </div>
         </div>
       </div>
@@ -311,12 +311,12 @@ const ShopPage = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-secondary-light via-primary to-secondary-soft">
         <div className="text-center">
           <p className="text-red-600 mb-4">{error}</p>
           <button 
             onClick={() => window.location.reload()}
-            className="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600"
+            className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark"
           >
             Retry
           </button>
@@ -326,7 +326,7 @@ const ShopPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-secondary-light via-primary to-secondary-soft">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
         {/* Header */}
         <div className="mb-8">
@@ -348,7 +348,7 @@ const ShopPage = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search for products... (Ctrl+K)"
-              className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-pink-400 focus:outline-none bg-white shadow-sm transition-colors"
+              className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-light focus:outline-none bg-white shadow-sm transition-colors"
               aria-label="Search products"
             />
             {searchQuery && (
@@ -369,7 +369,7 @@ const ShopPage = () => {
             {/* Mobile Filter Toggle */}
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className="lg:hidden flex items-center gap-2 px-4 py-2 border-2 border-gray-300 rounded-lg hover:border-pink-400 transition-colors"
+              className="lg:hidden flex items-center gap-2 px-4 py-2 border-2 border-gray-300 rounded-lg hover:border-primary-light transition-colors"
               aria-expanded={showFilters}
               aria-controls="filter-panel"
             >
@@ -429,7 +429,7 @@ const ShopPage = () => {
               {(filters.category !== "all" || filters.subCategory !== "all" || filters.priceRange !== "all" || searchQuery) && (
                 <button
                   onClick={clearFilters}
-                  className="text-sm text-pink-600 hover:text-pink-700 font-medium"
+                  className="text-sm text-primary hover:text-primary font-medium"
                 >
                   Clear all
                 </button>
@@ -453,7 +453,7 @@ const ShopPage = () => {
             </p>
             <button
               onClick={clearFilters}
-              className="px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all active:scale-95"
+              className="px-6 py-3 bg-gradient-to-r from-primary to-primary-light text-white rounded-xl font-semibold hover:shadow-lg transition-all active:scale-95"
             >
               Clear All Filters
             </button>
@@ -496,8 +496,8 @@ const ShopPage = () => {
                       }}
                       className={`absolute top-3 right-3 p-2 rounded-full shadow-md transition-all hover:scale-110 ${
                         isWishlisted
-                          ? "bg-pink-500 text-white"
-                          : "bg-white text-gray-600 hover:bg-pink-50"
+                          ? "bg-primary text-white"
+                          : "bg-white text-gray-600 hover:bg-secondary-light"
                       }`}
                       aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
                     >
@@ -520,7 +520,7 @@ const ShopPage = () => {
                   <div className="p-4 flex-1 flex flex-col">
                     {/* Category */}
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xs font-semibold text-pink-600 bg-pink-100 px-2 py-1 rounded-full">
+                      <span className="text-xs font-semibold text-primary bg-secondary-light px-2 py-1 rounded-full">
                         {product.category}
                       </span>
                       {product.subCategory && (
@@ -531,7 +531,7 @@ const ShopPage = () => {
                     {/* Product Name */}
                     <Link
                       to={`/product/${product.id}`}
-                      className="block font-semibold text-gray-900 hover:text-pink-600 transition-colors mb-2 line-clamp-2"
+                      className="block font-semibold text-gray-900 hover:text-primary transition-colors mb-2 line-clamp-2"
                     >
                       {product.productName}
                     </Link>
@@ -560,7 +560,7 @@ const ShopPage = () => {
                       className={`mt-auto w-full py-2.5 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2 ${
                         isOutOfStock
                           ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-                          : "bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:shadow-lg hover:scale-105 active:scale-95"
+                          : "bg-gradient-to-r from-primary to-primary-light text-white hover:shadow-lg hover:scale-105 active:scale-95"
                       }`}
                       aria-label={isOutOfStock ? "Out of stock" : `Add ${product.productName} to cart`}
                     >
@@ -581,3 +581,7 @@ const ShopPage = () => {
 };
 
 export default ShopPage;
+
+
+
+

@@ -18,13 +18,13 @@ const setupOptions = [
     title: "Roles & Permissions",
     description: "Manage user roles and access permissions",
     icon: Shield,
-    color: "bg-purple-500",
+    color: "bg-primary",
   },
   {
     title: "Localization",
     description: "Set language, timezone, and regional formats",
     icon: Globe,
-    color: "bg-pink-500",
+    color: "bg-primary",
   },
 ];
 
@@ -58,3 +58,8 @@ const MasterSetup = () => {
 };
 
 export default MasterSetup;
+
+
+
+
+

@@ -98,7 +98,7 @@ const LoginForm = () => {
     <div
       className="min-h-screen flex items-center justify-center px-4 py-6 relative"
       style={{
-        background: "linear-gradient(135deg, #fdf2f8 0%, #eff6ff 100%)",
+        background: "linear-gradient(135deg, #DBEAFE 0%, #eff6ff 100%)",
         backgroundAttachment: "fixed",
       }}
     >
@@ -111,7 +111,7 @@ const LoginForm = () => {
       {/* Card Container */}
       <div className="relative flex flex-col lg:flex-row w-full max-w-5xl rounded-3xl overflow-hidden shadow-2xl bg-white my-2">
         {/* LEFT Gradient Panel */}
-        <div className="hidden lg:flex lg:w-1/2 relative bg-gradient-to-br from-pink-500 via-purple-500 to-blue-500">
+        <div className="hidden lg:flex lg:w-1/2 relative bg-gradient-to-br from-primary via-primary to-primary-light">
           {/* Subtle overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
 
@@ -149,10 +149,10 @@ const LoginForm = () => {
           <div className="max-w-sm w-full mx-auto">
             {/* Mobile Logo */}
             <Link to="/" className="lg:hidden flex items-center justify-center gap-2 mb-6">
-              <div className="bg-gradient-to-r from-pink-500 to-blue-500 p-2 rounded-xl">
+              <div className="bg-gradient-to-r from-primary to-primary-light p-2 rounded-xl">
                 <Heart className="h-5 w-5 text-white" />
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent">
+              <span className="text-xl font-bold bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent">
                 Pashora
               </span>
             </Link>
@@ -165,7 +165,7 @@ const LoginForm = () => {
                 Don't have an account?{" "}
                 <Link
                   to="/register"
-                  className="text-pink-600 font-semibold hover:text-pink-700 transition-colors"
+                  className="text-primary font-semibold hover:text-primary transition-colors"
                 >
                   Sign up here
                 </Link>
@@ -247,13 +247,13 @@ const LoginForm = () => {
                 <label className="flex items-center gap-2 text-gray-700 cursor-pointer">
                   <input
                     type="checkbox"
-                    className="h-4 w-4 text-pink-500 focus:ring-2 focus:ring-pink-500 border-gray-300 rounded"
+                    className="h-4 w-4 text-primary focus:ring-2 focus:ring-primary border-gray-300 rounded"
                   />
                   <span className="select-none">Remember me</span>
                 </label>
                 <Link
                   to="/forgot-password"
-                  className="text-pink-600 hover:text-pink-700 font-semibold transition-colors"
+                  className="text-primary hover:text-primary font-semibold transition-colors"
                 >
                   Forgot password?
                 </Link>
@@ -265,7 +265,7 @@ const LoginForm = () => {
                 disabled={!isValid || isSubmitting}
                 className={`w-full py-3 rounded-xl text-white font-semibold text-sm transition-all ${!isValid || isSubmitting
                   ? "bg-gray-300 cursor-not-allowed"
-                  : "bg-gradient-to-r from-pink-500 to-blue-500 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]"
+                  : "bg-gradient-to-r from-primary to-primary-light hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]"
                   }`}
               >
                 {isSubmitting ? (
@@ -305,3 +305,8 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+
+
+
+
+

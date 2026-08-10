@@ -11,14 +11,14 @@ const AboutPage = () => {
       {/* <div className="h-16" /> */}
 
       {/* ── Hero ── */}
-      <section className="py-16 sm:py-20 bg-gradient-to-br from-pink-50 via-white to-blue-50">
+      <section className="py-16 sm:py-20 bg-gradient-to-br from-secondary-light via-white to-secondary-soft">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="inline-block text-xs font-semibold tracking-widest text-pink-500 uppercase mb-3">
+          <span className="inline-block text-xs font-semibold tracking-widest text-primary uppercase mb-3">
             Our Story
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
             About{" "}
-            <span className="bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent">
               Pashora
             </span>
           </h1>
@@ -43,13 +43,13 @@ const AboutPage = () => {
             </div>
 
             <div className="flex-1 text-left">
-              <span className="text-xs font-semibold tracking-widest text-pink-500 uppercase">
+              <span className="text-xs font-semibold tracking-widest text-primary uppercase">
                 Who We Are
               </span>
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mt-2 mb-4 leading-tight">
                 Built for pets,<br /> by pet lovers.
               </h2>
-              <div className="w-10 h-1 bg-gradient-to-r from-pink-500 to-blue-500 rounded-full mb-5" />
+              <div className="w-10 h-1 bg-gradient-to-r from-primary to-primary-light rounded-full mb-5" />
               <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-3">
                 Founded by passionate pet lovers, Pashora began with one mission — to provide
                 high-quality, safe, and heart-warming products for our furry friends. From nutritious meals
@@ -62,7 +62,7 @@ const AboutPage = () => {
               </p>
               <Link
                 to="/shop"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-white bg-gradient-to-r from-pink-500 to-blue-500 px-6 py-2.5 rounded-full hover:opacity-90 active:scale-95 transition-all shadow-sm"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-white bg-gradient-to-r from-primary to-primary-light px-6 py-2.5 rounded-full hover:opacity-90 active:scale-95 transition-all shadow-sm"
               >
                 Shop Now
                 <ArrowRight className="h-4 w-4" />
@@ -76,7 +76,7 @@ const AboutPage = () => {
       <section className="py-16 sm:py-20 bg-gray-50/80">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 sm:mb-14">
-            <span className="text-xs font-semibold tracking-widest text-pink-500 uppercase">
+            <span className="text-xs font-semibold tracking-widest text-primary uppercase">
               Our Purpose
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mt-2">
@@ -90,24 +90,24 @@ const AboutPage = () => {
                 icon: PawPrint,
                 title: "Our Mission",
                 desc: "To make premium, safe, and sustainable pet care accessible to all. Every product we offer is chosen with love and tested for your pets' comfort.",
-                color: "text-pink-500 bg-pink-50",
+                color: "text-primary bg-secondary-light",
               },
               {
                 icon: Heart,
                 title: "Our Vision",
                 desc: "To build a global community where pets live happier, healthier lives — supported by products, education, and love from Pashora.",
-                color: "text-blue-500 bg-blue-50",
+                color: "text-primary-dark bg-secondary-light",
               },
               {
                 icon: Smile,
                 title: "Our Promise",
                 desc: "We promise honesty, quality, and compassion. Every order supports local pet shelters and animal welfare programs.",
-                color: "text-purple-500 bg-purple-50",
+                color: "text-primary-light bg-secondary-soft",
               },
             ].map(({ icon: Icon, title, desc, color }) => (
               <div
                 key={title}
-                className="flex flex-col items-center text-center p-5 sm:p-6 rounded-2xl bg-white border border-gray-100 hover:border-pink-200/60 hover:shadow-sm transition-all"
+                className="flex flex-col items-center text-center p-5 sm:p-6 rounded-2xl bg-white border border-gray-100 hover:border-primary-light/60 hover:shadow-sm transition-all"
               >
                 <div className={`h-11 w-11 rounded-xl flex items-center justify-center mb-3 ${color}`}>
                   <Icon className="h-5 w-5" />
@@ -124,7 +124,7 @@ const AboutPage = () => {
       <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 sm:mb-14">
-            <span className="text-xs font-semibold tracking-widest text-pink-500 uppercase">
+            <span className="text-xs font-semibold tracking-widest text-primary uppercase">
               Why Us
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mt-2">
@@ -134,14 +134,14 @@ const AboutPage = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
             {[
-              { icon: Truck, title: "Fast Delivery", desc: "Get essentials delivered quickly with real-time tracking and secure packaging.", color: "text-pink-500 bg-pink-50" },
+              { icon: Truck, title: "Fast Delivery", desc: "Get essentials delivered quickly with real-time tracking and secure packaging.", color: "text-primary bg-secondary-light" },
               { icon: Shield, title: "100% Authentic", desc: "We only partner with trusted brands so you can shop with confidence.", color: "text-blue-500 bg-blue-50" },
-              { icon: Heart, title: "Love in Every Order", desc: "Every order helps us contribute to animal shelters and stray welfare.", color: "text-purple-500 bg-purple-50" },
+              { icon: Heart, title: "Love in Every Order", desc: "Every order helps us contribute to animal shelters and stray welfare.", color: "text-primary bg-secondary-light" },
               { icon: HeadphonesIcon, title: "24/7 Support", desc: "Our team of pet lovers is always ready to help you.", color: "text-green-500 bg-green-50" },
             ].map(({ icon: Icon, title, desc, color }) => (
               <div
                 key={title}
-                className="flex flex-col items-center text-center p-4 rounded-2xl bg-gradient-to-br from-pink-50/50 to-blue-50/50 border border-gray-100 hover:border-pink-200/60 hover:shadow-sm transition-all"
+                className="flex flex-col items-center text-center p-4 rounded-2xl bg-gradient-to-br from-secondary-light/50 to-secondary-soft/50 border border-gray-100 hover:border-primary-light/60 hover:shadow-sm transition-all"
               >
                 <div className={`h-10 w-10 rounded-xl flex items-center justify-center mb-2.5 ${color}`}>
                   <Icon className="h-5 w-5" />
@@ -158,7 +158,7 @@ const AboutPage = () => {
       <section className="py-16 sm:py-20 bg-gray-50/80">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 sm:mb-14">
-            <span className="text-xs font-semibold tracking-widest text-pink-500 uppercase">
+            <span className="text-xs font-semibold tracking-widest text-primary uppercase">
               By The Numbers
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mt-2">
@@ -168,19 +168,19 @@ const AboutPage = () => {
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {[
-              { value: "500+", label: "Products available", icon: Package, color: "text-pink-500 bg-pink-50" },
+              { value: "500+", label: "Products available", icon: Package, color: "text-primary bg-secondary-light" },
               { value: "50+", label: "Trusted brands", icon: Award, color: "text-blue-500 bg-blue-50" },
-              { value: "10k+", label: "Happy pet parents", icon: PawPrint, color: "text-purple-500 bg-purple-50" },
+              { value: "10k+", label: "Happy pet parents", icon: PawPrint, color: "text-primary bg-secondary-light" },
               { value: "24/7", label: "Customer support", icon: HeadphonesIcon, color: "text-green-500 bg-green-50" },
             ].map(({ value, label, icon: Icon, color }) => (
               <div
                 key={label}
-                className="border border-gray-100 hover:border-pink-200 rounded-2xl p-5 sm:p-6 flex flex-col gap-1 transition-all hover:shadow-sm bg-white"
+                className="border border-gray-100 hover:border-primary-light rounded-2xl p-5 sm:p-6 flex flex-col gap-1 transition-all hover:shadow-sm bg-white"
               >
                 <div className={`h-9 w-9 rounded-xl flex items-center justify-center mb-1 ${color}`}>
                   <Icon className="h-4 w-4" />
                 </div>
-                <span className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent">
+                <span className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent">
                   {value}
                 </span>
                 <span className="text-xs sm:text-sm text-gray-400 leading-snug">{label}</span>
@@ -198,3 +198,7 @@ const AboutPage = () => {
 };
 
 export default AboutPage;
+
+
+
+

@@ -64,3 +64,8 @@ const ManagePurchase = () => {
 };
 
 export default ManagePurchase;
+
+
+
+
+

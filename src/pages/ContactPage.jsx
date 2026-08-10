@@ -87,18 +87,18 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-secondary-light via-primary to-secondary-soft">
       <div className="max-w-6xl mx-auto px-6 py-12">
         <h1 className="text-4xl font-bold text-center text-gray-900 mb-10">
           Contact{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-light">
             Pashora
           </span>
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {/* Left Info Section */}
-          <div className="bg-white shadow-xl rounded-2xl p-8 border border-pink-100 flex flex-col justify-between">
+          <div className="bg-white shadow-xl rounded-2xl p-8 border border-primary-light flex flex-col justify-between">
             <div>
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">We'd love to hear from you!</h2>
               <p className="text-gray-700 mb-6 leading-relaxed">
@@ -112,7 +112,7 @@ const ContactPage = () => {
                   { icon: MapPin, text: "123 Pet Street, Animal City, India" },
                 ].map(({ icon: Icon, text }) => (
                   <div key={text} className="flex items-center gap-3">
-                    <div className="p-3 rounded-full bg-gradient-to-r from-pink-400 to-purple-500 text-white shadow-md flex-shrink-0">
+                    <div className="p-3 rounded-full bg-gradient-to-r from-primary to-primary-light text-white shadow-md flex-shrink-0">
                       <Icon className="h-4 w-4" />
                     </div>
                     <span className="text-gray-700 text-sm">{text}</span>
@@ -127,7 +127,7 @@ const ContactPage = () => {
           </div>
 
           {/* Right Form Section */}
-          <div className="bg-white shadow-xl rounded-2xl p-8 border border-pink-100">
+          <div className="bg-white shadow-xl rounded-2xl p-8 border border-primary-light">
             <h2 className="text-2xl font-semibold text-gray-900 mb-6">Send Us a Message</h2>
             <form onSubmit={handleSubmit} className="space-y-5" noValidate>
 
@@ -144,7 +144,7 @@ const ContactPage = () => {
                     value={formData[name]}
                     onChange={handleChange}
                     placeholder={placeholder}
-                    className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-pink-400 focus:outline-none text-sm transition-colors ${errors[name] ? "border-red-400 bg-red-50" : "border-gray-300"
+                    className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-primary focus:outline-none text-sm transition-colors ${errors[name] ? "border-red-400 bg-red-50" : "border-gray-300"
                       }`}
                   />
                   {errors[name] && (
@@ -161,7 +161,7 @@ const ContactPage = () => {
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Write your message here..."
-                  className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-pink-400 focus:outline-none resize-none text-sm transition-colors ${errors.message ? "border-red-400 bg-red-50" : "border-gray-300"
+                  className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-primary focus:outline-none resize-none text-sm transition-colors ${errors.message ? "border-red-400 bg-red-50" : "border-gray-300"
                     }`}
                 />
                 {errors.message && (
@@ -172,7 +172,7 @@ const ContactPage = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-pink-400 to-purple-500 text-white py-3 rounded-xl font-semibold hover:shadow-lg hover:scale-[1.02] transition-all disabled:opacity-50"
+                className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-primary-light text-white py-3 rounded-xl font-semibold hover:shadow-lg hover:scale-[1.02] transition-all disabled:opacity-50"
               >
                 <Send className="h-4 w-4" />
                 {isSubmitting ? "Sending..." : "Send Message"}
@@ -188,3 +188,7 @@ const ContactPage = () => {
 };
 
 export default ContactPage;
+
+
+
+

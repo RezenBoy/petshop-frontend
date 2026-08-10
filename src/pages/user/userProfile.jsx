@@ -50,16 +50,16 @@ const INITIAL_ADDRESS = {
 // ─── Sub-Components ──────────────────────────────────────
 
 const LoadingScreen = () => (
-  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 via-white to-blue-50">
+  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-secondary-light via-white to-secondary-soft">
     <div className="flex flex-col items-center gap-3">
-      <Loader2 className="h-8 w-8 text-pink-500 animate-spin" />
+      <Loader2 className="h-8 w-8 text-primary animate-spin" />
       <p className="text-sm text-gray-500">Loading profile...</p>
     </div>
   </div>
 );
 
 const ErrorScreen = ({ message }) => (
-  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 via-white to-blue-50">
+  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-secondary-light via-white to-secondary-soft">
     <div className="text-center">
       <AlertCircle className="h-12 w-12 text-red-400 mx-auto mb-3" />
       <p className="text-red-600 font-medium">{message}</p>
@@ -82,7 +82,7 @@ const GradientButton = ({ children, onClick, disabled, type = "button", classNam
     type={type}
     onClick={onClick}
     disabled={disabled}
-    className={`px-4 py-2 rounded-xl text-sm font-medium bg-gradient-to-r from-pink-500 to-blue-500 text-white hover:opacity-90 transition-all shadow-sm disabled:opacity-60 disabled:cursor-not-allowed ${className}`}
+    className={`px-4 py-2 rounded-xl text-sm font-medium bg-gradient-to-r from-primary to-primary-light text-white hover:opacity-90 transition-all shadow-sm disabled:opacity-60 disabled:cursor-not-allowed ${className}`}
   >
     {children}
   </button>
@@ -118,7 +118,7 @@ const InputField = ({ label, value, onChange, type = "text", placeholder, disabl
       placeholder={placeholder}
       disabled={disabled}
       required={required}
-      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-pink-400 focus:border-transparent outline-none transition-all text-sm disabled:bg-gray-50"
+      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all text-sm disabled:bg-gray-50"
     />
   </div>
 );
@@ -151,8 +151,8 @@ const StatusBadge = ({ status }) => (
 const PetTypeIcon = ({ type }) => {
   const colors = {
     Dog: "from-amber-100 to-orange-100 text-amber-600",
-    Cat: "from-pink-100 to-rose-100 text-pink-600",
-    Bird: "from-sky-100 to-blue-100 text-sky-600",
+    Cat: "from-secondary-light to-primary-light text-primary",
+    Bird: "from-sky-100 to-primary-light text-sky-600",
     Fish: "from-cyan-100 to-teal-100 text-cyan-600",
     Rabbit: "from-emerald-100 to-green-100 text-emerald-600",
     Other: "from-gray-100 to-slate-100 text-gray-600",
@@ -524,7 +524,7 @@ const UserProfile = () => {
       >
         <div className="bg-white lg:rounded-2xl lg:shadow-sm lg:border border-gray-100 overflow-y-auto h-full lg:h-auto lg:overflow-hidden lg:sticky lg:top-24 flex flex-col">
           {/* Profile Card */}
-          <div className="bg-gradient-to-br from-pink-500 to-blue-500 p-4 sm:p-6 text-white flex-shrink-0">
+          <div className="bg-gradient-to-br from-primary to-primary-light p-4 sm:p-6 text-white flex-shrink-0">
             <div className="flex flex-col items-center text-center">
               <div className="relative">
                 <div className="h-16 sm:h-20 w-16 sm:w-20 rounded-full bg-white/20 backdrop-blur-sm border-4 border-white/30 flex items-center justify-center text-2xl sm:text-3xl font-bold">
@@ -550,7 +550,7 @@ const UserProfile = () => {
                     setSidebarOpen(false);
                   }}
                   className={`w-full flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-medium transition-all mb-2 ${isActive
-                    ? "bg-gradient-to-r from-pink-500 to-blue-500 text-white shadow-md"
+                    ? "bg-gradient-to-r from-primary to-primary-light text-white shadow-md"
                     : "text-gray-600 hover:bg-gray-50"
                     }`}
                 >
@@ -610,7 +610,7 @@ const UserProfile = () => {
             </SecondaryButton>
           </div>
         ) : (
-          <SecondaryButton onClick={handleEditToggle} className="text-pink-600 hover:bg-pink-50">
+          <SecondaryButton onClick={handleEditToggle} className="text-primary hover:bg-secondary-light">
             <span className="flex items-center gap-2">
               <Edit2 className="h-4 w-4" />
               Edit Profile
@@ -707,7 +707,7 @@ const UserProfile = () => {
       />
 
       {showPetForm && (
-        <form onSubmit={handleAddPet} className="bg-pink-50 p-4 sm:p-6 rounded-2xl border border-pink-100 mb-6 space-y-4">
+        <form onSubmit={handleAddPet} className="bg-secondary-light p-4 sm:p-6 rounded-2xl border border-primary-light mb-6 space-y-4">
           <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Register a New Pet</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <InputField
@@ -836,7 +836,7 @@ const UserProfile = () => {
                   setAddressError("");
                 }}
                 className={`w-full text-left p-3 rounded-xl border transition-all ${selectedAddressId === a.id
-                  ? "border-pink-300 bg-pink-50"
+                  ? "border-primary-light bg-secondary-light"
                   : "border-gray-100 bg-white hover:border-gray-200"
                   }`}
               >
@@ -851,8 +851,8 @@ const UserProfile = () => {
                     </div>
                   </div>
                   {a.isDefault && (
-                    <span className="text-xs text-pink-600 font-medium ml-2 flex items-center gap-1">
-                      <Star className="h-3 w-3 fill-pink-600" />
+                    <span className="text-xs text-primary font-medium ml-2 flex items-center gap-1">
+                      <Star className="h-3 w-3 fill-primary" />
                       Default
                     </span>
                   )}
@@ -966,7 +966,7 @@ const UserProfile = () => {
             <div className="flex items-center justify-between gap-3">
               <div>
                 {!addressEditMode ? (
-                  <SecondaryButton onClick={startEditAddress} className="text-pink-600 hover:bg-pink-50">
+                  <SecondaryButton onClick={startEditAddress} className="text-primary hover:bg-secondary-light">
                     <span className="flex items-center gap-2">
                       <Edit2 className="h-4 w-4" />
                       Edit
@@ -978,7 +978,7 @@ const UserProfile = () => {
                       type="checkbox"
                       checked={tempAddress.isDefault || false}
                       onChange={(e) => setTempAddress((t) => ({ ...t, isDefault: e.target.checked }))}
-                      className="rounded accent-pink-500 h-4 w-4"
+                      className="rounded accent-primary h-4 w-4"
                     />
                     <span className="text-gray-700">Set as default address</span>
                   </label>
@@ -1023,7 +1023,7 @@ const UserProfile = () => {
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
                 <div className="flex items-start gap-3 sm:gap-4">
-                  <div className="h-10 sm:h-12 w-10 sm:w-12 rounded-xl bg-gradient-to-br from-pink-500 to-blue-500 flex items-center justify-center text-white flex-shrink-0">
+                  <div className="h-10 sm:h-12 w-10 sm:w-12 rounded-xl bg-gradient-to-br from-primary to-primary-light flex items-center justify-center text-white flex-shrink-0">
                     <Package className="h-5 w-5" />
                   </div>
                   <div className="min-w-0">
@@ -1063,8 +1063,8 @@ const UserProfile = () => {
               className="group bg-white rounded-2xl border border-gray-100 p-4 sm:p-6 hover:shadow-lg transition-all"
             >
               <div className="flex justify-between items-start mb-4">
-                <div className="h-14 sm:h-16 w-14 sm:w-16 rounded-xl bg-gradient-to-br from-pink-100 to-blue-100 flex items-center justify-center flex-shrink-0">
-                  <Heart className="h-6 w-6 text-pink-400" />
+                <div className="h-14 sm:h-16 w-14 sm:w-16 rounded-xl bg-gradient-to-br from-secondary-light to-primary-light flex items-center justify-center flex-shrink-0">
+                  <Heart className="h-6 w-6 text-primary" />
                 </div>
                 <button
                   onClick={() => handleRemoveFromWishlist(item.id)}
@@ -1074,7 +1074,7 @@ const UserProfile = () => {
                 </button>
               </div>
               <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">{item.name}</h3>
-              <p className="text-base sm:text-lg font-bold text-pink-600 mb-4">₹{item.price}</p>
+              <p className="text-base sm:text-lg font-bold text-primary mb-4">₹{item.price}</p>
               <GradientButton className="w-full">
                 <span className="flex items-center justify-center gap-2">
                   <ShoppingCart className="h-4 w-4" />
@@ -1128,7 +1128,7 @@ const UserProfile = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-secondary-light via-white to-secondary-soft">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         <div className="grid lg:grid-cols-12 gap-4 sm:gap-6">
           {/* Mobile Header */}
@@ -1156,3 +1156,8 @@ const UserProfile = () => {
 };
 
 export default UserProfile;
+
+
+
+
+
