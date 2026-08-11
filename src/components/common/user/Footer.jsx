@@ -1,6 +1,7 @@
 import React, { useMemo, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Heart, Phone, Mail, MapPin, ArrowUp, ExternalLink } from "lucide-react";
+import { BRAND } from "../brand";
 
 // ─── Constants ─────────────────────────────────────────────
 const CURRENT_YEAR = new Date().getFullYear();
@@ -162,7 +163,7 @@ const Footer = () => {
             <div className="sm:col-span-2 lg:col-span-1">
               <div className="flex items-center gap-2 mb-4">
                 <Heart className="h-5 w-5 text-pink-400 fill-pink-400 flex-shrink-0" aria-hidden="true" />
-                <span className="text-lg font-bold">Pashora</span>
+                <span className="text-lg font-bold">{BRAND.name}</span>
               </div>
               <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
                 Making pets and their families happier, one product at a time. Your trusted pet paradise since day one.
@@ -211,7 +212,7 @@ const Footer = () => {
         <div className="border-t border-slate-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-center">
             <p className="text-gray-500 text-xs sm:text-sm">
-              &copy; {CURRENT_YEAR} Pashora. All rights reserved.
+              &copy; {CURRENT_YEAR} {BRAND.name}. All rights reserved.
             </p>
             <p className="text-gray-500 text-xs sm:text-sm flex items-center gap-1">
               Made with

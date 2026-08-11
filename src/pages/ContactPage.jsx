@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import Footer from "../components/common/user/Footer";
+import { BRAND } from "../components/common/brand";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -92,7 +93,7 @@ const ContactPage = () => {
         <h1 className="text-4xl font-bold text-center text-gray-900 mb-10">
           Contact{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600">
-            Pashora
+            {BRAND.name}
           </span>
         </h1>
 
