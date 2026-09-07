@@ -100,13 +100,13 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
   return (
     <div
-      className={`fixed inset-y-0 left-0 z-50 w-64 flex-shrink-0 box-border bg-gray-900 transform ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+      className={`fixed inset-y-0 left-0 z-50 w-64 flex-shrink-0 box-border bg-text transform ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
         } transition-transform duration-200 lg:translate-x-0 lg:static lg:inset-0`}
     >
       {/* Header */}
-      <div className="flex items-center justify-between h-16 px-4 bg-gray-800">
-        <span className="text-white text-lg font-semibold">{BRAND.name}</span>
-        <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-white">
+      <div className="flex items-center justify-between h-16 px-4 bg-primary">
+        <span className="text-surface text-lg font-semibold">{BRAND.name}</span>
+        <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-surface">
           <X className="w-5 h-5" />
         </button>
       </div>
@@ -123,15 +123,15 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   <button
                     onClick={() => toggleMenu(item.label)}
                     className={`${linkBaseClass} justify-between px-4 py-2 ${parentActive
-                        ? "bg-gray-800 text-white"
-                        : "text-gray-300 hover:bg-gray-800 hover:text-white"
+                        ? "bg-primary text-surface"
+                        : "text-secondary hover:bg-primary/50 hover:text-surface"
                       }`}
                   >
                     <div className="flex items-center truncate">
                       <item.icon className="w-5 h-5 mr-3" />
                       <span>{item.label}</span>
                     </div>
-                    <span className="text-gray-400">
+                    <span className="text-secondary">
                       {openMenu === item.label ? "−" : "+"}
                     </span>
                   </button>
@@ -139,8 +139,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   <Link
                     to={item.path}
                     className={`${linkBaseClass} px-4 py-2 ${parentActive
-                        ? "bg-gray-800 text-white"
-                        : "text-gray-300 hover:bg-gray-800 hover:text-white"
+                        ? "bg-primary text-surface"
+                        : "text-secondary hover:bg-primary/50 hover:text-surface"
                       }`}
                   >
                     <item.icon className="w-5 h-5 mr-3" />
@@ -158,8 +158,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                           key={sidx}
                           to={sub.path}
                           className={`flex items-center px-4 py-2 text-sm font-medium truncate ${childActive
-                              ? "bg-gray-700 text-white rounded-r-md"
-                              : "text-gray-300 hover:bg-gray-800 hover:text-white"
+                              ? "bg-primary/80 text-surface rounded-r-md"
+                              : "text-secondary hover:bg-primary/50 hover:text-surface"
                             }`}
                         >
                           <sub.icon className="w-4 h-4 mr-2" />

@@ -99,10 +99,10 @@ const ProductImage = ({ product, apiUrl }) => {
   }, [product.imageUrls, apiUrl, error]);
 
   return (
-    <div className="relative aspect-square bg-gray-50 overflow-hidden">
+    <div className="relative aspect-square bg-surface overflow-hidden">
       {loading && (
         <div className="absolute inset-0 flex items-center justify-center">
-          <Loader2 className="h-8 w-8 text-gray-300 animate-spin" />
+          <Loader2 className="h-8 w-8 text-textMuted animate-spin" />
         </div>
       )}
       {url ? (
@@ -114,7 +114,7 @@ const ProductImage = ({ product, apiUrl }) => {
           onError={() => { setError(true); setLoading(false); }}
         />
       ) : (
-        <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-400 text-sm">
+        <div className="w-full h-full flex items-center justify-center bg-surface text-textMuted text-sm">
           No Image Available
         </div>
       )}
@@ -128,24 +128,24 @@ const StarRating = ({ rating = 4, count = 87 }) => (
       <Star
         key={i}
         className={`h-4 w-4 ${
-          i < rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+          i < rating ? "fill-accent text-accent" : "text-border"
         }`}
         aria-hidden="true"
       />
     ))}
-    <span className="text-xs text-gray-500 ml-1">({count})</span>
+    <span className="text-xs text-textMuted ml-1">({count})</span>
   </div>
 );
 
 const FilterSelect = ({ label, value, onChange, options }) => (
   <div className="flex flex-col gap-1">
-    <label className="text-xs font-medium text-gray-500 uppercase tracking-wider">
+    <label className="text-xs font-medium text-textMuted uppercase tracking-wider">
       {label}
     </label>
     <select
       value={value}
       onChange={onChange}
-      className="px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-pink-400 focus:outline-none bg-white text-sm"
+      className="px-4 py-2 border-2 border-border rounded-lg focus:border-primary focus:outline-none bg-surface text-text text-sm"
     >
       {options.map(opt => (
         <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -290,7 +290,7 @@ const ShopPage = () => {
     // Toast notification instead of alert()
     // You can integrate react-hot-toast or similar
     const toast = document.createElement('div');
-    toast.className = 'fixed bottom-4 right-4 bg-gray-900 text-white px-4 py-2 rounded-lg shadow-lg z-50 animate-bounce';
+    toast.className = 'fixed bottom-4 right-4 bg-text text-surface px-4 py-2 rounded-lg shadow-lg z-50 animate-bounce';
     toast.textContent = `Added ${product.productName} to cart!`;
     document.body.appendChild(toast);
     setTimeout(() => toast.remove(), 3000);
@@ -298,11 +298,11 @@ const ShopPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="relative">
-          <div className="animate-spin h-12 w-12 border-4 border-pink-400 border-t-transparent rounded-full" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <Heart className="h-5 w-5 text-pink-400 animate-pulse" />
+          <div className="animate-spin h-12 w-12 border-4 border-primary border-t-transparent rounded-full" />
+          <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+            <Heart className="h-5 w-5 text-primary animate-pulse" />
           </div>
         </div>
       </div>
@@ -311,12 +311,12 @@ const ShopPage = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
           <p className="text-red-600 mb-4">{error}</p>
           <button 
             onClick={() => window.location.reload()}
-            className="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600"
+            className="px-4 py-2 bg-primary text-surface rounded-lg hover:bg-primary/90"
           >
             Retry
           </button>
@@ -326,14 +326,14 @@ const ShopPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+    <div className="min-h-screen bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
+          <h1 className="text-3xl lg:text-4xl font-bold text-text mb-2">
             Shop All Products
           </h1>
-          <p className="text-gray-600">
+          <p className="text-textMuted">
             Discover premium products for your beloved pets
           </p>
         </div>
@@ -341,20 +341,20 @@ const ShopPage = () => {
         {/* Search Bar */}
         <div className="mb-6">
           <div className="relative max-w-2xl">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-textMuted" />
             <input
               ref={searchInputRef}
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search for products... (Ctrl+K)"
-              className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-pink-400 focus:outline-none bg-white shadow-sm transition-colors"
+              className="w-full pl-12 pr-4 py-3 border-2 border-border rounded-xl focus:border-primary focus:outline-none bg-surface text-text shadow-sm transition-colors"
               aria-label="Search products"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery("")}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-textMuted hover:text-text"
                 aria-label="Clear search"
               >
                 <X className="h-4 w-4" />
@@ -364,12 +364,12 @@ const ShopPage = () => {
         </div>
 
         {/* Filter Bar */}
-        <div className="bg-white rounded-xl shadow-md p-4 mb-8">
+        <div className="bg-surface rounded-xl shadow-md p-4 mb-8 border border-border/40">
           <div className="flex flex-wrap items-start gap-4">
             {/* Mobile Filter Toggle */}
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className="lg:hidden flex items-center gap-2 px-4 py-2 border-2 border-gray-300 rounded-lg hover:border-pink-400 transition-colors"
+              className="lg:hidden flex items-center gap-2 px-4 py-2 border-2 border-border rounded-lg hover:border-primary transition-colors text-text"
               aria-expanded={showFilters}
               aria-controls="filter-panel"
             >
@@ -429,12 +429,12 @@ const ShopPage = () => {
               {(filters.category !== "all" || filters.subCategory !== "all" || filters.priceRange !== "all" || searchQuery) && (
                 <button
                   onClick={clearFilters}
-                  className="text-sm text-pink-600 hover:text-pink-700 font-medium"
+                  className="text-sm text-primary hover:text-accent font-medium"
                 >
                   Clear all
                 </button>
               )}
-              <span className="text-sm text-gray-600 font-medium">
+              <span className="text-sm text-textMuted font-medium">
                 {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'}
               </span>
             </div>
@@ -443,17 +443,17 @@ const ShopPage = () => {
 
         {/* Products Grid */}
         {filteredProducts.length === 0 ? (
-          <div className="bg-white rounded-2xl shadow-xl p-12 text-center">
-            <div className="text-gray-300 mb-4">
+          <div className="bg-surface rounded-2xl border border-border shadow-xl p-12 text-center">
+            <div className="text-textMuted/40 mb-4">
               <ShoppingCart className="h-24 w-24 mx-auto" />
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">No Products Found</h3>
-            <p className="text-gray-600 mb-6">
+            <h3 className="text-2xl font-bold text-text mb-2">No Products Found</h3>
+            <p className="text-textMuted mb-6">
               Try adjusting your filters or search terms
             </p>
             <button
               onClick={clearFilters}
-              className="px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all active:scale-95"
+              className="px-6 py-3 bg-primary hover:bg-primary/90 text-surface rounded-xl font-semibold hover:shadow-lg transition-all active:scale-95"
             >
               Clear All Filters
             </button>
@@ -470,7 +470,7 @@ const ShopPage = () => {
               return (
                 <article
                   key={product.id}
-                  className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 group flex flex-col"
+                  className="bg-surface rounded-xl border border-border/70 shadow-sm overflow-hidden hover:shadow-xl hover:border-border transition-all duration-300 group flex flex-col"
                 >
                   {/* Product Image */}
                   <Link 
@@ -482,7 +482,7 @@ const ShopPage = () => {
                     
                     {/* Discount Badge */}
                     {discount && (
-                      <div className="absolute top-3 left-3 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-md">
+                      <div className="absolute top-3 left-3 bg-accent text-surface text-xs font-bold px-2 py-1 rounded-lg shadow-md">
                         {discount}% OFF
                       </div>
                     )}
@@ -496,20 +496,20 @@ const ShopPage = () => {
                       }}
                       className={`absolute top-3 right-3 p-2 rounded-full shadow-md transition-all hover:scale-110 ${
                         isWishlisted
-                          ? "bg-pink-500 text-white"
-                          : "bg-white text-gray-600 hover:bg-pink-50"
+                          ? "bg-accent text-surface"
+                          : "bg-surface/90 text-textMuted hover:text-accent hover:bg-surface"
                       }`}
                       aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
                     >
                       <Heart
-                        className={`h-5 w-5 ${isWishlisted ? "fill-white" : ""}`}
+                        className={`h-5 w-5 ${isWishlisted ? "fill-surface" : ""}`}
                       />
                     </button>
 
                     {/* Stock Status */}
                     {isOutOfStock && (
-                      <div className="absolute inset-0 bg-black/60 flex items-center justify-center backdrop-blur-sm">
-                        <span className="bg-red-500 text-white px-4 py-2 rounded-lg font-semibold">
+                      <div className="absolute inset-0 bg-text/70 flex items-center justify-center backdrop-blur-sm">
+                        <span className="bg-red-500 text-surface px-4 py-2 rounded-lg font-semibold">
                           Out of Stock
                         </span>
                       </div>
@@ -520,18 +520,18 @@ const ShopPage = () => {
                   <div className="p-4 flex-1 flex flex-col">
                     {/* Category */}
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xs font-semibold text-pink-600 bg-pink-100 px-2 py-1 rounded-full">
+                      <span className="text-xs font-semibold text-primary bg-secondary/30 px-2 py-1 rounded-full">
                         {product.category}
                       </span>
                       {product.subCategory && (
-                        <span className="text-xs text-gray-500">• {product.subCategory}</span>
+                        <span className="text-xs text-textMuted">• {product.subCategory}</span>
                       )}
                     </div>
 
                     {/* Product Name */}
                     <Link
                       to={`/product/${product.id}`}
-                      className="block font-semibold text-gray-900 hover:text-pink-600 transition-colors mb-2 line-clamp-2"
+                      className="block font-semibold text-text hover:text-primary transition-colors mb-2 line-clamp-2"
                     >
                       {product.productName}
                     </Link>
@@ -543,11 +543,11 @@ const ShopPage = () => {
 
                     {/* Price */}
                     <div className="flex items-center gap-2 mb-4">
-                      <span className="text-xl font-bold text-gray-900">
+                      <span className="text-xl font-bold text-text">
                         ₹{product.price || product.mrp || 0}
                       </span>
                       {product.mrp && product.price && product.mrp > product.price && (
-                        <span className="text-sm text-gray-400 line-through">
+                        <span className="text-sm text-textMuted/60 line-through">
                           ₹{product.mrp}
                         </span>
                       )}
@@ -559,8 +559,8 @@ const ShopPage = () => {
                       disabled={isOutOfStock}
                       className={`mt-auto w-full py-2.5 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2 ${
                         isOutOfStock
-                          ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-                          : "bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:shadow-lg hover:scale-105 active:scale-95"
+                          ? "bg-secondary/30 text-textMuted cursor-not-allowed"
+                          : "bg-primary hover:bg-primary/90 text-surface shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-95"
                       }`}
                       aria-label={isOutOfStock ? "Out of stock" : `Add ${product.productName} to cart`}
                     >

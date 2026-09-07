@@ -38,7 +38,7 @@ const CreatePurchase = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold text-gray-900 mb-6">Create Purchase</h1>
+      <h1 className="text-2xl font-semibold text-text mb-6">Create Purchase</h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Supplier Info */}
@@ -49,7 +49,7 @@ const CreatePurchase = () => {
             placeholder="Supplier Name"
             value={formData.supplier}
             onChange={handleChange}
-            className="p-2 border rounded"
+            className="p-2 border border-border bg-surface text-text rounded focus:outline-none focus:ring-2 focus:ring-primary"
           />
           <input
             type="text"
@@ -57,22 +57,22 @@ const CreatePurchase = () => {
             placeholder="Invoice Number"
             value={formData.invoiceNo}
             onChange={handleChange}
-            className="p-2 border rounded"
+            className="p-2 border border-border bg-surface text-text rounded focus:outline-none focus:ring-2 focus:ring-primary"
           />
           <input
             type="date"
             name="date"
             value={formData.date}
             onChange={handleChange}
-            className="p-2 border rounded"
+            className="p-2 border border-border bg-surface text-text rounded focus:outline-none focus:ring-2 focus:ring-primary"
           />
         </div>
 
         {/* Items Table */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
-          <h2 className="text-lg font-medium mb-3">Purchase Items</h2>
+        <div className="bg-surface rounded-xl shadow-sm border border-border p-4">
+          <h2 className="text-lg font-medium mb-3 text-text">Purchase Items</h2>
           <table className="w-full text-sm">
-            <thead className="bg-gray-50">
+            <thead className="bg-background text-textMuted">
               <tr>
                 <th className="px-4 py-2 text-left">Item</th>
                 <th className="px-4 py-2 text-left">Quantity</th>
@@ -82,13 +82,13 @@ const CreatePurchase = () => {
             </thead>
             <tbody>
               {formData.items.map((item, index) => (
-                <tr key={index} className="border-t">
+                <tr key={index} className="border-t border-border">
                   <td className="px-4 py-2">
                     <input
                       type="text"
                       value={item.name}
                       onChange={(e) => handleItemChange(index, "name", e.target.value)}
-                      className="p-1 border rounded w-full"
+                      className="p-1 border border-border bg-surface text-text rounded w-full focus:outline-none focus:ring-2 focus:ring-primary"
                     />
                   </td>
                   <td className="px-4 py-2">
@@ -97,7 +97,7 @@ const CreatePurchase = () => {
                       value={item.qty}
                       min="1"
                       onChange={(e) => handleItemChange(index, "qty", e.target.value)}
-                      className="p-1 border rounded w-full"
+                      className="p-1 border border-border bg-surface text-text rounded w-full focus:outline-none focus:ring-2 focus:ring-primary"
                     />
                   </td>
                   <td className="px-4 py-2">
@@ -106,10 +106,10 @@ const CreatePurchase = () => {
                       value={item.price}
                       min="0"
                       onChange={(e) => handleItemChange(index, "price", e.target.value)}
-                      className="p-1 border rounded w-full"
+                      className="p-1 border border-border bg-surface text-text rounded w-full focus:outline-none focus:ring-2 focus:ring-primary"
                     />
                   </td>
-                  <td className="px-4 py-2 font-medium">
+                  <td className="px-4 py-2 font-medium text-text">
                     ₹{item.qty * item.price}
                   </td>
                 </tr>
@@ -119,7 +119,7 @@ const CreatePurchase = () => {
           <button
             type="button"
             onClick={addItem}
-            className="mt-3 flex items-center bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+            className="mt-3 flex items-center bg-secondary/40 text-primary px-3 py-1.5 rounded hover:bg-secondary/60 transition-colors text-sm font-medium"
           >
             <Plus className="w-4 h-4 mr-1" /> Add Item
           </button>
@@ -128,7 +128,7 @@ const CreatePurchase = () => {
         {/* Submit */}
         <button
           type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          className="bg-primary text-surface px-6 py-2 rounded-lg hover:bg-primary/90 transition-colors shadow-sm font-medium"
         >
           Save Purchase
         </button>

@@ -79,44 +79,44 @@ const Brand = () => {
     <div>
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-semibold text-gray-900">Brands</h1>
+        <h1 className="text-2xl font-semibold text-text">Brands</h1>
         <button
           onClick={() => setShowBrandModal(true)}
-          className="flex items-center bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition"
+          className="flex items-center bg-primary text-surface px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors shadow-sm font-medium"
         >
           <Plus className="w-4 h-4 mr-2" /> Add Brand
         </button>
       </div>
 
       {/* Brands Table */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-x-auto">
+      <div className="bg-surface rounded-xl shadow-sm border border-border overflow-x-auto">
         <table className="w-full">
-          <thead className="bg-gray-50">
+          <thead className="bg-background">
             <tr>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-600">#</th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-600">Brand Name</th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-600">Description</th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-600">Active</th>
-              <th className="px-6 py-3 text-right text-sm font-medium text-gray-600">Actions</th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-textMuted">#</th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-textMuted">Brand Name</th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-textMuted">Description</th>
+              <th className="px-6 py-3 text-left text-sm font-medium text-textMuted">Active</th>
+              <th className="px-6 py-3 text-right text-sm font-medium text-textMuted">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200">
+          <tbody className="divide-y divide-border">
             {brands.map((brand, idx) => (
-              <tr key={brand.id} className="hover:bg-gray-50">
-                <td className="px-6 py-4">{idx + 1}</td>
-                <td className="px-6 py-4">{brand.brandName}</td>
-                <td className="px-6 py-4">{brand.description}</td>
-                <td className="px-6 py-4">{brand.active ? "Yes" : "No"}</td>
+              <tr key={brand.id} className="hover:bg-background/60 transition-colors">
+                <td className="px-6 py-4 text-textMuted">{idx + 1}</td>
+                <td className="px-6 py-4 font-medium text-text">{brand.brandName}</td>
+                <td className="px-6 py-4 text-textMuted">{brand.description}</td>
+                <td className="px-6 py-4 text-text">{brand.active ? "Yes" : "No"}</td>
                 <td className="px-6 py-4 text-right space-x-3">
                   <button
                     onClick={() => setEditBrand(brand)}
-                    className="text-indigo-600 hover:text-indigo-800"
+                    className="text-primary hover:text-primary/80 transition-colors"
                   >
                     <Edit2 className="inline w-4 h-4" /> Edit
                   </button>
                   <button
                     onClick={() => handleDeleteBrand(brand.id)}
-                    className="text-red-600 hover:text-red-800"
+                    className="text-red-500 hover:text-red-700 transition-colors"
                   >
                     <Trash2 className="inline w-4 h-4" /> Delete
                   </button>
@@ -136,26 +136,27 @@ const Brand = () => {
               placeholder="Brand Name"
               value={newBrand.brandName}
               onChange={(e) => setNewBrand({ ...newBrand, brandName: e.target.value })}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border border-border bg-surface text-text rounded focus:outline-none focus:ring-2 focus:ring-primary"
             />
             <input
               type="text"
               placeholder="Description"
               value={newBrand.description}
               onChange={(e) => setNewBrand({ ...newBrand, description: e.target.value })}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border border-border bg-surface text-text rounded focus:outline-none focus:ring-2 focus:ring-primary"
             />
-            <label className="flex items-center space-x-2">
+            <label className="flex items-center space-x-2 text-text">
               <input
                 type="checkbox"
                 checked={newBrand.active}
                 onChange={(e) => setNewBrand({ ...newBrand, active: e.target.checked })}
+                className="accent-primary"
               />
               <span>Active</span>
             </label>
             <button
               type="submit"
-              className="w-full bg-purple-500 text-white px-4 py-2 rounded-lg"
+              className="w-full bg-primary text-surface px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors shadow-sm font-medium"
             >
               Save
             </button>
@@ -171,25 +172,26 @@ const Brand = () => {
               type="text"
               value={editBrand.brandName || ""}
               onChange={(e) => setEditBrand({ ...editBrand, brandName: e.target.value })}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border border-border bg-surface text-text rounded focus:outline-none focus:ring-2 focus:ring-primary"
             />
             <input
               type="text"
               value={editBrand.description || ""}
               onChange={(e) => setEditBrand({ ...editBrand, description: e.target.value })}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border border-border bg-surface text-text rounded focus:outline-none focus:ring-2 focus:ring-primary"
             />
-            <label className="flex items-center space-x-2">
+            <label className="flex items-center space-x-2 text-text">
               <input
                 type="checkbox"
                 checked={editBrand.active}
                 onChange={(e) => setEditBrand({ ...editBrand, active: e.target.checked })}
+                className="accent-primary"
               />
               <span>Active</span>
             </label>
             <button
               type="submit"
-              className="w-full bg-purple-500 text-white px-4 py-2 rounded-lg"
+              className="w-full bg-primary text-surface px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors shadow-sm font-medium"
             >
               Update
             </button>
@@ -203,14 +205,14 @@ const Brand = () => {
 // Reusable Modal
 const Modal = ({ children, onClose, title }) => (
   <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-    <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6 relative pointer-events-auto">
+    <div className="bg-surface rounded-lg shadow-lg w-full max-w-md p-6 relative pointer-events-auto border border-border">
       <button
         onClick={onClose}
-        className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+        className="absolute top-3 right-3 text-textMuted hover:text-text"
       >
         <X className="w-5 h-5" />
       </button>
-      <h2 className="text-xl font-semibold mb-4">{title}</h2>
+      <h2 className="text-xl font-semibold mb-4 text-text">{title}</h2>
       {children}
     </div>
   </div>

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Heart, Eye, EyeOff } from "lucide-react";
 import axios from "axios";
 import { BRAND } from "../../components/common/brand";
+import { COLORS } from "../../components/common/color_pallate";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -99,7 +100,7 @@ const LoginForm = () => {
     <div
       className="min-h-screen flex items-center justify-center px-4 py-6 relative"
       style={{
-        background: "linear-gradient(135deg, #fdf2f8 0%, #eff6ff 100%)",
+        background: `linear-gradient(135deg, ${COLORS.background} 0%, ${COLORS.surface} 100%)`,
         backgroundAttachment: "fixed",
       }}
     >
@@ -110,22 +111,25 @@ const LoginForm = () => {
       ></div>
 
       {/* Card Container */}
-      <div className="relative flex flex-col lg:flex-row w-full max-w-5xl rounded-3xl overflow-hidden shadow-2xl bg-white my-2">
+      <div className="relative flex flex-col lg:flex-row w-full max-w-5xl rounded-3xl overflow-hidden shadow-2xl bg-surface my-2 border border-border/40">
         {/* LEFT Gradient Panel */}
-        <div className="hidden lg:flex lg:w-1/2 relative bg-gradient-to-br from-pink-500 via-purple-500 to-blue-500">
+        <div 
+          className="hidden lg:flex lg:w-1/2 relative"
+          style={{ background: `linear-gradient(135deg, ${COLORS.gradient.from}, ${COLORS.gradient.to})` }}
+        >
           {/* Subtle overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
 
-          <div className="relative flex flex-col justify-between p-10 text-white z-10">
+          <div className="relative flex flex-col justify-between p-10 text-surface z-10">
             <div>
               {/* Logo */}
               <Link to="/" className="inline-flex items-center gap-3 mb-8 group">
                 <div className="bg-white/20 backdrop-blur-sm p-2.5 rounded-xl shadow-lg group-hover:scale-105 transition-transform">
-                  <Heart className="h-5 w-5 text-white" />
+                  <Heart className="h-5 w-5 text-surface" />
                 </div>
                 <div>
                   <h1 className="text-lg font-bold">{BRAND.name}</h1>
-                  <p className="text-xs text-white/80">Pet Paradise</p>
+                  <p className="text-xs text-secondary">Pet Paradise</p>
                 </div>
               </Link>
 
@@ -133,40 +137,40 @@ const LoginForm = () => {
               <h2 className="text-3xl font-bold leading-snug mb-4">
                 Welcome back to your pet's happy place 🐾
               </h2>
-              <p className="text-white/90 text-sm leading-relaxed">
+              <p className="text-secondary text-sm leading-relaxed">
                 Sign in to continue exploring premium toys, treats, and accessories for your furry friends.
               </p>
             </div>
 
             {/* Footer */}
-            <p className="text-xs text-white/60 mt-6">
+            <p className="text-xs text-secondary/70 mt-6">
               © 2025 {BRAND.name}. All rights reserved.
             </p>
           </div>
         </div>
 
         {/* RIGHT FORM */}
-        <div className="w-full lg:w-1/2 bg-white p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
+        <div className="w-full lg:w-1/2 bg-surface p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
           <div className="max-w-sm w-full mx-auto">
             {/* Mobile Logo */}
             <Link to="/" className="lg:hidden flex items-center justify-center gap-2 mb-6">
-              <div className="bg-gradient-to-r from-pink-500 to-blue-500 p-2 rounded-xl">
-                <Heart className="h-5 w-5 text-white" />
+              <div className="bg-primary p-2 rounded-xl">
+                <Heart className="h-5 w-5 text-surface" />
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent">
+              <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                 {BRAND.name}
               </span>
             </Link>
 
             <div className="text-center lg:text-left">
-              <h2 className="text-2xl font-bold text-gray-900 mb-1.5">
+              <h2 className="text-2xl font-bold text-text mb-1.5">
                 Sign in to your account
               </h2>
-              <p className="text-sm text-gray-600 mb-6">
+              <p className="text-sm text-textMuted mb-6">
                 Don't have an account?{" "}
                 <Link
                   to="/register"
-                  className="text-pink-600 font-semibold hover:text-pink-700 transition-colors"
+                  className="text-primary font-semibold hover:text-accent transition-colors"
                 >
                   Sign up here
                 </Link>
@@ -183,7 +187,7 @@ const LoginForm = () => {
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Email */}
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1.5">
+                <label className="block text-xs font-semibold text-text mb-1.5">
                   Email address
                 </label>
                 <input
@@ -194,11 +198,11 @@ const LoginForm = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   placeholder="you@example.com"
-                  className={`w-full px-4 py-2.5 text-sm rounded-xl border-2 transition-all focus:outline-none ${errors.email
+                  className={`w-full px-4 py-2.5 text-sm rounded-xl border-2 transition-all focus:outline-none bg-surface text-text ${errors.email
                     ? "border-red-300 bg-red-50 focus:border-red-500"
                     : touched.email && !errors.email
                       ? "border-green-300 bg-green-50 focus:border-green-500"
-                      : "border-gray-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
+                      : "border-border focus:border-primary focus:ring-2 focus:ring-secondary/50"
                     }`}
                 />
                 {errors.email && (
@@ -208,7 +212,7 @@ const LoginForm = () => {
 
               {/* Password */}
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1.5">
+                <label className="block text-xs font-semibold text-text mb-1.5">
                   Password
                 </label>
                 <div className="relative">
@@ -219,17 +223,17 @@ const LoginForm = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     placeholder="Enter your password"
-                    className={`w-full px-4 py-2.5 pr-12 text-sm rounded-xl border-2 transition-all focus:outline-none ${errors.password
+                    className={`w-full px-4 py-2.5 pr-12 text-sm rounded-xl border-2 transition-all focus:outline-none bg-surface text-text ${errors.password
                       ? "border-red-300 bg-red-50 focus:border-red-500"
                       : touched.password && !errors.password
                         ? "border-green-300 bg-green-50 focus:border-green-500"
-                        : "border-gray-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
+                        : "border-border focus:border-primary focus:ring-2 focus:ring-secondary/50"
                       }`}
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-textMuted hover:text-text transition-colors"
                   >
                     {showPassword ? (
                       <EyeOff className="h-4 w-4" />
@@ -245,16 +249,16 @@ const LoginForm = () => {
 
               {/* Options */}
               <div className="flex items-center justify-between text-sm pt-1">
-                <label className="flex items-center gap-2 text-gray-700 cursor-pointer">
+                <label className="flex items-center gap-2 text-text cursor-pointer">
                   <input
                     type="checkbox"
-                    className="h-4 w-4 text-pink-500 focus:ring-2 focus:ring-pink-500 border-gray-300 rounded"
+                    className="h-4 w-4 text-primary focus:ring-2 focus:ring-primary border-border rounded"
                   />
                   <span className="select-none">Remember me</span>
                 </label>
                 <Link
                   to="/forgot-password"
-                  className="text-pink-600 hover:text-pink-700 font-semibold transition-colors"
+                  className="text-primary hover:text-accent font-semibold transition-colors"
                 >
                   Forgot password?
                 </Link>
@@ -264,15 +268,15 @@ const LoginForm = () => {
               <button
                 type="submit"
                 disabled={!isValid || isSubmitting}
-                className={`w-full py-3 rounded-xl text-white font-semibold text-sm transition-all ${!isValid || isSubmitting
-                  ? "bg-gray-300 cursor-not-allowed"
-                  : "bg-gradient-to-r from-pink-500 to-blue-500 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]"
+                className={`w-full py-3 rounded-xl text-surface font-semibold text-sm transition-all ${!isValid || isSubmitting
+                  ? "bg-secondary text-textMuted cursor-not-allowed"
+                  : "bg-primary hover:bg-primary/90 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]"
                   }`}
               >
                 {isSubmitting ? (
                   <div className="flex justify-center items-center gap-2">
                     <svg
-                      className="animate-spin h-4 w-4 text-white"
+                      className="animate-spin h-4 w-4 text-surface"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"

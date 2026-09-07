@@ -99,7 +99,7 @@ const Discount = () => {
     <div>
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-semibold text-gray-900">Discounts</h1>
+        <h1 className="text-2xl font-semibold text-text">Discounts</h1>
         <button
           onClick={() => {
             setFormData({
@@ -110,41 +110,41 @@ const Discount = () => {
             setEditDiscount(null);
             setShowModal(true);
           }}
-          className="flex items-center bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-600 transition"
+          className="flex items-center bg-primary text-surface px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors shadow-sm font-medium"
         >
           <Plus className="w-4 h-4 mr-2" /> Add Discount
         </button>
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-x-auto">
+      <div className="bg-surface rounded-xl shadow-sm border border-border overflow-x-auto">
         <table className="w-full">
-          <thead className="bg-gray-50">
+          <thead className="bg-background">
             <tr>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-600">
+              <th className="px-6 py-3 text-left text-sm font-medium text-textMuted">
                 #
               </th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-600">
+              <th className="px-6 py-3 text-left text-sm font-medium text-textMuted">
                 Discount Name
               </th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-600">
+              <th className="px-6 py-3 text-left text-sm font-medium text-textMuted">
                 Value
               </th>
-              <th className="px-6 py-3 text-left text-sm font-medium text-gray-600">
+              <th className="px-6 py-3 text-left text-sm font-medium text-textMuted">
                 Subcategory
               </th>
-              <th className="px-6 py-3 text-right text-sm font-medium text-gray-600">
+              <th className="px-6 py-3 text-right text-sm font-medium text-textMuted">
                 Actions
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200">
+          <tbody className="divide-y divide-border">
             {discounts.map((d, idx) => (
-              <tr key={d.id} className="hover:bg-gray-50">
-                <td className="px-6 py-4">{idx + 1}</td>
-                <td className="px-6 py-4">{d.discountName}</td>
-                <td className="px-6 py-4">{d.discountPercent}%</td>
-                <td className="px-6 py-4">
+              <tr key={d.id} className="hover:bg-background/60 transition-colors">
+                <td className="px-6 py-4 text-textMuted">{idx + 1}</td>
+                <td className="px-6 py-4 font-medium text-text">{d.discountName}</td>
+                <td className="px-6 py-4 font-medium text-text">{d.discountPercent}%</td>
+                <td className="px-6 py-4 text-textMuted">
                   {d.categoryName && d.subCategoryName
                     ? `${d.categoryName} → ${d.subCategoryName}`
                     : "—"}
@@ -161,13 +161,13 @@ const Discount = () => {
                       });
                       setShowModal(true);
                     }}
-                    className="text-blue-600 hover:text-blue-800"
+                    className="text-primary hover:text-primary/80 transition-colors"
                   >
                     <Edit2 className="inline w-4 h-4" /> Edit
                   </button>
                   <button
                     onClick={() => handleDelete(d.id)}
-                    className="text-red-600 hover:text-red-800"
+                    className="text-red-500 hover:text-red-700 transition-colors"
                   >
                     <Trash2 className="inline w-4 h-4" /> Delete
                   </button>
@@ -195,7 +195,7 @@ const Discount = () => {
               onChange={(e) =>
                 setFormData({ ...formData, discountName: e.target.value })
               }
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border border-border bg-surface text-text rounded focus:outline-none focus:ring-2 focus:ring-primary"
               required
             />
             <input
@@ -205,7 +205,7 @@ const Discount = () => {
               onChange={(e) =>
                 setFormData({ ...formData, discountPercent: e.target.value })
               }
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border border-border bg-surface text-text rounded focus:outline-none focus:ring-2 focus:ring-primary"
               required
             />
 
@@ -219,7 +219,7 @@ const Discount = () => {
                   subCategoryId: "",
                 })
               }
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border border-border bg-surface text-text rounded focus:outline-none focus:ring-2 focus:ring-primary"
               required
             >
               <option value="">Select Category</option>
@@ -236,7 +236,7 @@ const Discount = () => {
               onChange={(e) =>
                 setFormData({ ...formData, subCategoryId: e.target.value })
               }
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border border-border bg-surface text-text rounded focus:outline-none focus:ring-2 focus:ring-primary"
               required
               disabled={!formData.categoryId}
             >
@@ -259,7 +259,7 @@ const Discount = () => {
 
             <button
               type="submit"
-              className="w-full bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-600"
+              className="w-full bg-primary text-surface px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors shadow-sm font-medium"
             >
               {editDiscount ? "Update" : "Save"}
             </button>
@@ -272,14 +272,14 @@ const Discount = () => {
 
 const Modal = ({ children, onClose, title }) => (
   <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-    <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6 relative">
+    <div className="bg-surface rounded-lg shadow-lg w-full max-w-md p-6 relative border border-border">
       <button
         onClick={onClose}
-        className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+        className="absolute top-3 right-3 text-textMuted hover:text-text"
       >
         <X className="w-5 h-5" />
       </button>
-      <h2 className="text-xl font-semibold mb-4">{title}</h2>
+      <h2 className="text-xl font-semibold mb-4 text-text">{title}</h2>
       {children}
     </div>
   </div>

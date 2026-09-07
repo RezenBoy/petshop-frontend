@@ -160,12 +160,12 @@ const AddProduct = () => {
     <div>
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-lg shadow border border-gray-200 space-y-6"
+        className="bg-surface p-6 rounded-lg shadow-sm border border-border space-y-6"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Product Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-text">
               Product Name <span className="text-red-500">*</span>
             </label>
             <input
@@ -174,14 +174,14 @@ const AddProduct = () => {
               value={formData.productname}
               onChange={handleChange}
               placeholder="Enter product name"
-              className="w-full p-2 border rounded mt-1"
+              className="w-full p-2 border border-border bg-surface text-text rounded mt-1 focus:outline-none focus:ring-2 focus:ring-primary"
               required
             />
           </div>
 
           {/* HSN Code */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-text">
               HSN Code<span className="text-red-500">*</span>
             </label>
             <input
@@ -190,14 +190,14 @@ const AddProduct = () => {
               value={formData.hsnCode}
               onChange={handleChange}
               placeholder="Enter HSN code"
-              className="w-full p-2 border rounded mt-1"
+              className="w-full p-2 border border-border bg-surface text-text rounded mt-1 focus:outline-none focus:ring-2 focus:ring-primary"
               required
             />
           </div>
 
           {/* Bar Code */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-text">
               Bar Code<span className="text-red-500">*</span>
             </label>
             <input
@@ -206,14 +206,14 @@ const AddProduct = () => {
               value={formData.barCode}
               onChange={handleChange}
               placeholder="Enter barcode"
-              className="w-full p-2 border rounded mt-1"
+              className="w-full p-2 border border-border bg-surface text-text rounded mt-1 focus:outline-none focus:ring-2 focus:ring-primary"
               required
             />
           </div>
 
           {/* Model No */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-text">
               Model No<span className="text-red-500">*</span>
             </label>
             <input
@@ -222,14 +222,14 @@ const AddProduct = () => {
               value={formData.modelNo}
               onChange={handleChange}
               placeholder="Enter model number"
-              className="w-full p-2 border rounded mt-1"
+              className="w-full p-2 border border-border bg-surface text-text rounded mt-1 focus:outline-none focus:ring-2 focus:ring-primary"
               required
             />
           </div>
 
           {/* Serial No */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-text">
               Serial No
             </label>
             <input
@@ -238,20 +238,20 @@ const AddProduct = () => {
               value={formData.serialNo}
               onChange={handleChange}
               placeholder="Enter serial number"
-              className="w-full p-2 border rounded mt-1"
+              className="w-full p-2 border border-border bg-surface text-text rounded mt-1 focus:outline-none focus:ring-2 focus:ring-primary"
             />
           </div>
 
           {/* Brand */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-text">
               Brand<span className="text-red-500">*</span>
             </label>
             <select
               name="brandId"
               value={formData.brandId}
               onChange={handleChange}
-              className="w-full p-2 border rounded mt-1"
+              className="w-full p-2 border border-border bg-surface text-text rounded mt-1 focus:outline-none focus:ring-2 focus:ring-primary"
               required
             >
               <option value="">Select Brand</option>
@@ -265,7 +265,7 @@ const AddProduct = () => {
 
           {/* Category */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-text">
               Category<span className="text-red-500">*</span>
             </label>
             <select
@@ -284,7 +284,7 @@ const AddProduct = () => {
                 );
                 setSubCategories(selectedCat?.subCategories || []);
               }}
-              className="w-full p-2 border rounded mt-1"
+              className="w-full p-2 border border-border bg-surface text-text rounded mt-1 focus:outline-none focus:ring-2 focus:ring-primary"
               required
             >
               <option value="">Select Category</option>
@@ -298,14 +298,14 @@ const AddProduct = () => {
 
           {/* Subcategory */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-text">
               Subcategory<span className="text-red-500">*</span>
             </label>
             <select
               name="productSubCategoryId"
               value={formData.productSubCategoryId}
               onChange={handleChange}
-              className="w-full p-2 border rounded mt-1"
+              className="w-full p-2 border border-border bg-surface text-text rounded mt-1 focus:outline-none focus:ring-2 focus:ring-primary"
               required
               disabled={!formData.categoryId}
             >
@@ -320,7 +320,7 @@ const AddProduct = () => {
 
           {/* Quantity */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-text">
               Quantity<span className="text-red-500">*</span>
             </label>
             <input
@@ -329,14 +329,14 @@ const AddProduct = () => {
               value={formData.quantity}
               onChange={handleChange}
               placeholder="Enter quantity"
-              className="w-full p-2 border rounded mt-1"
+              className="w-full p-2 border border-border bg-surface text-text rounded mt-1 focus:outline-none focus:ring-2 focus:ring-primary"
               required
             />
           </div>
 
           {/* Minimum Stock */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-text">
               Minimum Stock<span className="text-red-500">*</span>
             </label>
             <input
@@ -345,14 +345,14 @@ const AddProduct = () => {
               value={formData.minimumStock}
               onChange={handleChange}
               placeholder="Enter minimum stock"
-              className="w-full p-2 border rounded mt-1"
+              className="w-full p-2 border border-border bg-surface text-text rounded mt-1 focus:outline-none focus:ring-2 focus:ring-primary"
               required
             />
           </div>
 
           {/* Cost Price */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-text">
               Cost Price<span className="text-red-500">*</span>
             </label>
             <input
@@ -361,14 +361,14 @@ const AddProduct = () => {
               value={formData.costPrice}
               onChange={handleChange}
               placeholder="Enter cost price"
-              className="w-full p-2 border rounded mt-1"
+              className="w-full p-2 border border-border bg-surface text-text rounded mt-1 focus:outline-none focus:ring-2 focus:ring-primary"
               required
             />
           </div>
 
           {/* MRP */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-text">
               MRP<span className="text-red-500">*</span>
             </label>
             <input
@@ -377,21 +377,21 @@ const AddProduct = () => {
               value={formData.mrp}
               onChange={handleChange}
               placeholder="Enter MRP"
-              className="w-full p-2 border rounded mt-1"
+              className="w-full p-2 border border-border bg-surface text-text rounded mt-1 focus:outline-none focus:ring-2 focus:ring-primary"
               required
             />
           </div>
 
           {/* Tax */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-text">
               Tax Percentage
             </label>
             <select
               name="taxId"
               value={formData.taxId}
               onChange={handleChange}
-              className="w-full p-2 border rounded mt-1"
+              className="w-full p-2 border border-border bg-surface text-text rounded mt-1 focus:outline-none focus:ring-2 focus:ring-primary"
             >
               <option value="">Select Tax</option>
               {taxes.map((tax) => (
@@ -407,7 +407,7 @@ const AddProduct = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Sizes */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-text">
               Sizes
             </label>
             {formData.sizes.map((size, index) => (
@@ -416,14 +416,14 @@ const AddProduct = () => {
                 type="text"
                 value={size}
                 onChange={(e) => updateSizeField(index, e.target.value)}
-                className="w-full p-2 border rounded mt-1 mb-2"
+                className="w-full p-2 border border-border bg-surface text-text rounded mt-1 mb-2 focus:outline-none focus:ring-2 focus:ring-primary"
                 placeholder="Enter size (e.g. Small, Medium, 18)"
               />
             ))}
             <button
               type="button"
               onClick={addSizeField}
-              className="bg-gray-200 px-3 py-1 rounded"
+              className="bg-secondary/40 text-primary hover:bg-secondary/60 px-3 py-1 rounded transition-colors text-sm font-medium"
             >
               + Add Size
             </button>
@@ -431,14 +431,14 @@ const AddProduct = () => {
 
           {/* Measurement Unit */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-text">
               Measurement Unit
             </label>
             <select
               name="measurementUnit"
               value={formData.measurementUnit}
               onChange={handleChange}
-              className="w-full p-2 border rounded mt-1"
+              className="w-full p-2 border border-border bg-surface text-text rounded mt-1 focus:outline-none focus:ring-2 focus:ring-primary"
             >
               <option value="cm">Centimeter (cm)</option>
               <option value="inch">Inch (inch)</option>
@@ -449,7 +449,7 @@ const AddProduct = () => {
 
         {/* Colors (Name + Code) */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="block text-sm font-medium text-text">
             Colors
           </label>
 
@@ -467,7 +467,7 @@ const AddProduct = () => {
                   updatedColors[index].name = e.target.value;
                   setFormData({ ...formData, colors: updatedColors });
                 }}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border border-border bg-surface text-text rounded focus:outline-none focus:ring-2 focus:ring-primary"
                 placeholder="Color name (e.g. Red)"
               />
 
@@ -481,13 +481,13 @@ const AddProduct = () => {
                     updatedColors[index].code = e.target.value;
                     setFormData({ ...formData, colors: updatedColors });
                   }}
-                  className="w-full p-2 border rounded"
+                  className="w-full p-2 border border-border bg-surface text-text rounded focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="#FF0000"
                 />
                 {/* Optional: Color preview */}
                 {color.code && (
                   <div
-                    className="w-8 h-8 rounded border"
+                    className="w-8 h-8 rounded border border-border"
                     style={{ backgroundColor: color.code }}
                   ></div>
                 )}
@@ -503,7 +503,7 @@ const AddProduct = () => {
                 colors: [...formData.colors, { name: "", code: "" }],
               })
             }
-            className="bg-gray-200 px-3 py-1 rounded"
+            className="bg-secondary/40 text-primary hover:bg-secondary/60 px-3 py-1 rounded transition-colors text-sm font-medium"
           >
             + Add Color
           </button>
@@ -511,7 +511,7 @@ const AddProduct = () => {
 
         {/* Image Upload */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="block text-sm font-medium text-text">
             Product Images
           </label>
           <input
@@ -519,7 +519,7 @@ const AddProduct = () => {
             multiple
             accept="image/*"
             onChange={handleImageChange}
-            className="w-full p-2 border rounded mt-1"
+            className="w-full p-2 border border-border bg-surface text-text rounded mt-1 focus:outline-none focus:ring-2 focus:ring-primary"
           />
           {imagePreviews.length > 0 && (
             <div className="flex flex-wrap gap-3 mt-3">
@@ -528,7 +528,7 @@ const AddProduct = () => {
                   <img
                     src={preview}
                     alt={`Preview ${index}`}
-                    className="w-24 h-24 object-cover rounded border"
+                    className="w-24 h-24 object-cover rounded border border-border"
                   />
                   <button
                     type="button"
@@ -545,7 +545,7 @@ const AddProduct = () => {
 
         {/* Description */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="block text-sm font-medium text-text">
             Description<span className="text-red-500">*</span>
           </label>
           <textarea
@@ -553,7 +553,7 @@ const AddProduct = () => {
             value={formData.description}
             onChange={handleChange}
             placeholder="Enter product description"
-            className="w-full p-2 border rounded mt-1"
+            className="w-full p-2 border border-border bg-surface text-text rounded mt-1 focus:outline-none focus:ring-2 focus:ring-primary"
             rows={4}
             required
           ></textarea>
@@ -563,7 +563,7 @@ const AddProduct = () => {
         <div>
           <button
             type="submit"
-            className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition"
+            className="bg-primary text-surface px-6 py-2 rounded-lg hover:bg-primary/90 transition-colors shadow-sm font-medium"
           >
             Save Product
           </button>

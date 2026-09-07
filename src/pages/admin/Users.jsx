@@ -23,9 +23,9 @@ const Customers = () => {
       </div> */}
 
       {/* Customers Table */}
-      <div className="overflow-x-auto bg-white rounded-lg shadow-md">
-        <table className="min-w-full text-sm text-gray-700">
-          <thead className="bg-gray-100 text-gray-600 uppercase text-xs">
+      <div className="overflow-x-auto bg-surface rounded-lg shadow-sm border border-border">
+        <table className="min-w-full text-sm text-text">
+          <thead className="bg-background text-textMuted uppercase text-xs">
             <tr>
               <th className="px-6 py-3 text-left">Customer ID</th>
               <th className="px-6 py-3 text-left">Name</th>
@@ -35,25 +35,25 @@ const Customers = () => {
               <th className="px-6 py-3 text-center">Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-border">
             {customers.map((customer, index) => (
               <tr
                 key={index}
-                className="border-b hover:bg-gray-50 transition"
+                className="hover:bg-background/60 transition-colors"
               >
-                <td className="px-6 py-4">{customer.id}</td>
+                <td className="px-6 py-4 font-medium">{customer.id}</td>
                 <td className="px-6 py-4">{customer.name}</td>
-                <td className="px-6 py-4">{customer.email}</td>
-                <td className="px-6 py-4">{customer.phone}</td>
-                <td className="px-6 py-4">{customer.joined}</td>
+                <td className="px-6 py-4 text-textMuted">{customer.email}</td>
+                <td className="px-6 py-4 text-textMuted">{customer.phone}</td>
+                <td className="px-6 py-4 text-textMuted">{customer.joined}</td>
                 <td className="px-6 py-4 flex items-center justify-center space-x-3">
-                  <button className="text-green-500 hover:text-green-700" title="View Profile">
+                  <button className="text-accent hover:text-accent/80 transition-colors" title="View Profile">
                     <Eye className="w-5 h-5" />
                   </button>
-                  <button className="text-blue-500 hover:text-blue-700" title="Edit">
+                  <button className="text-primary hover:text-primary/80 transition-colors" title="Edit">
                     <Edit className="w-5 h-5" />
                   </button>
-                  <button className="text-red-500 hover:text-red-700" title="Delete">
+                  <button className="text-red-500 hover:text-red-700 transition-colors" title="Delete">
                     <Trash2 className="w-5 h-5" />
                   </button>
                 </td>

@@ -30,9 +30,9 @@ const PET_TYPES = [
 
 const ORDER_STATUS_STYLES = {
   Delivered: "bg-emerald-50 text-emerald-700 border-emerald-200",
-  Shipped: "bg-blue-50 text-blue-700 border-blue-200",
-  Processing: "bg-amber-50 text-amber-700 border-amber-200",
-  Pending: "bg-gray-50 text-gray-700 border-gray-200",
+  Shipped: "bg-secondary/30 text-primary border-border",
+  Processing: "bg-secondaryAccent/30 text-accent border-secondaryAccent",
+  Pending: "bg-secondary/20 text-textMuted border-border",
   Cancelled: "bg-red-50 text-red-700 border-red-200",
 };
 
@@ -50,16 +50,16 @@ const INITIAL_ADDRESS = {
 // ─── Sub-Components ──────────────────────────────────────
 
 const LoadingScreen = () => (
-  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 via-white to-blue-50">
+  <div className="min-h-screen flex items-center justify-center bg-background">
     <div className="flex flex-col items-center gap-3">
-      <Loader2 className="h-8 w-8 text-pink-500 animate-spin" />
-      <p className="text-sm text-gray-500">Loading profile...</p>
+      <Loader2 className="h-8 w-8 text-primary animate-spin" />
+      <p className="text-sm text-textMuted">Loading profile...</p>
     </div>
   </div>
 );
 
 const ErrorScreen = ({ message }) => (
-  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 via-white to-blue-50">
+  <div className="min-h-screen flex items-center justify-center bg-background">
     <div className="text-center">
       <AlertCircle className="h-12 w-12 text-red-400 mx-auto mb-3" />
       <p className="text-red-600 font-medium">{message}</p>
@@ -70,8 +70,8 @@ const ErrorScreen = ({ message }) => (
 const SectionHeader = ({ title, subtitle, action }) => (
   <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
     <div>
-      <h2 className="text-xl sm:text-2xl font-bold text-gray-900">{title}</h2>
-      {subtitle && <p className="text-xs sm:text-sm text-gray-500 mt-1">{subtitle}</p>}
+      <h2 className="text-xl sm:text-2xl font-bold text-text">{title}</h2>
+      {subtitle && <p className="text-xs sm:text-sm text-textMuted mt-1">{subtitle}</p>}
     </div>
     {action && <div className="w-full sm:w-auto">{action}</div>}
   </div>
@@ -82,7 +82,7 @@ const GradientButton = ({ children, onClick, disabled, type = "button", classNam
     type={type}
     onClick={onClick}
     disabled={disabled}
-    className={`px-4 py-2 rounded-xl text-sm font-medium bg-gradient-to-r from-pink-500 to-blue-500 text-white hover:opacity-90 transition-all shadow-sm disabled:opacity-60 disabled:cursor-not-allowed ${className}`}
+    className={`px-4 py-2 rounded-xl text-sm font-medium bg-primary hover:bg-primary/90 text-surface transition-all shadow-sm disabled:opacity-60 disabled:cursor-not-allowed ${className}`}
   >
     {children}
   </button>
@@ -93,7 +93,7 @@ const SecondaryButton = ({ children, onClick, disabled, type = "button", classNa
     type={type}
     onClick={onClick}
     disabled={disabled}
-    className={`px-4 py-2 rounded-xl text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all disabled:opacity-60 ${className}`}
+    className={`px-4 py-2 rounded-xl text-sm font-medium bg-secondary/30 text-text hover:bg-secondary/50 transition-all disabled:opacity-60 ${className}`}
   >
     {children}
   </button>
@@ -110,7 +110,7 @@ const DangerButton = ({ children, onClick, className = "" }) => (
 
 const InputField = ({ label, value, onChange, type = "text", placeholder, disabled, required, className = "" }) => (
   <div className={`space-y-2 ${className}`}>
-    {label && <label className="text-xs sm:text-sm font-medium text-gray-700">{label}</label>}
+    {label && <label className="text-xs sm:text-sm font-medium text-text">{label}</label>}
     <input
       type={type}
       value={value}
@@ -118,15 +118,15 @@ const InputField = ({ label, value, onChange, type = "text", placeholder, disabl
       placeholder={placeholder}
       disabled={disabled}
       required={required}
-      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-pink-400 focus:border-transparent outline-none transition-all text-sm disabled:bg-gray-50"
+      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-border bg-surface text-text focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all text-sm disabled:bg-secondary/20"
     />
   </div>
 );
 
 const DisplayField = ({ label, value }) => (
   <div className="space-y-2">
-    {label && <label className="text-xs sm:text-sm font-medium text-gray-700">{label}</label>}
-    <p className="text-sm sm:text-base text-gray-900 font-medium px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-50 rounded-xl">
+    {label && <label className="text-xs sm:text-sm font-medium text-text">{label}</label>}
+    <p className="text-sm sm:text-base text-text font-medium px-3 sm:px-4 py-2.5 sm:py-3 bg-secondary/15 rounded-xl">
       {value || "—"}
     </p>
   </div>
@@ -134,11 +134,11 @@ const DisplayField = ({ label, value }) => (
 
 const EmptyState = ({ icon: Icon, title, message }) => (
   <div className="text-center py-12 sm:py-16">
-    <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-      <Icon className="h-8 w-8 text-gray-400" />
+    <div className="w-16 h-16 bg-secondary/30 rounded-full flex items-center justify-center mx-auto mb-4">
+      <Icon className="h-8 w-8 text-primary" />
     </div>
-    <p className="text-sm sm:text-base font-medium text-gray-900 mb-1">{title}</p>
-    <p className="text-xs sm:text-sm text-gray-500">{message}</p>
+    <p className="text-sm sm:text-base font-medium text-text mb-1">{title}</p>
+    <p className="text-xs sm:text-sm text-textMuted">{message}</p>
   </div>
 );
 
@@ -151,7 +151,7 @@ const StatusBadge = ({ status }) => (
 const PetTypeIcon = ({ type }) => {
   const colors = {
     Dog: "from-amber-100 to-orange-100 text-amber-600",
-    Cat: "from-pink-100 to-rose-100 text-pink-600",
+    Cat: "from-accent/20 to-secondaryAccent/30 text-accent",
     Bird: "from-sky-100 to-blue-100 text-sky-600",
     Fish: "from-cyan-100 to-teal-100 text-cyan-600",
     Rabbit: "from-emerald-100 to-green-100 text-emerald-600",
@@ -519,21 +519,21 @@ const UserProfile = () => {
         />
       )}
       <div
-        className={`fixed inset-y-0 left-0 z-50 w-64 h-full bg-white shadow-2xl transform transition-transform duration-300 ease-in-out lg:static lg:w-auto lg:h-auto lg:bg-transparent lg:shadow-none lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        className={`fixed inset-y-0 left-0 z-50 w-64 h-full bg-surface shadow-2xl transform transition-transform duration-300 ease-in-out lg:static lg:w-auto lg:h-auto lg:bg-transparent lg:shadow-none lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
           }`}
       >
-        <div className="bg-white lg:rounded-2xl lg:shadow-sm lg:border border-gray-100 overflow-y-auto h-full lg:h-auto lg:overflow-hidden lg:sticky lg:top-24 flex flex-col">
+        <div className="bg-surface lg:rounded-2xl lg:shadow-sm lg:border border-border overflow-y-auto h-full lg:h-auto lg:overflow-hidden lg:sticky lg:top-24 flex flex-col">
           {/* Profile Card */}
-          <div className="bg-gradient-to-br from-pink-500 to-blue-500 p-4 sm:p-6 text-white flex-shrink-0">
+          <div className="bg-primary p-4 sm:p-6 text-surface flex-shrink-0">
             <div className="flex flex-col items-center text-center">
               <div className="relative">
-                <div className="h-16 sm:h-20 w-16 sm:w-20 rounded-full bg-white/20 backdrop-blur-sm border-4 border-white/30 flex items-center justify-center text-2xl sm:text-3xl font-bold">
+                <div className="h-16 sm:h-20 w-16 sm:w-20 rounded-full bg-surface/20 backdrop-blur-sm border-4 border-surface/30 flex items-center justify-center text-2xl sm:text-3xl font-bold">
                   {user?.fullName ? user.fullName[0].toUpperCase() : "U"}
                 </div>
-                <div className="absolute -bottom-1 -right-1 h-5 sm:h-6 w-5 sm:w-6 bg-emerald-400 rounded-full border-4 border-white" />
+                <div className="absolute -bottom-1 -right-1 h-5 sm:h-6 w-5 sm:w-6 bg-emerald-400 rounded-full border-4 border-surface" />
               </div>
-              <h3 className="mt-3 sm:mt-4 text-base sm:text-lg font-semibold">{user?.fullName}</h3>
-              <p className="text-xs sm:text-sm text-white/80 mt-1 break-all">{user?.email}</p>
+              <h3 className="mt-3 sm:mt-4 text-base sm:text-lg font-semibold text-surface">{user?.fullName}</h3>
+              <p className="text-xs sm:text-sm text-surface/80 mt-1 break-all">{user?.email}</p>
             </div>
           </div>
 
@@ -550,8 +550,8 @@ const UserProfile = () => {
                     setSidebarOpen(false);
                   }}
                   className={`w-full flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-medium transition-all mb-2 ${isActive
-                    ? "bg-gradient-to-r from-pink-500 to-blue-500 text-white shadow-md"
-                    : "text-gray-600 hover:bg-gray-50"
+                    ? "bg-primary text-surface shadow-md"
+                    : "text-textMuted hover:bg-secondary/20 hover:text-text"
                     }`}
                 >
                   <div className="flex items-center gap-2 sm:gap-3">
@@ -565,7 +565,7 @@ const UserProfile = () => {
           </nav>
 
           {/* Logout */}
-          <div className="p-3 sm:p-4 border-t border-gray-100 mt-auto">
+          <div className="p-3 sm:p-4 border-t border-border mt-auto">
             <button
               onClick={handleLogout}
               className="w-full flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-medium text-red-600 hover:bg-red-50 transition-all"
@@ -583,8 +583,8 @@ const UserProfile = () => {
     <div>
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
         <div className="flex-1 min-w-0">
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 truncate">My Profile</h2>
-          <p className="text-xs sm:text-sm text-gray-500 mt-1">Manage your personal information</p>
+          <h2 className="text-xl sm:text-2xl font-bold text-text truncate">My Profile</h2>
+          <p className="text-xs sm:text-sm text-textMuted mt-1">Manage your personal information</p>
         </div>
 
         {editMode ? (
@@ -610,7 +610,7 @@ const UserProfile = () => {
             </SecondaryButton>
           </div>
         ) : (
-          <SecondaryButton onClick={handleEditToggle} className="text-pink-600 hover:bg-pink-50">
+          <SecondaryButton onClick={handleEditToggle} className="text-primary hover:bg-secondary/20">
             <span className="flex items-center gap-2">
               <Edit2 className="h-4 w-4" />
               Edit Profile
@@ -707,8 +707,8 @@ const UserProfile = () => {
       />
 
       {showPetForm && (
-        <form onSubmit={handleAddPet} className="bg-pink-50 p-4 sm:p-6 rounded-2xl border border-pink-100 mb-6 space-y-4">
-          <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Register a New Pet</h3>
+        <form onSubmit={handleAddPet} className="bg-secondary/15 p-4 sm:p-6 rounded-2xl border border-border mb-6 space-y-4">
+          <h3 className="font-semibold text-text text-sm sm:text-base">Register a New Pet</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <InputField
               placeholder="Pet Name"
@@ -719,7 +719,7 @@ const UserProfile = () => {
             <select
               value={newPet.type}
               onChange={(e) => setNewPet({ ...newPet, type: e.target.value })}
-              className="w-full px-3 py-2 rounded-lg border border-gray-200 outline-none text-sm"
+              className="w-full px-3 py-2 rounded-lg border border-border bg-surface text-text outline-none text-sm"
             >
               {PET_TYPES.map((t) => (
                 <option key={t.value} value={t.value}>{t.label}</option>
@@ -763,7 +763,7 @@ const UserProfile = () => {
           {pets.map((pet) => (
             <div
               key={pet.id}
-              className="group relative bg-white rounded-2xl border border-gray-100 p-4 sm:p-6 hover:shadow-lg transition-all"
+              className="group relative bg-surface rounded-2xl border border-border p-4 sm:p-6 hover:shadow-lg transition-all"
             >
               <div className="flex justify-between items-start mb-4">
                 <PetTypeIcon type={pet.type} />
@@ -774,8 +774,8 @@ const UserProfile = () => {
                   <Trash2 className="h-4 w-4" />
                 </button>
               </div>
-              <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1">{pet.name}</h3>
-              <div className="space-y-1 text-xs sm:text-sm text-gray-500">
+              <h3 className="text-base sm:text-lg font-semibold text-text mb-1">{pet.name}</h3>
+              <div className="space-y-1 text-xs sm:text-sm text-textMuted">
                 <p>{pet.breed} • {pet.type}</p>
                 <p>{pet.age} {pet.age === 1 ? "year" : "years"} old</p>
               </div>
@@ -816,12 +816,12 @@ const UserProfile = () => {
         {/* Address List */}
         <div className="lg:col-span-1 space-y-3">
           {loadingAddresses ? (
-            <div className="p-4 rounded-xl bg-gray-50 text-sm text-gray-600 flex items-center gap-2">
+            <div className="p-4 rounded-xl bg-secondary/20 text-sm text-textMuted flex items-center gap-2">
               <Loader2 className="h-4 w-4 animate-spin" />
               Loading addresses...
             </div>
           ) : addresses.length === 0 ? (
-            <div className="p-4 rounded-xl bg-gray-50 text-sm text-gray-600">
+            <div className="p-4 rounded-xl bg-secondary/20 text-sm text-textMuted">
               No addresses yet. Click Add Address to create one.
             </div>
           ) : (
@@ -836,23 +836,23 @@ const UserProfile = () => {
                   setAddressError("");
                 }}
                 className={`w-full text-left p-3 rounded-xl border transition-all ${selectedAddressId === a.id
-                  ? "border-pink-300 bg-pink-50"
-                  : "border-gray-100 bg-white hover:border-gray-200"
+                  ? "border-primary bg-secondary/20"
+                  : "border-border bg-surface hover:border-textMuted/40"
                   }`}
               >
                 <div className="flex items-center justify-between">
                   <div className="min-w-0">
-                    <div className="text-sm font-medium text-gray-900 truncate flex items-center gap-2">
-                      <Home className="h-3 w-3 text-gray-400" />
+                    <div className="text-sm font-medium text-text truncate flex items-center gap-2">
+                      <Home className="h-3 w-3 text-textMuted" />
                       {a.label || a.landMark || "Address"}
                     </div>
-                    <div className="text-xs text-gray-500 truncate mt-1">
+                    <div className="text-xs text-textMuted truncate mt-1">
                       {[a.landMark, a.city, a.pincode].filter(Boolean).join(", ")}
                     </div>
                   </div>
                   {a.isDefault && (
-                    <span className="text-xs text-pink-600 font-medium ml-2 flex items-center gap-1">
-                      <Star className="h-3 w-3 fill-pink-600" />
+                    <span className="text-xs text-accent font-medium ml-2 flex items-center gap-1">
+                      <Star className="h-3 w-3 fill-accent" />
                       Default
                     </span>
                   )}
@@ -867,10 +867,10 @@ const UserProfile = () => {
           <div className="space-y-4 sm:space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               <div className="space-y-2 min-w-0">
-                <label className="text-xs sm:text-sm font-medium text-gray-700">Label</label>
+                <label className="text-xs sm:text-sm font-medium text-text">Label</label>
                 {!addressEditMode ? (
-                  <p className="text-sm sm:text-base text-gray-900 font-medium px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-50 rounded-xl flex items-center gap-2">
-                    <Home className="h-4 w-4 text-gray-400" />
+                  <p className="text-sm sm:text-base text-text font-medium px-3 sm:px-4 py-2.5 sm:py-3 bg-secondary/15 rounded-xl flex items-center gap-2">
+                    <Home className="h-4 w-4 text-textMuted" />
                     {selectedAddress?.label || "—"}
                   </p>
                 ) : (
@@ -883,10 +883,10 @@ const UserProfile = () => {
               </div>
 
               <div className="space-y-2 min-w-0">
-                <label className="text-xs sm:text-sm font-medium text-gray-700">Phone</label>
+                <label className="text-xs sm:text-sm font-medium text-text">Phone</label>
                 {!addressEditMode ? (
-                  <p className="text-sm sm:text-base text-gray-900 font-medium px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-50 rounded-xl flex items-center gap-2">
-                    <Phone className="h-4 w-4 text-gray-400" />
+                  <p className="text-sm sm:text-base text-text font-medium px-3 sm:px-4 py-2.5 sm:py-3 bg-secondary/15 rounded-xl flex items-center gap-2">
+                    <Phone className="h-4 w-4 text-textMuted" />
                     {selectedAddress?.phone || "—"}
                   </p>
                 ) : (
@@ -900,10 +900,10 @@ const UserProfile = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs sm:text-sm font-medium text-gray-700">Address / Landmark</label>
+                <label className="text-xs sm:text-sm font-medium text-text">Address / Landmark</label>
                 {!addressEditMode ? (
-                  <p className="text-sm sm:text-base text-gray-900 font-medium px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-50 rounded-xl flex items-center gap-2">
-                    <MapPinned className="h-4 w-4 text-gray-400" />
+                  <p className="text-sm sm:text-base text-text font-medium px-3 sm:px-4 py-2.5 sm:py-3 bg-secondary/15 rounded-xl flex items-center gap-2">
+                    <MapPinned className="h-4 w-4 text-textMuted" />
                     {selectedAddress?.landMark || "—"}
                   </p>
                 ) : (
@@ -916,10 +916,10 @@ const UserProfile = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs sm:text-sm font-medium text-gray-700">City</label>
+                <label className="text-xs sm:text-sm font-medium text-text">City</label>
                 {!addressEditMode ? (
-                  <p className="text-sm sm:text-base text-gray-900 font-medium px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-50 rounded-xl flex items-center gap-2">
-                    <Building2 className="h-4 w-4 text-gray-400" />
+                  <p className="text-sm sm:text-base text-text font-medium px-3 sm:px-4 py-2.5 sm:py-3 bg-secondary/15 rounded-xl flex items-center gap-2">
+                    <Building2 className="h-4 w-4 text-textMuted" />
                     {selectedAddress?.city || "—"}
                   </p>
                 ) : (
@@ -932,10 +932,10 @@ const UserProfile = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs sm:text-sm font-medium text-gray-700">Pincode</label>
+                <label className="text-xs sm:text-sm font-medium text-text">Pincode</label>
                 {!addressEditMode ? (
-                  <p className="text-sm sm:text-base text-gray-900 font-medium px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-50 rounded-xl flex items-center gap-2">
-                    <MapPin className="h-4 w-4 text-gray-400" />
+                  <p className="text-sm sm:text-base text-text font-medium px-3 sm:px-4 py-2.5 sm:py-3 bg-secondary/15 rounded-xl flex items-center gap-2">
+                    <MapPin className="h-4 w-4 text-textMuted" />
                     {selectedAddress?.pincode || "—"}
                   </p>
                 ) : (
@@ -948,9 +948,9 @@ const UserProfile = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs sm:text-sm font-medium text-gray-700">District / State</label>
+                <label className="text-xs sm:text-sm font-medium text-text">District / State</label>
                 {!addressEditMode ? (
-                  <p className="text-sm sm:text-base text-gray-900 font-medium px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-50 rounded-xl">
+                  <p className="text-sm sm:text-base text-text font-medium px-3 sm:px-4 py-2.5 sm:py-3 bg-secondary/15 rounded-xl">
                     {selectedAddress?.districtName || selectedAddress?.districtId || "—"}
                   </p>
                 ) : (
@@ -966,7 +966,7 @@ const UserProfile = () => {
             <div className="flex items-center justify-between gap-3">
               <div>
                 {!addressEditMode ? (
-                  <SecondaryButton onClick={startEditAddress} className="text-pink-600 hover:bg-pink-50">
+                  <SecondaryButton onClick={startEditAddress} className="text-primary hover:bg-secondary/20">
                     <span className="flex items-center gap-2">
                       <Edit2 className="h-4 w-4" />
                       Edit
@@ -978,9 +978,9 @@ const UserProfile = () => {
                       type="checkbox"
                       checked={tempAddress.isDefault || false}
                       onChange={(e) => setTempAddress((t) => ({ ...t, isDefault: e.target.checked }))}
-                      className="rounded accent-pink-500 h-4 w-4"
+                      className="rounded accent-primary h-4 w-4"
                     />
-                    <span className="text-gray-700">Set as default address</span>
+                    <span className="text-text">Set as default address</span>
                   </label>
                 )}
               </div>
@@ -1019,23 +1019,23 @@ const UserProfile = () => {
           {orders.map((order) => (
             <div
               key={order.id}
-              className="bg-white rounded-2xl border border-gray-100 p-4 sm:p-6 hover:shadow-md transition-all"
+              className="bg-surface rounded-2xl border border-border p-4 sm:p-6 hover:shadow-md transition-all"
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
                 <div className="flex items-start gap-3 sm:gap-4">
-                  <div className="h-10 sm:h-12 w-10 sm:w-12 rounded-xl bg-gradient-to-br from-pink-500 to-blue-500 flex items-center justify-center text-white flex-shrink-0">
+                  <div className="h-10 sm:h-12 w-10 sm:w-12 rounded-xl bg-primary flex items-center justify-center text-surface flex-shrink-0">
                     <Package className="h-5 w-5" />
                   </div>
                   <div className="min-w-0">
-                    <h3 className="font-semibold text-gray-900 mb-1 text-sm sm:text-base">Order #{order.id}</h3>
-                    <div className="flex flex-wrap gap-x-3 sm:gap-x-4 gap-y-1 text-xs sm:text-sm text-gray-500">
+                    <h3 className="font-semibold text-text mb-1 text-sm sm:text-base">Order #{order.id}</h3>
+                    <div className="flex flex-wrap gap-x-3 sm:gap-x-4 gap-y-1 text-xs sm:text-sm text-textMuted">
                       <span>{order.date}</span>
                       <span>{order.items} {order.items === 1 ? "item" : "items"}</span>
                     </div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 sm:gap-4">
-                  <span className="text-base sm:text-lg font-bold text-gray-900">₹{order.total}</span>
+                  <span className="text-base sm:text-lg font-bold text-text">₹{order.total}</span>
                   <StatusBadge status={order.status} />
                 </div>
               </div>
@@ -1060,11 +1060,11 @@ const UserProfile = () => {
           {wishlist.map((item) => (
             <div
               key={item.id}
-              className="group bg-white rounded-2xl border border-gray-100 p-4 sm:p-6 hover:shadow-lg transition-all"
+              className="group bg-surface rounded-2xl border border-border p-4 sm:p-6 hover:shadow-lg transition-all"
             >
               <div className="flex justify-between items-start mb-4">
-                <div className="h-14 sm:h-16 w-14 sm:w-16 rounded-xl bg-gradient-to-br from-pink-100 to-blue-100 flex items-center justify-center flex-shrink-0">
-                  <Heart className="h-6 w-6 text-pink-400" />
+                <div className="h-14 sm:h-16 w-14 sm:w-16 rounded-xl bg-secondary/30 flex items-center justify-center flex-shrink-0">
+                  <Heart className="h-6 w-6 text-accent" />
                 </div>
                 <button
                   onClick={() => handleRemoveFromWishlist(item.id)}
@@ -1073,8 +1073,8 @@ const UserProfile = () => {
                   <Trash2 className="h-4 w-4" />
                 </button>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">{item.name}</h3>
-              <p className="text-base sm:text-lg font-bold text-pink-600 mb-4">₹{item.price}</p>
+              <h3 className="font-semibold text-text mb-2 text-sm sm:text-base">{item.name}</h3>
+              <p className="text-base sm:text-lg font-bold text-primary mb-4">₹{item.price}</p>
               <GradientButton className="w-full">
                 <span className="flex items-center justify-center gap-2">
                   <ShoppingCart className="h-4 w-4" />
@@ -1097,14 +1097,14 @@ const UserProfile = () => {
           { title: "Notifications", desc: "Manage your notification preferences", action: "Notification Settings", icon: Bell },
           { title: "Privacy", desc: "Control your privacy and data settings", action: "Privacy Settings", icon: Shield },
         ].map((setting) => (
-          <div key={setting.title} className="bg-white rounded-2xl border border-gray-100 p-4 sm:p-6">
+          <div key={setting.title} className="bg-surface rounded-2xl border border-border p-4 sm:p-6">
             <div className="flex items-start gap-3 sm:gap-4">
-              <div className="h-10 w-10 rounded-xl bg-gray-50 flex items-center justify-center flex-shrink-0">
-                <setting.icon className="h-5 w-5 text-gray-500" />
+              <div className="h-10 w-10 rounded-xl bg-secondary/20 flex items-center justify-center flex-shrink-0">
+                <setting.icon className="h-5 w-5 text-textMuted" />
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="font-semibold text-gray-900 text-sm sm:text-base">{setting.title}</h3>
-                <p className="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4">{setting.desc}</p>
+                <h3 className="font-semibold text-text text-sm sm:text-base">{setting.title}</h3>
+                <p className="text-xs sm:text-sm text-textMuted mb-3 sm:mb-4">{setting.desc}</p>
                 <SecondaryButton>{setting.action}</SecondaryButton>
               </div>
             </div>
@@ -1128,15 +1128,15 @@ const UserProfile = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-blue-50">
+    <div className="min-h-screen bg-background text-text">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         <div className="grid lg:grid-cols-12 gap-4 sm:gap-6">
           {/* Mobile Header */}
           <div className="lg:hidden flex items-center justify-between col-span-full mb-4">
-            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Pet Profile</h1>
+            <h1 className="text-xl sm:text-2xl font-bold text-text">Pet Profile</h1>
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="p-2 hover:bg-gray-100 rounded-lg transition-all"
+              className="p-2 hover:bg-secondary/20 rounded-lg transition-all"
             >
               {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
@@ -1145,7 +1145,7 @@ const UserProfile = () => {
           {renderSidebar()}
 
           <main className="lg:col-span-9">
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 sm:p-6 lg:p-8">
+            <div className="bg-surface rounded-2xl shadow-sm border border-border p-4 sm:p-6 lg:p-8">
               {tabContent[activeTab]()}
             </div>
           </main>

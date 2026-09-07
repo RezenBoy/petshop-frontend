@@ -23,9 +23,9 @@ const Orders = () => {
       </div> */}  
 
       {/* Orders Table */}
-      <div className="overflow-x-auto bg-white rounded-lg shadow-md">
-        <table className="min-w-full text-sm text-gray-700">
-          <thead className="bg-gray-100 text-gray-600 uppercase text-xs">
+      <div className="overflow-x-auto bg-surface rounded-lg shadow-sm border border-border">
+        <table className="min-w-full text-sm text-text">
+          <thead className="bg-background text-textMuted uppercase text-xs">
             <tr>
               <th className="px-6 py-3 text-left">Order ID</th>
               <th className="px-6 py-3 text-left">Customer</th>
@@ -35,40 +35,40 @@ const Orders = () => {
               <th className="px-6 py-3 text-center">Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-border">
             {orders.map((order, index) => (
               <tr
                 key={index}
-                className="border-b hover:bg-gray-50 transition"
+                className="hover:bg-background/60 transition-colors"
               >
-                <td className="px-6 py-4">{order.id}</td>
-                <td className="px-6 py-4">{order.customer}</td>
-                <td className="px-6 py-4">{order.date}</td>
+                <td className="px-6 py-4 font-medium">{order.id}</td>
+                <td className="px-6 py-4 text-textMuted">{order.customer}</td>
+                <td className="px-6 py-4 text-textMuted">{order.date}</td>
                 <td className="px-6 py-4">
                   <span
                     className={`px-3 py-1 rounded-full text-xs font-medium ${
                       order.status === "Delivered"
-                        ? "bg-green-100 text-green-600"
+                        ? "bg-emerald-100 text-emerald-800"
                         : order.status === "Shipped"
-                        ? "bg-blue-100 text-blue-600"
-                        : "bg-yellow-100 text-yellow-600"
+                        ? "bg-secondary/40 text-primary"
+                        : "bg-accent/20 text-catBrown"
                     }`}
                   >
                     {order.status}
                   </span>
                 </td>
-                <td className="px-6 py-4">{order.total}</td>
+                <td className="px-6 py-4 font-medium">{order.total}</td>
                 <td className="px-6 py-4 flex items-center justify-center space-x-3">
-                  <button className="text-blue-500 hover:text-blue-700" title="Edit">
+                  <button className="text-primary hover:text-primary/80 transition-colors" title="Edit">
                     <Edit className="w-5 h-5" />
                   </button>
-                  <button className="text-red-500 hover:text-red-700" title="Delete">
+                  <button className="text-red-500 hover:text-red-700 transition-colors" title="Delete">
                     <Trash2 className="w-5 h-5" />
                   </button>
-                  <button className="text-purple-500 hover:text-purple-700" title="Track Order">
+                  <button className="text-accent hover:text-accent/80 transition-colors" title="Track Order">
                     <Truck className="w-5 h-5" />
                   </button>
-                  <button className="text-gray-600 hover:text-gray-800" title="Return/Refund">
+                  <button className="text-textMuted hover:text-text transition-colors" title="Return/Refund">
                     <RotateCcw className="w-5 h-5" />
                   </button>
                 </td>

@@ -45,42 +45,43 @@ const ManageProduct = () => {
 
   return (
     <div>
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-x-auto">
+      <div className="bg-surface rounded-xl shadow-sm border border-border overflow-x-auto">
         <table className="w-full text-sm">
-          <thead className="bg-gray-50">
+          <thead className="bg-background">
             <tr>
-              <th className="px-6 py-3 text-left font-medium text-gray-600">#</th>
-              <th className="px-6 py-3 text-left font-medium text-gray-600">Product</th>
-              <th className="px-6 py-3 text-left font-medium text-gray-600">Category</th>
-              <th className="px-6 py-3 text-left font-medium text-gray-600">Price</th>
-              <th className="px-6 py-3 text-left font-medium text-gray-600">Stock</th>
-              <th className="px-6 py-3 text-right font-medium text-gray-600">Actions</th>
+              <th className="px-6 py-3 text-left font-medium text-textMuted">#</th>
+              <th className="px-6 py-3 text-left font-medium text-textMuted">Product</th>
+              <th className="px-6 py-3 text-left font-medium text-textMuted">Category</th>
+              <th className="px-6 py-3 text-left font-medium text-textMuted">Price</th>
+              <th className="px-6 py-3 text-left font-medium text-textMuted">Stock</th>
+              <th className="px-6 py-3 text-right font-medium text-textMuted">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200">
+          <tbody className="divide-y divide-border">
             {products.map((product, index) => (
-              <tr key={product.id} className="hover:bg-gray-50">
-                <td className="px-6 py-4">{index + 1}</td>
+              <tr key={product.id} className="hover:bg-background/60 transition-colors">
+                <td className="px-6 py-4 text-textMuted">{index + 1}</td>
 
                 {/* ✅ productName fixed */}
-                <td className="px-6 py-4 font-medium text-gray-900">
+                <td className="px-6 py-4 font-medium text-text">
                   {product.productName}
                 </td>
 
                 {/* ✅ fixed productCategory path */}
-                <td className="px-6 py-4">
+                <td className="px-6 py-4 text-textMuted">
                   {product.productSubCategory?.productCategory?.categoryName}{" "}
                   → {product.productSubCategory?.subCategoryName}
                 </td>
 
-                <td className="px-6 py-4">₹{product.mrp}</td>
-                <td className="px-6 py-4">{product.quantity}</td>
+                <td className="px-6 py-4 font-medium text-text">₹{product.mrp}</td>
+                <td className="px-6 py-4 text-textMuted">{product.quantity}</td>
 
                 <td className="px-6 py-4 text-right flex gap-2 justify-end">
                   {/* View */}
                   <button
                     onClick={() => handleView(product)}
-                    className="text-blue-600 hover:text-blue-800"
+                    className="text-primary hover:text-primary/80 transition-colors"
+                    title="View"
                   >
                     <Eye className="w-4 h-4" />
                   </button>
@@ -88,7 +89,8 @@ const ManageProduct = () => {
                   {/* Edit */}
                   <button
                     onClick={() => handleEdit(product.id)}
-                    className="text-green-600 hover:text-green-800"
+                    className="text-accent hover:text-accent/80 transition-colors"
+                    title="Edit"
                   >
                     <Edit className="w-4 h-4" />
                   </button>
@@ -96,7 +98,8 @@ const ManageProduct = () => {
                   {/* Delete */}
                   <button
                     onClick={() => handleDelete(product.id)}
-                    className="text-red-600 hover:text-red-800"
+                    className="text-red-500 hover:text-red-700 transition-colors"
+                    title="Delete"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -110,38 +113,38 @@ const ManageProduct = () => {
       {/* ✅ View Modal */}
       {selectedProduct && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg relative">
+          <div className="bg-surface p-6 rounded-lg shadow-lg w-full max-w-lg relative border border-border">
             <button
               onClick={() => setSelectedProduct(null)}
-              className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
+              className="absolute top-2 right-2 text-textMuted hover:text-text"
             >
               ✖
             </button>
 
-            <h2 className="text-xl font-semibold mb-4">
+            <h2 className="text-xl font-semibold mb-4 text-text">
               {selectedProduct.productName}
             </h2>
 
-            <div className="space-y-2 text-sm">
+            <div className="space-y-2 text-sm text-textMuted">
               <p>
-                <strong>Category:</strong>{" "}
+                <strong className="text-text">Category:</strong>{" "}
                 {selectedProduct.productSubCategory?.productCategory?.categoryName} →{" "}
                 {selectedProduct.productSubCategory?.subCategoryName}
               </p>
               <p>
-                <strong>HSN Code:</strong> {selectedProduct.hsnCode || "—"}
+                <strong className="text-text">HSN Code:</strong> {selectedProduct.hsnCode || "—"}
               </p>
               <p>
-                <strong>Barcode:</strong> {selectedProduct.barCode || "—"}
+                <strong className="text-text">Barcode:</strong> {selectedProduct.barCode || "—"}
               </p>
               <p>
-                <strong>Price:</strong> ₹{selectedProduct.mrp}
+                <strong className="text-text">Price:</strong> ₹{selectedProduct.mrp}
               </p>
               <p>
-                <strong>Quantity:</strong> {selectedProduct.quantity}
+                <strong className="text-text">Quantity:</strong> {selectedProduct.quantity}
               </p>
               <p>
-                <strong>Description:</strong>{" "}
+                <strong className="text-text">Description:</strong>{" "}
                 {selectedProduct.description || "No description"}
               </p>
             </div>

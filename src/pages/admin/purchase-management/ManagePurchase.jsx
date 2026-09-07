@@ -21,36 +21,36 @@ const ManagePurchase = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold text-gray-900 mb-6">Manage Purchases</h1>
+      <h1 className="text-2xl font-semibold text-text mb-6">Manage Purchases</h1>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-x-auto">
+      <div className="bg-surface rounded-xl shadow-sm border border-border overflow-x-auto">
         <table className="w-full text-sm">
-          <thead className="bg-gray-50">
+          <thead className="bg-background">
             <tr>
-              <th className="px-6 py-3 text-left font-medium text-gray-600">#</th>
-              <th className="px-6 py-3 text-left font-medium text-gray-600">Supplier</th>
-              <th className="px-6 py-3 text-left font-medium text-gray-600">Invoice No</th>
-              <th className="px-6 py-3 text-left font-medium text-gray-600">Date</th>
-              <th className="px-6 py-3 text-left font-medium text-gray-600">Total</th>
-              <th className="px-6 py-3 text-right font-medium text-gray-600">Actions</th>
+              <th className="px-6 py-3 text-left font-medium text-textMuted">#</th>
+              <th className="px-6 py-3 text-left font-medium text-textMuted">Supplier</th>
+              <th className="px-6 py-3 text-left font-medium text-textMuted">Invoice No</th>
+              <th className="px-6 py-3 text-left font-medium text-textMuted">Date</th>
+              <th className="px-6 py-3 text-left font-medium text-textMuted">Total</th>
+              <th className="px-6 py-3 text-right font-medium text-textMuted">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200">
+          <tbody className="divide-y divide-border">
             {purchases.map((purchase, index) => (
-              <tr key={purchase.id} className="hover:bg-gray-50">
-                <td className="px-6 py-4">{index + 1}</td>
-                <td className="px-6 py-4">{purchase.supplier}</td>
-                <td className="px-6 py-4">{purchase.invoiceNo}</td>
-                <td className="px-6 py-4">{purchase.date}</td>
-                <td className="px-6 py-4">₹{purchase.total}</td>
+              <tr key={purchase.id} className="hover:bg-background/60 transition-colors">
+                <td className="px-6 py-4 text-textMuted">{index + 1}</td>
+                <td className="px-6 py-4 font-medium text-text">{purchase.supplier}</td>
+                <td className="px-6 py-4 text-textMuted">{purchase.invoiceNo}</td>
+                <td className="px-6 py-4 text-textMuted">{purchase.date}</td>
+                <td className="px-6 py-4 font-medium text-text">₹{purchase.total}</td>
                 <td className="px-6 py-4 text-right flex gap-2 justify-end">
-                  <button className="text-blue-600 hover:text-blue-800">
+                  <button className="text-primary hover:text-primary/80 transition-colors" title="View">
                     <Eye className="w-4 h-4" />
                   </button>
-                  <button className="text-green-600 hover:text-green-800">
+                  <button className="text-accent hover:text-accent/80 transition-colors" title="Edit">
                     <Edit className="w-4 h-4" />
                   </button>
-                  <button className="text-red-600 hover:text-red-800">
+                  <button className="text-red-500 hover:text-red-700 transition-colors" title="Delete">
                     <Trash2 className="w-4 h-4" />
                   </button>
                 </td>
