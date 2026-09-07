@@ -20,6 +20,7 @@ import {
   PlusCircle,
   Boxes,
 } from "lucide-react";
+import { BRAND } from "../brand";
 
 const menuItems = [
   { icon: Home, label: "Dashboard", path: "/admin" },
@@ -104,7 +105,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     >
       {/* Header */}
       <div className="flex items-center justify-between h-16 px-4 bg-gray-800">
-        <span className="text-white text-lg font-semibold">Pashora</span>
+        <span className="text-white text-lg font-semibold">{BRAND.name}</span>
         <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-white">
           <X className="w-5 h-5" />
         </button>

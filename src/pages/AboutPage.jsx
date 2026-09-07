@@ -3,6 +3,7 @@ import { Heart, PawPrint, Shield, Truck, Smile, ArrowRight, Package, Award, Head
 import { Link } from "react-router-dom";
 import Navbar from "../components/common/user/NavBar";
 import Footer from "../components/common/user/Footer";
+import { BRAND } from "../components/common/brand";
 
 const AboutPage = () => {
   return (
@@ -19,7 +20,7 @@ const AboutPage = () => {
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
             About{" "}
             <span className="bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent">
-              Pashora
+              {BRAND.name}
             </span>
           </h1>
           <p className="text-gray-500 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
@@ -51,7 +52,7 @@ const AboutPage = () => {
               </h2>
               <div className="w-10 h-1 bg-gradient-to-r from-pink-500 to-blue-500 rounded-full mb-5" />
               <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-3">
-                Founded by passionate pet lovers, Pashora began with one mission — to provide
+                Founded by passionate pet lovers, {BRAND.name} began with one mission — to provide
                 high-quality, safe, and heart-warming products for our furry friends. From nutritious meals
                 to comfy accessories, we've grown into a trusted pet-care brand loved by pet parents across India.
               </p>
@@ -95,7 +96,7 @@ const AboutPage = () => {
               {
                 icon: Heart,
                 title: "Our Vision",
-                desc: "To build a global community where pets live happier, healthier lives — supported by products, education, and love from Pashora.",
+                desc: "To build a global community where pets live happier, healthier lives — supported by products, education, and love from {BRAND.name}.",
                 color: "text-blue-500 bg-blue-50",
               },
               {
@@ -128,7 +129,7 @@ const AboutPage = () => {
               Why Us
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mt-2">
-              Why Choose Pashora?
+              Why Choose {BRAND.name}?
             </h2>
           </div>
 

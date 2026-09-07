@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Heart, Eye, EyeOff } from "lucide-react";
 import axios from "axios";
+import { BRAND } from "../../components/common/brand";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -123,7 +124,7 @@ const LoginForm = () => {
                   <Heart className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-lg font-bold">Pashora</h1>
+                  <h1 className="text-lg font-bold">{BRAND.name}</h1>
                   <p className="text-xs text-white/80">Pet Paradise</p>
                 </div>
               </Link>
@@ -139,7 +140,7 @@ const LoginForm = () => {
 
             {/* Footer */}
             <p className="text-xs text-white/60 mt-6">
-              © 2025 Pashora. All rights reserved.
+              © 2025 {BRAND.name}. All rights reserved.
             </p>
           </div>
         </div>
@@ -153,7 +154,7 @@ const LoginForm = () => {
                 <Heart className="h-5 w-5 text-white" />
               </div>
               <span className="text-xl font-bold bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent">
-                Pashora
+                {BRAND.name}
               </span>
             </Link>
 

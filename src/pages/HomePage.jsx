@@ -13,6 +13,7 @@ import {
 import Footer from "../components/common/user/Footer";
 import Navbar from "../components/common/user/NavBar";
 import api from "../libs/api";
+import { BRAND } from "../components/common/brand";
 
 import { ReactComponent as DeliveryIcon } from "../assets/svg/fast-delivery-svgrepo-com.svg";
 import { ReactComponent as QualityIcon } from "../assets/svg/quality-supervision-svgrepo-com.svg";
@@ -480,7 +481,7 @@ const HomePage = () => {
               </h2>
               <div className="w-10 h-1 bg-gradient-to-r from-pink-500 to-blue-500 rounded-full mb-4 sm:mb-5" />
               <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-3">
-                At Pashora, we believe every pet deserves the very best. We're dedicated to providing
+                At {BRAND.name}, we believe every pet deserves the very best. We're dedicated to providing
                 high-quality products that keep your furry friends healthy, happy, and loved.
               </p>
               <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8">
