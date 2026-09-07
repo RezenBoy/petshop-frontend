@@ -28,7 +28,7 @@ const Dashboard = () => {
       change: "+8.2%",
       trend: "up",
       icon: DollarSign,
-      color: "bg-accent text-catBrown",
+      color: "bg-accent text-text",
     },
     {
       title: "Products Sold",
@@ -44,7 +44,7 @@ const Dashboard = () => {
       change: "+15.3%",
       trend: "up",
       icon: Users,
-      color: "bg-secondaryAccent text-catBrown",
+      color: "bg-secondary text-text",
     },
   ];
 
@@ -149,7 +149,7 @@ const Dashboard = () => {
                           order.status === "Delivered"
                             ? "bg-emerald-100 text-emerald-800"
                             : order.status === "Processing"
-                            ? "bg-accent/20 text-catBrown"
+                            ? "bg-accent/20 text-text"
                             : "bg-secondary/40 text-primary"
                         }`}
                       >
@@ -195,7 +195,7 @@ const Dashboard = () => {
           <h3 className="text-lg font-semibold text-text">Sales Overview</h3>
         </div>
         <div className="p-6">
-          <div className="h-64 bg-gradient-to-r from-secondary/30 via-surface to-secondaryAccent/30 rounded-lg flex items-center justify-center border border-border/40">
+          <div className="h-64 bg-gradient-to-r from-secondary/30 via-surface to-accent/20 rounded-lg flex items-center justify-center border border-border/40">
             <div className="text-center">
               <BarChart3 className="w-16 h-16 text-primary mx-auto mb-4" />
               <p className="text-text font-medium">Sales chart would be rendered here</p>

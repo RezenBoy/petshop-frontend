@@ -324,7 +324,7 @@ const ProductView = () => {
                   <span className="text-textMuted">›</span>
                 )}
                 {product.subCategory && (
-                  <span className="inline-block px-3 py-1 text-xs font-semibold text-accent bg-secondaryAccent/30 rounded-full">
+                  <span className="inline-block px-3 py-1 text-xs font-semibold text-text bg-accent/25 rounded-full">
                     {product.subCategory}
                   </span>
                 )}
@@ -362,7 +362,7 @@ const ProductView = () => {
                         <span className="text-xl text-textMuted/60 line-through">
                           ₹{product.mrp}
                         </span>
-                        <span className="text-sm font-semibold text-accent bg-secondaryAccent/30 px-2.5 py-1 rounded-lg">
+                        <span className="text-sm font-semibold text-text bg-accent/25 px-2.5 py-1 rounded-lg">
                           {Math.round(
                             ((product.mrp - product.price) / product.mrp) * 100
                           )}
@@ -547,7 +547,7 @@ const ProductView = () => {
                 <button
                   className={`px-6 py-4 rounded-xl border-2 shadow-md transition-all font-semibold flex items-center justify-center gap-2 ${
                     wishlist
-                      ? "bg-secondaryAccent/30 text-accent border-accent shadow-sm"
+                      ? "bg-accent/20 text-text border-accent shadow-sm"
                       : "border-border text-text hover:bg-secondary/20 hover:border-primary"
                   }`}
                   onClick={() => {

@@ -25,11 +25,11 @@ const API = process.env.REACT_APP_API_URL;
 // ─── Constants ─────────────────────────────────────────────
 const CATEGORY_GRADIENTS = [
   "from-primary/15 to-secondary/30",
-  "from-accent/20 to-secondaryAccent/30",
+  "from-accent/20 to-secondary/30",
   "from-secondary/40 to-surface",
-  "from-catBrown/15 to-secondaryAccent/30",
+  "from-primary/15 to-accent/20",
   "from-primary/10 to-accent/15",
-  "from-secondaryAccent/25 to-secondary/30",
+  "from-accent/15 to-secondary/30",
 ];
 
 const FEATURES = [
@@ -49,7 +49,7 @@ const FEATURES = [
     Icon: BestPriceIcon,
     title: "Best Prices",
     desc: "Competitive pricing with regular deals and discounts.",
-    color: "bg-secondaryAccent/30 text-catBrown"
+    color: "bg-secondary/30 text-text"
   },
   {
     Icon: SupportIcon,
@@ -63,7 +63,7 @@ const STATS = [
   { value: "500+", label: "Products available", icon: Package, color: "text-primary bg-primary/10" },
   { value: "50+", label: "Trusted brands", icon: Award, color: "text-accent bg-accent/15" },
   { value: "10k+", label: "Happy pet parents", icon: PawPrint, color: "text-text bg-secondary/30" },
-  { value: "24/7", label: "Customer support", icon: HeadphonesIcon, color: "text-catBrown bg-secondaryAccent/30" },
+  { value: "24/7", label: "Customer support", icon: HeadphonesIcon, color: "text-text bg-accent/25" },
 ];
 
 // ─── Utilities ───────────────────────────────────────────────
@@ -283,7 +283,7 @@ const ProductCard = ({ product }) => {
         className="block flex-shrink-0"
         aria-label={`View ${product.productName}`}
       >
-        <div className="relative bg-gradient-to-br from-secondary/20 to-secondaryAccent/20 h-36 sm:h-44 lg:h-48 flex items-center justify-center overflow-hidden">
+        <div className="relative bg-gradient-to-br from-secondary/20 to-accent/20 h-36 sm:h-44 lg:h-48 flex items-center justify-center overflow-hidden">
           {!imageLoaded && imageUrl && (
             <div className="absolute inset-0 flex items-center justify-center">
               <Loader2 className="h-6 w-6 text-textMuted animate-spin" />
@@ -305,7 +305,7 @@ const ProductCard = ({ product }) => {
             </span>
           )}
 
-          <span className="absolute top-2 left-2 bg-secondaryAccent/40 text-catBrown text-[10px] font-semibold px-2 py-0.5 rounded-full">
+          <span className="absolute top-2 left-2 bg-accent/30 text-text text-[10px] font-semibold px-2 py-0.5 rounded-full">
             {subcategory}
           </span>
         </div>

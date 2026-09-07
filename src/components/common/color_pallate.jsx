@@ -1,35 +1,35 @@
 // src/components/common/color_pallate.jsx
 
 export const COLORS = {
-    // Primary
-    primary: "#244A83",
+    // Primary Brand
+    primary: "#304B82",
 
     // Accent
-    accent: "#F5AC3A",
+    accent: "#EFB851",
 
-    // Backgrounds
-    background: "#FAF3EA",
-    surface: "#FBF9F5",
+    // Main Background
+    background: "#FBF7EC",
 
-    // Text
-    text: "#172F55",
-    textMuted: "#6B7078",
+    // Cards / Sections
+    surface: "#FFFDF8",
 
-    // Secondary UI
-    secondary: "#C7D3E3",
-    secondaryAccent: "#F3CE8F",
+    // Main Text
+    text: "#20252B",
 
-    // Optional
-    catBrown: "#4D3D22",
+    // Secondary Accent
+    secondary: "#A8B89A",
 
-    // Gradient
+    // Border / UI (derived from secondary)
+    border: "#A8B89A",
+
+    // Muted Text (derived from main text with opacity)
+    textMuted: "rgba(32, 37, 43, 0.6)",
+
+    // Gradient (derived from primary and secondary)
     gradient: {
-        from: "#244A83",
-        to: "#C7D3E3",
+        from: "#304B82",
+        to: "#A8B89A",
     },
-
-    // Border
-    border: "#C7D3E3",
 };
 
 export default COLORS;

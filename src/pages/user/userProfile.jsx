@@ -31,7 +31,7 @@ const PET_TYPES = [
 const ORDER_STATUS_STYLES = {
   Delivered: "bg-emerald-50 text-emerald-700 border-emerald-200",
   Shipped: "bg-secondary/30 text-primary border-border",
-  Processing: "bg-secondaryAccent/30 text-accent border-secondaryAccent",
+  Processing: "bg-accent/20 text-accent border-accent/40",
   Pending: "bg-secondary/20 text-textMuted border-border",
   Cancelled: "bg-red-50 text-red-700 border-red-200",
 };
@@ -151,7 +151,7 @@ const StatusBadge = ({ status }) => (
 const PetTypeIcon = ({ type }) => {
   const colors = {
     Dog: "from-amber-100 to-orange-100 text-amber-600",
-    Cat: "from-accent/20 to-secondaryAccent/30 text-accent",
+    Cat: "from-accent/20 to-secondary/30 text-accent",
     Bird: "from-sky-100 to-blue-100 text-sky-600",
     Fish: "from-cyan-100 to-teal-100 text-cyan-600",
     Rabbit: "from-emerald-100 to-green-100 text-emerald-600",

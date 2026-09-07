@@ -51,7 +51,7 @@ const Orders = () => {
                         ? "bg-emerald-100 text-emerald-800"
                         : order.status === "Shipped"
                         ? "bg-secondary/40 text-primary"
-                        : "bg-accent/20 text-catBrown"
+                        : "bg-accent/20 text-text"
                     }`}
                   >
                     {order.status}

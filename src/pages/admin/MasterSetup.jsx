@@ -12,19 +12,19 @@ const setupOptions = [
     title: "System Settings",
     description: "Configure application and system preferences",
     icon: Settings,
-    color: "bg-accent text-catBrown",
+    color: "bg-accent text-text",
   },
   {
     title: "Roles & Permissions",
     description: "Manage user roles and access permissions",
     icon: Shield,
-    color: "bg-secondary text-primary",
+    color: "bg-secondary text-text",
   },
   {
     title: "Localization",
     description: "Set language, timezone, and regional formats",
     icon: Globe,
-    color: "bg-secondaryAccent text-catBrown",
+    color: "bg-secondary/40 text-primary",
   },
 ];
 

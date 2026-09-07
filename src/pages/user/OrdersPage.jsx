@@ -24,7 +24,7 @@ const STATUS_CONFIG = {
     label: "Shipped",
   },
   Processing: {
-    color: "bg-secondaryAccent/30 text-accent border-secondaryAccent",
+    color: "bg-accent/20 text-accent border-accent/40",
     dotColor: "bg-accent",
     icon: Clock,
     label: "Processing",

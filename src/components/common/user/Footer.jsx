@@ -104,7 +104,7 @@ const ContactItem = ({ icon: Icon, text, href, label }) => (
       aria-label={label}
     >
       <Icon className="h-4 w-4 flex-shrink-0 mt-0.5 text-accent group-hover:scale-110 transition-transform" />
-      <span className="leading-snug group-hover:text-secondaryAccent transition-colors">{text}</span>
+      <span className="leading-snug group-hover:text-accent transition-colors">{text}</span>
     </a>
   </li>
 );

@@ -96,13 +96,13 @@ const AboutPage = () => {
                 icon: Heart,
                 title: "Our Vision",
                 desc: "To build a global community where pets live happier, healthier lives — supported by products, education, and love from {BRAND.name}.",
-                color: "text-accent bg-secondaryAccent/30",
+                color: "text-accent bg-accent/20",
               },
               {
                 icon: Smile,
                 title: "Our Promise",
                 desc: "We promise honesty, quality, and compassion. Every order supports local pet shelters and animal welfare programs.",
-                color: "text-catBrown bg-secondary/20",
+                color: "text-text bg-secondary/30",
               },
             ].map(({ icon: Icon, title, desc, color }) => (
               <div
@@ -135,9 +135,9 @@ const AboutPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
             {[
               { icon: Truck, title: "Fast Delivery", desc: "Get essentials delivered quickly with real-time tracking and secure packaging.", color: "text-primary bg-secondary/30" },
-              { icon: Shield, title: "100% Authentic", desc: "We only partner with trusted brands so you can shop with confidence.", color: "text-accent bg-secondaryAccent/30" },
+              { icon: Shield, title: "100% Authentic", desc: "We only partner with trusted brands so you can shop with confidence.", color: "text-accent bg-accent/20" },
               { icon: Heart, title: "Love in Every Order", desc: "Every order helps us contribute to animal shelters and stray welfare.", color: "text-primary bg-secondary/30" },
-              { icon: HeadphonesIcon, title: "24/7 Support", desc: "Our team of pet lovers is always ready to help you.", color: "text-accent bg-secondaryAccent/30" },
+              { icon: HeadphonesIcon, title: "24/7 Support", desc: "Our team of pet lovers is always ready to help you.", color: "text-accent bg-accent/20" },
             ].map(({ icon: Icon, title, desc, color }) => (
               <div
                 key={title}
@@ -169,9 +169,9 @@ const AboutPage = () => {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {[
               { value: "500+", label: "Products available", icon: Package, color: "text-primary bg-secondary/30" },
-              { value: "50+", label: "Trusted brands", icon: Award, color: "text-accent bg-secondaryAccent/30" },
+              { value: "50+", label: "Trusted brands", icon: Award, color: "text-accent bg-accent/20" },
               { value: "10k+", label: "Happy pet parents", icon: PawPrint, color: "text-primary bg-secondary/30" },
-              { value: "24/7", label: "Customer support", icon: HeadphonesIcon, color: "text-accent bg-secondaryAccent/30" },
+              { value: "24/7", label: "Customer support", icon: HeadphonesIcon, color: "text-accent bg-accent/20" },
             ].map(({ value, label, icon: Icon, color }) => (
               <div
                 key={label}

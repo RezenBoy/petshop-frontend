@@ -203,7 +203,7 @@ const FormInput = ({
 );
 
 const SavingsBanner = ({ amount }) => (
-  <div className="mb-6 p-3 bg-secondaryAccent/20 border border-accent/40 rounded-lg">
+  <div className="mb-6 p-3 bg-accent/20 border border-accent/40 rounded-lg">
     <p className="text-sm font-semibold text-accent text-center flex items-center justify-center gap-2">
       <Tag className="h-4 w-4" />
       You're saving ₹{amount.toFixed(2)} on this order!
