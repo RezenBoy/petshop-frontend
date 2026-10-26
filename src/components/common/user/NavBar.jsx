@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import logo from "../../../assets/logo.jpg";
+import logo from "../../../assets/logo.png";
+import BrandName from "../../../assets/pashora_name.png";
 import { Menu, X, ShoppingCart, Search, User, LogOut, ChevronDown } from "lucide-react";
 import { BRAND } from "../brand";
 
@@ -273,14 +274,12 @@ const Navbar = () => {
                 alt={BRAND.name}
                 className="h-10 w-10 sm:h-12 sm:w-12 object-contain rounded-full flex-shrink-0"
               />
-              <div className="leading-tight min-w-0">
-                <span className="block text-sm sm:text-base font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent whitespace-nowrap">
-                  {BRAND.name}
-                </span>
-                <span className="hidden sm:block text-[10px] text-textMuted tracking-wide">
-                  Pet Paradise
-                </span>
-              </div>
+              <img
+                src={BrandName}
+                alt={BRAND.name}
+                 className="h-8 sm:h-8 w-1/3 object-contain flex-shrink-0"
+              />
+              
             </Link>
 
             {/* Desktop Nav Links */}
@@ -568,6 +567,7 @@ const Navbar = () => {
       </div>
     </>
   );
+  
 };
 
 export default Navbar;

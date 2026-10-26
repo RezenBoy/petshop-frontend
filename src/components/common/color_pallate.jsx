@@ -16,6 +16,8 @@ export const COLORS = {
     // Main Text
     text: "#20252B",
 
+    textLight: "#FFFFFF",
+
     // Secondary Accent
     secondary: "#A8B89A",
 

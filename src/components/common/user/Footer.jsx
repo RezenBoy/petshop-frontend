@@ -2,6 +2,8 @@ import React, { useMemo, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Heart, Phone, Mail, MapPin, ArrowUp, ExternalLink } from "lucide-react";
 import { BRAND } from "../brand";
+import BrandName from "../../../assets/pashora_name.png";
+
 
 // ─── Constants ─────────────────────────────────────────────
 const CURRENT_YEAR = new Date().getFullYear();
@@ -85,7 +87,7 @@ const QuickLink = ({ label, href, isAnchor }) => {
       <Link
         to={href}
         onClick={handleClick}
-        className="text-secondary/90 text-sm hover:text-accent transition-colors inline-flex items-center gap-1 group focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded px-1 -mx-1"
+        className="text-textlight/90 text-sm hover:text-accent transition-colors inline-flex items-center gap-1 group focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded px-1 -mx-1"
       >
         <span className="group-hover:translate-x-0.5 transition-transform duration-200">
           {label}
@@ -100,10 +102,10 @@ const ContactItem = ({ icon: Icon, text, href, label }) => (
   <li>
     <a
       href={href}
-      className="flex items-start gap-3 text-secondary/90 text-sm hover:text-accent transition-colors group focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg p-1 -mx-1"
+      className="flex items-start gap-3 text-textlight/90 text-sm hover:text-accent transition-colors group focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg p-1 -mx-1"
       aria-label={label}
     >
-      <Icon className="h-4 w-4 flex-shrink-0 mt-0.5 text-accent group-hover:scale-110 transition-transform" />
+      <Icon className="h-4 w-4 flex-shrink-0 mt-0.5 text-primary group-hover:scale-110 transition-transform" />
       <span className="leading-snug group-hover:text-accent transition-colors">{text}</span>
     </a>
   </li>
@@ -127,7 +129,7 @@ const ScrollToTop = () => {
   return (
     <button
       onClick={scroll}
-      className="fixed bottom-6 right-6 z-40 h-10 w-10 bg-gradient-to-r from-primary to-accent text-surface rounded-full shadow-lg hover:shadow-xl hover:scale-110 active:scale-95 transition-all flex items-center justify-center"
+      className="fixed bottom-12 right-6 z-40 h-10 w-10 bg-gradient-to-r from-primary to-accent text-surface rounded-full shadow-lg hover:shadow-xl hover:scale-110 active:scale-95 transition-all flex items-center justify-center"
       aria-label="Scroll to top"
     >
       <ArrowUp className="h-5 w-5" />
@@ -144,7 +146,7 @@ const Footer = () => {
           <SocialIcon key={link.label} {...link} />
         ))}
       </div>
-      <p className="text-secondary/70 text-xs leading-relaxed">
+      <p className="text-textlight/70 text-xs leading-relaxed">
         Follow us for pet care tips, new arrivals, and exclusive offers.
       </p>
     </div>
@@ -154,18 +156,21 @@ const Footer = () => {
     <>
       <footer className="bg-text text-surface w-full">
         {/* Gradient top border */}
-        <div className="h-1 w-full bg-gradient-to-r from-primary via-accent to-secondary" />
+        <div className="h-1 w-full bg-gradient-to-r from-primary via-accent to-textlight" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12">
 
             {/* Brand */}
             <div className="sm:col-span-2 lg:col-span-1">
-              <div className="flex items-center gap-2 mb-4">
-                <Heart className="h-5 w-5 text-accent fill-accent flex-shrink-0" aria-hidden="true" />
-                <span className="text-lg font-bold text-surface">{BRAND.name}</span>
-              </div>
-              <p className="text-secondary/80 text-sm leading-relaxed max-w-xs">
+              <Link to="/" className="flex items-center gap-2 flex-shrink-0 min-w-0">
+                <img
+                  src={BrandName}
+                  alt={BRAND.name}
+                  className="h-8 sm:h-8 w-1/2 object-contain flex-shrink-0 mb-4"
+                />
+              </Link>
+              <p className="text-textlight/80 text-sm leading-relaxed max-w-xs">
                 Making pets and their families happier, one product at a time. Your trusted pet paradise since day one.
               </p>
               {/* Social — mobile/tablet */}
@@ -211,10 +216,10 @@ const Footer = () => {
         {/* Bottom bar */}
         <div className="border-t border-primary/40">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-center">
-            <p className="text-secondary/70 text-xs sm:text-sm">
+            <p className="text-textlight/70 text-xs sm:text-sm">
               &copy; {CURRENT_YEAR} {BRAND.name}. All rights reserved.
             </p>
-            <p className="text-secondary/70 text-xs sm:text-sm flex items-center gap-1">
+            <p className="text-textlight/70 text-xs sm:text-sm flex items-center gap-1">
               Made with
               <Heart className="h-3 w-3 text-accent fill-accent inline" aria-hidden="true" />
               by Rezen boi
